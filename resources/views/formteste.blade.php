@@ -1,7 +1,8 @@
 @extends('layouts.site')
 
 @section('content')
-
+<div class="px-4 md:px-10 mx-auto w-full">
+<div class="flex flex-wrap">
 <div class="block w-full mt-24">
 <div class="">
     <h1 class="mb-20 text-2xl font-bold"></i><i class="fas fa-school opacity-75 mr-2 text-2xl"></i>Cadastre sua escola</h1>

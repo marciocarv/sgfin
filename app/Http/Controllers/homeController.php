@@ -15,6 +15,8 @@ class homeController extends Controller
         $user = Auth::user();
 
         if($user->tenancy){
+            $school = $user->tenancy->school;
+            session(['school' => $school]);
             return view('dashboard');
         }else{
             return redirect()->route('addSchool');

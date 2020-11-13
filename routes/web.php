@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrdinanceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,5 @@ Route::get('/teste', function () {
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 Route::get('/escola', [SchoolController::class, 'create'])->middleware('checkTen');
 Route::post('/escola', [SchoolController::class, 'create'])->name('addSchool');
+Route::get('/portaria', [OrdinanceController::class, 'create'])->name('addOrdinance');
+Route::post('/portaria', [OrdinanceController::class, 'create'])->name('addOrdinancePost');

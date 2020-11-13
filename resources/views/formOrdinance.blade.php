@@ -5,23 +5,23 @@
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
 <div class="">
-    <h1 class="mb-20 text-2xl font-bold"></i><i class="fas fa-school opacity-75 mr-2 text-2xl"></i>Cadastre sua escola</h1>
+    <h1 class="mb-20 text-2xl font-bold"></i><i class="fas fa-school opacity-75 mr-2 text-2xl"></i>Cadastre sua Portaria</h1>
 </div>
 @if (isset($msg))
   <p>{{$msg}}</p>
 @endif
-<form class="w-full max-w-2xl block" action="{{route('addSchool')}}" method="post" enctype="multipart/form-data">
+<form class="w-full max-w-2xl block" action="{{route('addOrdinance')}}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="relative w-full mb-3">
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Nome</label
+        >Descrição</label
       ><input
         type="text"
-        name="name"
+        name="description"
         class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-        placeholder="Nome"
+        placeholder="Descrição da Portaria"
         style="transition: all 0.15s ease 0s;"
       />
     </div>
@@ -29,12 +29,12 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >CNPJ</label
+          >Data</label
         ><input
-          type="text"
-          name="cnpj"
+          type="date"
+          name="date_ordinance"
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="Cnpj"
+          placeholder="Data Portaria"
           style="transition: all 0.15s ease 0s;"
         />
       </div>
@@ -42,12 +42,12 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >Endereço</label
+          >Número Diário Oficial</label
         ><input
           type="text"
-          name="adress"
+          name="number_diario"
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="Email"
+          placeholder="Número do diário oficial"
           style="transition: all 0.15s ease 0s;"
         />
       </div>
@@ -55,12 +55,12 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >CEP</label
+          >Natureza</label
         ><input
           type="text"
-          name="cep"
+          name="nature"
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="CEP"
+          placeholder="Natureza do Recurso"
           style="transition: all 0.15s ease 0s;"
         />
       </div>
@@ -68,12 +68,12 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >Lei de Criação</label
+          >Fonte</label
         ><input
           type="text"
-          name="lei_criacao"
+          name="font"
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="Lei de Criação"
+          placeholder="Fonte do Recurso"
           style="transition: all 0.15s ease 0s;"
         />
       </div>
@@ -81,14 +81,54 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >Imagem Lei</label
+          >Valor Capital</label
+        ><input
+          type="text"
+          name="value_capital"
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Valor referente a capital"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >Valor Custeio</label
+        ><input
+          type="text"
+          name="value_custeio"
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Valor Referente a custeio"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >Valor Total</label
+        ><input
+          type="text"
+          name="amount"
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Valor Total da Portaria"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >Imagem Portaria</label
         ><input
           type="file"
-          name="image_lei"
+          name="image"
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           style="transition: all 0.15s ease 0s;"
         />
       </div>
+      
     <div class="text-center mt-6">
       <button
         class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full max-w-xs"
@@ -101,3 +141,7 @@
   </form>
 </div>
 @endsection
+            
+
+
+
