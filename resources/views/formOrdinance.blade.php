@@ -4,14 +4,37 @@
 <div class="px-4 md:px-10 mx-auto w-full">
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
-<div class="">
-    <h1 class="mb-20 text-2xl font-bold"></i><i class="fas fa-school opacity-75 mr-2 text-2xl"></i>Cadastre sua Portaria</h1>
-</div>
-@if (isset($msg))
-  <p>{{$msg}}</p>
-@endif
-<form class="w-full max-w-2xl block" action="{{route('addOrdinance')}}" method="post" enctype="multipart/form-data">
+  <div class="">
+      <h1 class="mb-20 text-2xl font-bold"><i class="fas fa-file-contract"></i> Cadastre sua Portaria</h1>
+  </div>
+  <a href="{{route('ordinance')}}" class="p-3 mb-5 bg-gray-800 text-white rounded"><i class="fas fa-undo-alt"></i> Voltar</a>
+  @if (session('msg'))
+    <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">{{ session('msg') }}</p>
+  @endif
+  
+  <form id="register-form" class="w-full mt-5 max-w-2xl block" action="{{route($route)}}" method="post" enctype="multipart/form-data">
     @csrf
+    @if ($action == 'update')
+      <input type="hidden" value="{{$ordinance->id}}" name="id"/>
+    @endif
+    <div class="relative w-full mb-3">
+      <label
+        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        for="grid-password"
+        >Número Portaria</label
+      ><input
+        type="number"
+        name="number"
+        required
+        id="edicao"
+        @if ($action == 'update')
+          value="{{$ordinance->number}}"
+        @endif
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        placeholder="Número da Portaria"
+        style="transition: all 0.15s ease 0s;"
+      />
+    </div>
     <div class="relative w-full mb-3">
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
@@ -20,6 +43,11 @@
       ><input
         type="text"
         name="description"
+        required
+        id="description"
+        @if ($action == 'update')
+          value="{{$ordinance->description}}"
+        @endif
         class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
         placeholder="Descrição da Portaria"
         style="transition: all 0.15s ease 0s;"
@@ -33,6 +61,11 @@
         ><input
           type="date"
           name="date_ordinance"
+          required
+          id="date_ordinance"
+          @if ($action == 'update')
+          value="{{$ordinance->date_ordinance->format('Y-m-d')}}"
+          @endif
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="Data Portaria"
           style="transition: all 0.15s ease 0s;"
@@ -42,12 +75,35 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >Número Diário Oficial</label
+          >Edição do Diário Oficial</label
         ><input
-          type="text"
+          type="number"
           name="number_diario"
+          required
+          id="number_diario"
+          @if ($action == 'update')
+          value="{{$ordinance->number_diario}}"
+          @endif
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="Número do diário oficial"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >Número Processo</label
+        ><input
+          type="number"
+          name="number_process"
+          required
+          id="number_process"
+          @if ($action == 'update')
+          value="{{$ordinance->number_process}}"
+          @endif
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Número de Processo da Portaria"
           style="transition: all 0.15s ease 0s;"
         />
       </div>
@@ -59,6 +115,10 @@
         ><input
           type="text"
           name="nature"
+          id="nature"
+          @if ($action == 'update')
+          value="{{$ordinance->nature}}"
+          @endif
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="Natureza do Recurso"
           style="transition: all 0.15s ease 0s;"
@@ -71,35 +131,13 @@
           >Fonte</label
         ><input
           type="text"
-          name="font"
+          name="source"
+          id="source"
+          @if ($action == 'update')
+          value="{{$ordinance->source}}"
+          @endif
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="Fonte do Recurso"
-          style="transition: all 0.15s ease 0s;"
-        />
-      </div>
-      <div class="relative w-full mb-3">
-        <label
-          class="block uppercase text-gray-700 text-xs font-bold mb-2"
-          for="grid-password"
-          >Valor Capital</label
-        ><input
-          type="text"
-          name="value_capital"
-          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="Valor referente a capital"
-          style="transition: all 0.15s ease 0s;"
-        />
-      </div>
-      <div class="relative w-full mb-3">
-        <label
-          class="block uppercase text-gray-700 text-xs font-bold mb-2"
-          for="grid-password"
-          >Valor Custeio</label
-        ><input
-          type="text"
-          name="value_custeio"
-          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="Valor Referente a custeio"
           style="transition: all 0.15s ease 0s;"
         />
       </div>
@@ -111,32 +149,26 @@
         ><input
           type="text"
           name="amount"
+          required
+          id="amount"
+          @if ($action == 'update')
+          value="{{$ordinance->amount}}"
+          @endif
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="Valor Total da Portaria"
           style="transition: all 0.15s ease 0s;"
         />
-      </div>
-      <div class="relative w-full mb-3">
-        <label
-          class="block uppercase text-gray-700 text-xs font-bold mb-2"
-          for="grid-password"
-          >Imagem Portaria</label
-        ><input
-          type="file"
-          name="image"
-          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          style="transition: all 0.15s ease 0s;"
-        />
-      </div>
-      
+      </div>     
     <div class="text-center mt-6">
       <button
         class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full max-w-xs"
         type="submit"
+        id="btn-submit"
         style="transition: all 0.15s ease 0s;"
       >
         Salvar
       </button>
+      <p id="error-validation" class="hidden text-red-600 absolute text-xs"></p>
     </div>
   </form>
 </div>

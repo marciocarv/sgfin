@@ -18,6 +18,7 @@ class CreateExpendituresTable extends Migration
             $table->foreignId('account_id')->constrained();
             $table->string('description');
             $table->decimal('value', 10, 2);
+            $table->string('type');
             $table->datetime('expiration');
             $table->timestamps();
         });

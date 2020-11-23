@@ -12,6 +12,7 @@ class Expenditure extends Model
     protected $fillable = [
         'descripton',
         'value',
+        'type'
     ];
 
     protected $dates = [

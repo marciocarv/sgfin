@@ -20,6 +20,7 @@
       ><input
         type="text"
         name="name"
+        required
         class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
         placeholder="Nome"
         style="transition: all 0.15s ease 0s;"
@@ -33,6 +34,8 @@
         ><input
           type="text"
           name="cnpj"
+          required
+          id="cnpj"
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="Cnpj"
           style="transition: all 0.15s ease 0s;"
@@ -46,6 +49,7 @@
         ><input
           type="text"
           name="adress"
+          required
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="Email"
           style="transition: all 0.15s ease 0s;"
@@ -59,6 +63,8 @@
         ><input
           type="text"
           name="cep"
+          id="cep"
+          required
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="CEP"
           style="transition: all 0.15s ease 0s;"
@@ -72,6 +78,7 @@
         ><input
           type="text"
           name="lei_criacao"
+          required
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="Lei de Criação"
           style="transition: all 0.15s ease 0s;"

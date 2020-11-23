@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\School;
 
 class homeController extends Controller
 {
@@ -15,8 +16,9 @@ class homeController extends Controller
         $user = Auth::user();
 
         if($user->tenancy){
-            $school = $user->tenancy->school;
-            session(['school' => $school]);
+                $schoolSession = $user->tenancy->school;
+                $school = School::find($schoolSession->id);
+                session(['school' => $school]);            
             return view('dashboard');
         }else{
             return redirect()->route('addSchool');

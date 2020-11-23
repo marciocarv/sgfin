@@ -17,15 +17,15 @@ class School extends Model
         'image_lei'
     ];
 
-    public function tenancy(){
+    public function tenancys(){
         return $this->hasMany(Tenancy::class);
     }
 
-    public function ordinance(){
+    public function ordinances(){
         return $this->hasMany(Ordinance::class);
     }
 
-    public function account(){
+    public function accounts(){
         return $this->hasMany(Account::class);
     }
 }

@@ -18,7 +18,9 @@ class CreateIncomesTable extends Migration
             $table->foreignId('account_id')->constrained();
             $table->foreignId('ordinance_id')->constrained();
             $table->string('description');
-            $table->decimal('value', 10, 2);
+            $table->decimal('value_custeio', 10, 2);
+            $table->decimal('value_capital', 10, 2);
+            $table->decimal('amount', 10, 2);
             $table->timestamps();
         });
     }

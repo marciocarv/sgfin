@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Ordinance;
+
 class OrdinanceController extends Controller
 {
     public function __construct()
@@ -12,44 +13,101 @@ class OrdinanceController extends Controller
     }
 
     public function show(){
-        
+        $school = session('school');
+        $ordinance =  new Ordinance;
+
+        $ordinances = $ordinance->ordinanceBySchool($school->id);
+
+        return view('ordinance', ['ordinances'=>$ordinances, 'acesso'=>true]);
     }
 
     public function create(Request $request){
+        $javascript = true;
+        $validate = [
+            ['campo'=>'amount','value'=>'', 'mask'=>'maskMoney'],
+        ];
         if($request->input('description') == null || $request->input('date_ordinance') == null){
-            return view('formOrdinance');
+            return view('formOrdinance', ['javascript'=>$javascript, 'route'=>'addOrdinance', 'action'=>'create', 'validate'=>$validate]);
         }else{
-            
-            $school = session('school');
+            //tratamento dos valores
+            $amount = Str::of($request->amount)->replace('.', '');
+            $amount = Str::of($amount)->replace(',', '.');
 
+            //montagem do objeto ordinance para inserir
+            $school = session('school');
             $ordinance = new Ordinance;
             $ordinance->school_id = $school->id;
+            $ordinance->number = $request->number;
             $ordinance->description = $request->description;
             $ordinance->date_ordinance = $request->date_ordinance;
             $ordinance->number_diario = $request->number_diario;
+            $ordinance->number_process = $request->number_process;
             $ordinance->nature = $request->nature;
-            $ordinance->font = $request->font;
-            $ordinance->value_capital = $request->value_capital;
-            $ordinance->value_custeio = $request->value_custeio;
-            $ordinance->amount = $request->amount;
-
-            $image = $request->image->store('images');
-
-            $ordinance->image = $image;
+            $ordinance->source = $request->source;
+            $ordinance->amount = $amount;
 
             if($ordinance->save()){
-                return view('formOrdinance', ['msg'=>'Portaria Salva com sucesso!']);                
+                return redirect('portaria')->with('msg', 'Portaria Salva com sucesso!');                
             }else{
-                return view('formOrdinance', ['msg'=>'Não foi possível salvar sua Portaria!']);
+                return redirect('portaria/add')->with('msg', 'Não foi possível Salvar a portaria!');
             }
         }
     }
 
-    public function update(){
-        
+    public function setUpdate($id){
+        $javascript = true;
+        $validate = [
+            ['campo'=>'amount','value'=>'', 'mask'=>'maskMoney'],
+        ];
+        $ordinance = Ordinance::find($id);
+        if($ordinance->school_id === session('school')->id){
+            return view('formOrdinance', ['javascript'=>$javascript, 'ordinance'=>$ordinance, 'route'=>'upOrdinancePost', 'action'=>'update', 'validate'=>$validate]);
+        }else{
+            return redirect('portaria')->with('msg', 'Você não tem acesso a essa Portaria!');
+        }
     }
 
-    public function delete(){
-        
+    public function update(Request $request){
+        $ordinance = Ordinance::find($request->id);
+
+        $amount = Str::of($request->amount)->replace('.', '');
+        $amount = Str::of($amount)->replace(',', '.');
+
+        $ordinance->number = $request->number;
+        $ordinance->description = $request->description;
+        $ordinance->date_ordinance = $request->date_ordinance;
+        $ordinance->number_diario = $request->number_diario;
+        $ordinance->number_process = $request->number_process;
+        $ordinance->nature = $request->nature;
+        $ordinance->source = $request->source;
+        $ordinance->amount = $amount;
+
+        if($ordinance->save()){
+            return redirect('portaria')->with('msg', 'Portaria editada com sucesso!');                
+        }else{
+            return redirect('portaria')->with('msg', 'Não foi possível Editar a portaria!');
+        }
+    }
+
+    public function delete($id){
+        $ordinance = Ordinance::find($id);
+        if($ordinance->school_id === session('school')->id){
+            $ordinance->delete();
+            return redirect('portaria')->with('msg', 'Portaria Excluída com sucesso!');
+        }else{
+            return redirect('portaria')->with('msg', 'Você não tem acesso a essa Portaria!');
+        }
+    }
+
+    public function detail($id){
+        $ordinance = Ordinance::find($id);
+
+        if($ordinance->school_id === session('school')->id){
+            $incomes = $ordinance->incomes;
+            $bidding = $ordinance->bidding;
+            return view('detailOrdinance', ['ordinance'=>$ordinance, 'acesso'=>true, 'incomes'=>$incomes, 'bidding'=>$bidding]);
+        }else{
+            return view('detailOrdinance', ['acesso'=>false]);
+        }
     }
 }

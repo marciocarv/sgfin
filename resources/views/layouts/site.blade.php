@@ -16,7 +16,7 @@
     />
     <link
       rel="stylesheet"
-  href="{{ asset('css/fontawesome-free/css/all.min.css') }}"
+      href="{{ asset('css/fontawesome-free/css/all.min.css') }}"
     />
     <link
       rel="stylesheet"
@@ -161,7 +161,7 @@
               <li class="items-center">
                 <a
                   class="text-green-500 hover:text-green-600 text-xs uppercase py-3 font-bold block"
-                  href="#/dashboard"
+                  href="/dashboard"
                   ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
                   Painel de Controle</a
                 >
@@ -169,43 +169,49 @@
               <li class="items-center">
                 <a
                   class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
-                  href="#/landing"
-                  ><i class="fas fa-newspaper text-gray-500 mr-2 text-sm"></i>
-                  Landing Page</a
+                  href="{{route('ordinance')}}"
+                  ><i class="fas fa-file-contract text-gray-500 mr-2 text-sm"></i>
+                  Portarias</a
                 >
               </li>
               <li class="items-center">
                 <a
                   class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
-                  href="#/profile"
-                  ><i class="fas fa-user-circle text-gray-500 mr-2 text-sm"></i>
-                  Profile Page</a
+                  href="{{route('account')}}"
+                  ><i class="fas fa-file-invoice-dollar text-gray-500 mr-2 text-sm"></i>
+                  Contas</a
                 >
               </li>
               <li class="items-center">
                 <a
                   class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
-                  href="#/login"
-                  ><i class="fas fa-fingerprint text-gray-500 mr-2 text-sm"></i>
-                  Login</a
+                  href="{{route('chooseAccount', ['movimento'=>'in'])}}"
+                  ><i class="fas fa-money-bill-alt text-gray-500 mr-2 text-sm"></i>
+                  Receitas</a
                 >
               </li>
               <li class="items-center">
                 <a
-                  class="text-gray-400 text-xs uppercase py-3 font-bold block"
-                  href="#pablo"
-                  ><i
-                    class="fas fa-clipboard-list text-gray-400 mr-2 text-sm"
-                  ></i>
-                  Register (soon)</a
+                  class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
+                  href="{{route('chooseAccount', ['movimento'=>'out'])}}"
+                  ><i class="far fa-money-bill-alt text-gray-500 mr-2 text-sm"></i>
+                  Despesas</a
                 >
               </li>
               <li class="items-center">
                 <a
-                  class="text-gray-400 text-xs uppercase py-3 font-bold block"
+                  class="text-gray-800 text-xs uppercase py-3 font-bold block"
                   href="#pablo"
-                  ><i class="fas fa-tools text-gray-400 mr-2 text-sm"></i>
-                  Settings (soon)</a
+                  ><i class="fas fa-file-signature text-gray-500 mr-2 text-sm"></i>
+                  Licitações</a
+                >
+              </li>
+              <li class="items-center">
+                <a
+                  class="text-gray-800 text-xs uppercase py-3 font-bold block"
+                  href="#pablo"
+                  ><i class="fas fa-fax text-gray-500 mr-2 text-sm"></i>
+                  Prestação de contas</a
                 >
               </li>
             </ul>
@@ -213,7 +219,7 @@
             <h6
               class="md:min-w-full text-gray-600 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
             >
-              Documentation
+              Relatórios
             </h6>
             <ul
               class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4"
@@ -281,7 +287,7 @@
           >
             <a
               class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-        href="/"
+        href="/dashboard"
               >Painel de Controle</a
             >
             <form
@@ -372,8 +378,22 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
       charset="utf-8"
     ></script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js" charset="utf-8"></script>
+    @if(!isset($javascript))
+      {{$javascript = false}}
+    @endif
+    @if ($javascript)
+      <script src="{{asset('js/vanilla-masker.min.js')}}" charset="utf-8"></script>
+      <script charset="utf-8" type="text/javascript">
+        @foreach($validate as $seletor)
+        VMasker(document.querySelector("#{{$seletor['campo']}}")).{{$seletor['mask']}}("{{$seletor['value']}}");
+        @endforeach
+        
+      </script>
+    @endif
     <script type="text/javascript">
+
       /* Sidebar - Side navigation menu on mobile/responsive mode */
       function toggleNavbar(collapseID) {
         document.getElementById(collapseID).classList.toggle("hidden");

@@ -11,12 +11,11 @@ class Ordinance extends Model
     protected $fillable = [
         'number',
         'description',
+        'number_process',
         'number_diario',
         'nature',
-        'font',
+        'source',
         'image',
-        'value_custeio',
-        'value_capital',
         'amount'
     ];
 
@@ -29,10 +28,15 @@ class Ordinance extends Model
     }
 
     public function bidding(){
-        return $this->hasMany(Bidding::class);
+        return $this->hasOne(Bidding::class);
     }
 
-    public function income(){
+    public function incomes(){
         return $this->hasMany(Income::class);
+    }
+
+    public function ordinanceBySchool($id){
+        $ordinances = Ordinance::where('school_id', $id)->paginate(25);
+        return $ordinances;
     }
 }
