@@ -37,7 +37,7 @@ class IncomeController extends Controller
         $validate = [
             ['campo'=>'amount','value'=>'', 'mask'=>'maskMoney'],
             ['campo'=>'value_capital','value'=>'', 'mask'=>'maskMoney'],
-            ['campo'=>'value_custio','value'=>'', 'mask'=>'maskMoney']
+            ['campo'=>'value_custeio','value'=>'', 'mask'=>'maskMoney']
         ];
 
         $school = School::find(session('school')->id);

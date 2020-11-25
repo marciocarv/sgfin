@@ -6,6 +6,9 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrdinanceController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\ExpenditureController;
+use App\Http\Controllers\testeController;
+use App\Http\Controllers\ProviderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +22,15 @@ use App\Http\Controllers\IncomeController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(session('school')){
+        return redirect()->route('dashboard');
+    }else{
+        return view('welcome');
+    }
+    
 });
 
-Route::get('/teste', function () {
-    return view('formteste');
-});
+Route::get('/teste', [testeController::class, 'teste']);
 
 /*Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -60,6 +66,10 @@ Route::get('/receita/delete/{id}', [IncomeController::class, 'delete'])->name('d
 Route::get('/receita/update/{id}', [IncomeController::class, 'setUpdate'])->name('upIncome');
 Route::post('/receita/update', [IncomeController::class, 'update'])->name('upIncomePost');
 
-Route::get('/despesa/{id}', [IncomeController::class, 'show'])->name('expenditure');
+Route::get('/despesa/{id}', [ExpenditureController::class, 'show'])->name('expenditure');
+
+Route::get('/provider', [ProviderController::class, 'show'])->name('provider');
+Route::get('/provider/add', [ProviderController::class, 'setCreate'])->name('addProvider');
+Route::post('/provider/add', [ProviderController::class, 'create'])->name('addProviderPost');
 
 

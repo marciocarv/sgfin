@@ -16,10 +16,14 @@ class homeController extends Controller
         $user = Auth::user();
 
         if($user->tenancy){
+            if (session()->exists('school')) {
+                return view('dashboard');
+            }else{
                 $schoolSession = $user->tenancy->school;
                 $school = School::find($schoolSession->id);
-                session(['school' => $school]);            
-            return view('dashboard');
+                session(['school' => $school]);
+                return view('dashboard');
+            }            
         }else{
             return redirect()->route('addSchool');
         }

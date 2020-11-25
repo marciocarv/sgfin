@@ -11,12 +11,12 @@ class Pay extends Model
 
     protected $fillable = [
         'number_invoice',
-        'image_invoice',
-        'value',
+        'payment_method',
     ];
 
     protected $date = [
         'date_pay',
+        'emission_invoice',
     ];
 
     public function expenditure(){

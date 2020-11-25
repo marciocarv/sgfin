@@ -163,7 +163,7 @@
                   class="text-green-500 hover:text-green-600 text-xs uppercase py-3 font-bold block"
                   href="/dashboard"
                   ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
-                  Painel de Controle</a
+                  Início</a
                 >
               </li>
               <li class="items-center">
@@ -172,6 +172,14 @@
                   href="{{route('ordinance')}}"
                   ><i class="fas fa-file-contract text-gray-500 mr-2 text-sm"></i>
                   Portarias</a
+                >
+              </li>
+              <li class="items-center">
+                <a
+                  class="text-gray-800 hover:text-gray-600 text-xs uppercase py-3 font-bold block"
+                  href="{{route('provider')}}"
+                  ><i class="fas fas fa-dolly text-gray-500 mr-2 text-sm"></i>
+                  Fornecedores</a
                 >
               </li>
               <li class="items-center">
@@ -288,7 +296,7 @@
             <a
               class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
         href="/dashboard"
-              >Painel de Controle</a
+              >Início</a
             >
             <form
               class="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3"

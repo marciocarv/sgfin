@@ -16,8 +16,11 @@ class CreateExpendituresTable extends Migration
         Schema::create('expenditures', function (Blueprint $table) {
             $table->id();
             $table->foreignId('account_id')->constrained();
+            $table->foreignId('provider_id')->constrained();
             $table->string('description');
+            $table->datetime('date_expenditure');
             $table->decimal('value', 10, 2);
+            $table->string('nature');
             $table->string('type');
             $table->datetime('expiration');
             $table->timestamps();

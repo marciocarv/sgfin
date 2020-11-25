@@ -18,8 +18,8 @@ class CreatePaysTable extends Migration
             $table->foreignId('expenditure_id')->constrained();
             $table->dateTime('date_pay');
             $table->string('number_invoice');
-            $table->string('image_invoice');
-            $table->decimal('value', 10, 2);
+            $table->dateTime('emission_invoice');
+            $table->string('payment_method');
             $table->timestamps();
         });
     }

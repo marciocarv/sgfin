@@ -22,7 +22,35 @@
         name="name"
         required
         class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-        placeholder="Nome"
+        placeholder="Informe o Nome da Escola"
+        style="transition: all 0.15s ease 0s;"
+      />
+    </div>
+    <div class="relative w-full mb-3">
+      <label
+        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        for="grid-password"
+        >Associação</label
+      ><input
+        type="text"
+        name="associacao"
+        required
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        placeholder="Informe o Nome da ACE"
+        style="transition: all 0.15s ease 0s;"
+      />
+    </div>
+    <div class="relative w-full mb-3">
+      <label
+        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        for="grid-password"
+        >Código Inep</label
+      ><input
+        type="text"
+        name="codigo_inep"
+        required
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        placeholder="Informe o Código INEP da escola"
         style="transition: all 0.15s ease 0s;"
       />
     </div>
@@ -37,9 +65,91 @@
           required
           id="cnpj"
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="Cnpj"
+          placeholder="Informe o CNPJ da escola"
           style="transition: all 0.15s ease 0s;"
         />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >email</label
+        ><input
+          type="email"
+          name="email"
+          required
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Informe o Email da escola"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >Telofone</label
+        ><input
+          type="text"
+          name="telefone"
+          required
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Informe o Telefone da escola"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >Presidente / Diretor</label
+        ><input
+          type="text"
+          name="presidente"
+          required
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Infome o nome do Diretor / Presidente da Escola/Associação"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >Secretário</label
+        ><input
+          type="text"
+          name="secretario"
+          required
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Informe o nome do Secretário da escola"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >Coordenador Financeiro</label
+        ><input
+          type="text"
+          name="caf"
+          required
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Informe o nome do Coordenador Financeiro da escola"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >Módulo</label
+        ><select name="modulo" class="px-3 py-3 text-gray-700 rounded text-sm shadow w-full">
+          <option value="">-</option>
+          <option value="I">Módulo I</option>
+          <option value="II">Módulo II</option>
+          <option value="III">Módulo III</option>
+        </select>
       </div>
       <div class="relative w-full mb-3">
         <label
@@ -51,7 +161,7 @@
           name="adress"
           required
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="Email"
+          placeholder="Informe o Endreço da escola"
           style="transition: all 0.15s ease 0s;"
         />
       </div>
@@ -66,7 +176,7 @@
           id="cep"
           required
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="CEP"
+          placeholder="99.999-99"
           style="transition: all 0.15s ease 0s;"
         />
       </div>
@@ -80,7 +190,7 @@
           name="lei_criacao"
           required
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="Lei de Criação"
+          placeholder="Informe o número da Lei de Criação"
           style="transition: all 0.15s ease 0s;"
         />
       </div>
@@ -93,6 +203,34 @@
           type="file"
           name="image_lei"
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >Data de Criação da escola</label
+        ><input
+          type="date"
+          name="date_criacao"
+          required
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Informe o número da Lei de Criação"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >Autorização de Funcionamento</label
+        ><input
+          type="text"
+          name="autorizacao_funcionamento"
+          required
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Informe a autorização de funcionamento"
           style="transition: all 0.15s ease 0s;"
         />
       </div>

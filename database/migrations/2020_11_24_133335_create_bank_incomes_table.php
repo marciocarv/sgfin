@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDateIncomeToIncomesTable extends Migration
+class CreateBankIncomesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddDateIncomeToIncomesTable extends Migration
      */
     public function up()
     {
-        Schema::table('incomes', function (Blueprint $table) {
-            $table->dateTime('date_income');
+        Schema::create('bank_incomes', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('account_id')->constrained();
+            $table->decimal('value', 10, 2);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddDateIncomeToIncomesTable extends Migration
      */
     public function down()
     {
-        Schema::table('incomes', function (Blueprint $table) {
-            $table->dropColumn('date_income');
-        });
+        Schema::dropIfExists('bank_incomes');
     }
 }

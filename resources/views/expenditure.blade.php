@@ -6,11 +6,11 @@
 <div class="block w-full mt-24">
 <div class="">
   <h1 class="mb-5 text-2xl font-bold">
-    <i class="fas fa-file-contract"></i> Receitas - {{$account->description}}
+    <i class="fas fa-file-contract"></i> Despesas - {{$account->description}}
     <a href="{{route('chooseAccount', ['movimento'=>'in'])}}" class="text-sm text-blue-500 hover:text-blue-700"><i class="fas fa-sync-alt"></i> Alterar Conta</a>
   </h1>
 </div>
-<a href="{{route('addIncome', ['id'=>$account->id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded hover:bg-gray-600"><i class="fas fa-plus"></i> Registrar Receitas</a>
+<a href="{{route('addIncome', ['id'=>$account->id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded hover:bg-gray-600"><i class="fas fa-plus"></i> Registrar Despesas</a>
 @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 mt-3 rounded-lg text-green-800">{{ session('msg') }}</p>
 @endif
@@ -63,7 +63,7 @@
         @endforeach
         @if($incomes->isEmpty())
           <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="7">
-            Nâo há receitas registradas, favor adicione uma nova receita <a href="{{route('addIncome', ['id'=>$account->id])}}" class="text-green-500 hover:text-green-600">Registrar Receita</a>
+            Nâo há portarias registradas, favor adicione uma nova receita <a href="{{route('addIncome', ['id'=>$account->id])}}" class="text-green-500 hover:text-green-600">Registrar Receita</a>
           </td>
         @endif
     </tbody>

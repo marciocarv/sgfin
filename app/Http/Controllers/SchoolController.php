@@ -20,8 +20,9 @@ class SchoolController extends Controller
     public function create(Request $request){
         $javascript = true;
         $validate = [
-            ['campo'=>'cnpj','value'=>'99.999.999/0009-99', 'mask'=>'maskPattern'],
+            ['campo'=>'cnpj','value'=>'99.999.999/9999-99', 'mask'=>'maskPattern'],
             ['campo'=>'cep','value'=>'99.999-999', 'mask'=>'maskPattern'],
+            ['campo'=>'telefone','value'=>'(99) 9999-9999)', 'mask'=>'maskPattern']
         ];
         if($request->input('name') == null || $request->input('cnpj') == null){
             return view('formSchool', ['javascript'=>$javascript, 'route'=>'addOrdinance', 'action'=>'create', 'validate'=>$validate]);
@@ -29,10 +30,20 @@ class SchoolController extends Controller
             
             $school = new School;
             $school->name = $request->name;
+            $school->associacao = $request->associacao;
+            $school->codigo_inep = $request->codigo_inep;
+            $school->email = $request->email;
+            $school->telefone = $request->telefone;
+            $school->presidente = $request->presidente;
+            $school->secretario = $request->secretario;
+            $school->caf = $request->caf;
+            $school->modulo = $request->modulo;
             $school->cnpj = $request->cnpj;
             $school->adress = $request->adress;
             $school->cep = $request->cep;
             $school->lei_criacao = $request->lei_criacao;
+            $school->date_criacao = $request->date_criacao;
+            $school->autorizacao_funcionamento = $request->autorizacao_funcionamento;
 
             if($request->image_lei){
                 $image_lei = $request->image_lei->store('images');
