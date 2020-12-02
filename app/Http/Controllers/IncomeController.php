@@ -47,7 +47,7 @@ class IncomeController extends Controller
 
         //verifica se o usuário tem acesso a conta.
         if($account->school_id === $school->id){
-            return view('formIncome', ['javascript'=>$javascript, 'route'=>'addIncomePost', 'action'=>'create', 'account'=>$account, 'options'=>$options, 'validate'=>$validate]);
+            return view('formIncome', ['javascript'=>$javascript, 'script'=>'validate', 'route'=>'addIncomePost', 'action'=>'create', 'account'=>$account, 'options'=>$options, 'validate'=>$validate]);
         }else{
             return redirect('dashoboard');
         }

@@ -7,7 +7,7 @@
   <div class="">
       <h1 class="mb-20 text-2xl font-bold"><i class="fas fa-file-contract"></i> Cadastre sua Conta</h1>
   </div>
-  <a href="{{route('ordinance')}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
+  <a href="{{route('account')}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
   @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">{{ session('msg') }}</p>
   @endif
@@ -21,7 +21,7 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Conta</label
+        >Conta Corrente</label
       ><input
         type="text"
         name="number"

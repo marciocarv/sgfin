@@ -18,7 +18,7 @@ class CreateBiddingsTable extends Migration
             $table->foreignId('ordinance_id')->constrained();
             $table->string('num_process');
             $table->string('object');
-            $table->string('tipe');
+            $table->string('type');
             $table->timestamps();
         });
     }

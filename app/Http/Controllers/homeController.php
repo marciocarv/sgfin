@@ -17,12 +17,12 @@ class homeController extends Controller
 
         if($user->tenancy){
             if (session()->exists('school')) {
-                return view('dashboard');
+                return view('dashboard', ['javascript'=>true, 'script'=>'dashboard']);
             }else{
                 $schoolSession = $user->tenancy->school;
                 $school = School::find($schoolSession->id);
                 session(['school' => $school]);
-                return view('dashboard');
+                return view('dashboard', ['javascript'=>true, 'script'=>'dashboard']);
             }            
         }else{
             return redirect()->route('addSchool');

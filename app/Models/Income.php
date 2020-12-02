@@ -32,7 +32,6 @@ class Income extends Model
     public function incomeByAccount($id){
         $incomes = Income::where('account_id', $id)
         ->join('ordinances', 'incomes.ordinance_id', '=', 'ordinances.id')
-        ->where('incomes.account_id', '=', $id)
         ->select('incomes.*', 'ordinances.number', 'ordinances.description as orddescription')
         ->paginate(25);
         return $incomes;

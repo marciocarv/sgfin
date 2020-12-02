@@ -12,7 +12,7 @@ class Bidding extends Model
     protected $fillable = [
         'num_process',
         'object',
-        'tipe'
+        'type'
     ];
 
     public function ordinance(){

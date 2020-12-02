@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Account;
+use App\Models\School;
 
 class AccountController extends Controller
 {
@@ -22,7 +23,7 @@ class AccountController extends Controller
     }
 
     public function choose($movimento){
-        $school = session('school');
+        $school = School::find(session('school')->id);
 
         if($movimento === 'in'){
             $titulo = 'Escolha a Conta em que o recurso será creditado';

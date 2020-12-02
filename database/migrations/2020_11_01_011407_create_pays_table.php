@@ -16,9 +16,9 @@ class CreatePaysTable extends Migration
         Schema::create('pays', function (Blueprint $table) {
             $table->id();
             $table->foreignId('expenditure_id')->constrained();
-            $table->dateTime('date_pay');
-            $table->string('number_invoice');
-            $table->dateTime('emission_invoice');
+            $table->dateTime('date_pay')->nullable();
+            $table->string('number_invoice')->nullable();
+            $table->dateTime('emission_invoice')->nullable();
             $table->string('payment_method');
             $table->timestamps();
         });

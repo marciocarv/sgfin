@@ -20,17 +20,17 @@ class CreateSchoolsTable extends Migration
             $table->string('codigo_inep');
             $table->string('email');
             $table->string('telefone');
-            $table->dateTime('date_criacao');
-            $table->string('presidente')->default('');
-            $table->string('secretario')->default('');
-            $table->string('caf')->default('');
-            $table->string('modulo')->default('');
-            $table->string('cnpj')->default('');
-            $table->string('adress')->default('');
-            $table->string('cep')->default('');
-            $table->string('lei_criacao')->default('');
-            $table->string('autorizacao_funcionamento')->default('');
-            $table->string('image_lei')->default('');
+            $table->dateTime('date_criacao')->nullable();
+            $table->string('presidente')->nullable();
+            $table->string('secretario')->nullable();
+            $table->string('caf')->nullable();
+            $table->string('modulo')->nullable();
+            $table->string('cnpj')->nullable();
+            $table->string('adress')->nullable();
+            $table->string('cep')->nullable();
+            $table->string('lei_criacao')->nullable();
+            $table->string('autorizacao_funcionamento')->nullable();
+            $table->string('image_lei')->nullable();
             $table->timestamps();
         });
     }

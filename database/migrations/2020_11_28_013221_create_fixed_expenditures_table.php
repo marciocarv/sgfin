@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExpendituresTable extends Migration
+class CreateFixedExpendituresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateExpendituresTable extends Migration
      */
     public function up()
     {
-        Schema::create('expenditures', function (Blueprint $table) {
+        Schema::create('fixed_expenditures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('account_id')->constrained();
-            $table->foreignId('provider_id')->constrained();
+            $table->integer('account_id');
+            $table->integer('provider_id');
             $table->string('description');
-            $table->datetime('date_expenditure')->nullable();
+            $table->datetime('emission_date');
             $table->decimal('value', 10, 2);
             $table->string('nature');
-            $table->boolean('fixed');
-            $table->datetime('expiration')->nullable();
+            $table->datetime('expiration_date');
             $table->timestamps();
         });
     }
@@ -34,6 +33,6 @@ class CreateExpendituresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('expenditures');
+        Schema::dropIfExists('fixed_expenditures');
     }
 }

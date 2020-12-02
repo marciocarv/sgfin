@@ -21,10 +21,18 @@
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
         >Tipo Pessoa</label
-      ><select name="person_type" class="px-3 py-3 text-gray-700 rounded text-sm shadow w-full">
+      ><select name="person_type" class="px-3 py-3 text-gray-700 rounded text-sm shadow w-full" id="select_provider">
         <option value="">-</option>
-        <option value="Física">Pessoa Física</option>
-        <option value="Jurídica">Pessoa Jurídica</option>
+        <option value="Física"
+        @if($action == 'update' && $provider->person_type == 'Física')
+        selected
+        @endif
+        >Pessoa Física</option>
+        <option value="Jurídica"
+        @if($action == 'update' && $provider->person_type == 'Jurídica')
+        selected
+        @endif
+        >Pessoa Jurídica</option>
       </select>
     </div>
     <div class="relative w-full mb-3">
@@ -45,7 +53,7 @@
         style="transition: all 0.15s ease 0s;"
       />
     </div>
-    <div class="relative w-full mb-3">
+    <div class="relative w-full mb-3" id="form_razao">
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
@@ -63,7 +71,7 @@
         style="transition: all 0.15s ease 0s;"
       />
     </div>
-    <div class="relative w-full mb-3">
+    <div class="relative w-full mb-3" id="form_cpf">
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
@@ -81,7 +89,7 @@
           style="transition: all 0.15s ease 0s;"
         />
       </div>
-      <div class="relative w-full mb-3">
+      <div class="relative w-full mb-3" id="form_cnpj">
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"

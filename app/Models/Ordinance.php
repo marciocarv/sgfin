@@ -36,7 +36,8 @@ class Ordinance extends Model
     }
 
     public function ordinanceBySchool($id){
-        $ordinances = Ordinance::where('school_id', $id)->paginate(25);
+
+        $ordinances = Ordinance::where('school_id', $id)->where('number', '<>', '0')->paginate(25);
         return $ordinances;
     }
 }

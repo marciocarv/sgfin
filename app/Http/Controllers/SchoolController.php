@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\School;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Ordinance;
 
 class SchoolController extends Controller
 {
@@ -22,10 +23,10 @@ class SchoolController extends Controller
         $validate = [
             ['campo'=>'cnpj','value'=>'99.999.999/9999-99', 'mask'=>'maskPattern'],
             ['campo'=>'cep','value'=>'99.999-999', 'mask'=>'maskPattern'],
-            ['campo'=>'telefone','value'=>'(99) 9999-9999)', 'mask'=>'maskPattern']
+            ['campo'=>'telefone','value'=>'(99) 9999-9999', 'mask'=>'maskPattern']
         ];
         if($request->input('name') == null || $request->input('cnpj') == null){
-            return view('formSchool', ['javascript'=>$javascript, 'route'=>'addOrdinance', 'action'=>'create', 'validate'=>$validate]);
+            return view('formSchool', ['javascript'=>$javascript, 'script'=>'validate', 'route'=>'addOrdinance', 'action'=>'create', 'validate'=>$validate]);
         }else{
             
             $school = new School;
@@ -52,6 +53,10 @@ class SchoolController extends Controller
 
             if($school->save()){
                 $tenancyC = new TenancyController();
+                $ordinance = new Ordinance;
+                $ordinance->school_id = $school->id;
+                $ordinance->description = 'Recurso sem Portaria';
+                $ordinance->save();
                 if($tenancyC->create($school->id, Auth::id())){
                     return redirect()->route('dashboard');
                 }                

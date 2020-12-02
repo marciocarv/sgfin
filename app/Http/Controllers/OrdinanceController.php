@@ -27,7 +27,7 @@ class OrdinanceController extends Controller
             ['campo'=>'amount','value'=>'', 'mask'=>'maskMoney'],
         ];
         if($request->input('description') == null || $request->input('date_ordinance') == null){
-            return view('formOrdinance', ['javascript'=>$javascript, 'route'=>'addOrdinance', 'action'=>'create', 'validate'=>$validate]);
+            return view('formOrdinance', ['javascript'=>$javascript, 'script'=>'validate', 'route'=>'addOrdinance', 'action'=>'create', 'validate'=>$validate]);
         }else{
             //tratamento dos valores
             $amount = Str::of($request->amount)->replace('.', '');
@@ -61,7 +61,7 @@ class OrdinanceController extends Controller
         ];
         $ordinance = Ordinance::find($id);
         if($ordinance->school_id === session('school')->id){
-            return view('formOrdinance', ['javascript'=>$javascript, 'ordinance'=>$ordinance, 'route'=>'upOrdinancePost', 'action'=>'update', 'validate'=>$validate]);
+            return view('formOrdinance', ['javascript'=>$javascript, 'script'=>'validate', 'ordinance'=>$ordinance, 'route'=>'upOrdinancePost', 'action'=>'update', 'validate'=>$validate]);
         }else{
             return redirect('portaria')->with('msg', 'Você não tem acesso a essa Portaria!');
         }

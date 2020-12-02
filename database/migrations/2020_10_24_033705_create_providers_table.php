@@ -16,13 +16,13 @@ class CreateProvidersTable extends Migration
         Schema::create('providers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('school_id')->constrained();
-            $table->string('name')->default('');
-            $table->string('company_name')->default('');
-            $table->string('cpf')->default('');
-            $table->string('cnpj')->default('');
-            $table->string('phone')->default('');
-            $table->string('adress')->default('');
-            $table->string('person_type')->default('');
+            $table->string('name')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('cpf')->nullable();
+            $table->string('cnpj')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('adress')->nullable();
+            $table->string('person_type')->nullable();
             $table->timestamps();
         });
     }

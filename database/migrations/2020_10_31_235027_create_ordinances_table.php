@@ -16,15 +16,15 @@ class CreateOrdinancesTable extends Migration
         Schema::create('ordinances', function (Blueprint $table) {
             $table->id();
             $table->foreignId('school_id')->constrained();
-            $table->string('number');
-            $table->string('description');
-            $table->string('number_process');
-            $table->dateTime('date_ordinance');
-            $table->string('number_diario');
-            $table->string('nature');
-            $table->string('source');
-            $table->string('image')->default('');
-            $table->decimal('amount', 10, 2);
+            $table->string('number')->nullable();
+            $table->string('description')->nullable();
+            $table->string('number_process')->nullable();
+            $table->dateTime('date_ordinance')->nullable();
+            $table->string('number_diario')->nullable();
+            $table->string('nature')->nullable();
+            $table->string('source')->nullable();
+            $table->string('image')->nullable();
+            $table->decimal('amount', 10, 2)->nullable();
             $table->timestamps();
         });
     }

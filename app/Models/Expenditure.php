@@ -13,7 +13,7 @@ class Expenditure extends Model
         'descripton',
         'value',
         'nature',
-        'type'
+        'fixed'
     ];
 
     protected $dates = [
@@ -21,15 +21,13 @@ class Expenditure extends Model
         'expiration',
     ];
 
-    public function expensivesByAccount($id){
-        $expenditures = Income::where('account_id', $id)
-        ->join('ordinances', 'incomes.ordinance_id', '=', 'ordinances.id')
-        ->where('incomes.account_id', '=', $id)
-        ->select('incomes.*', 'ordinances.number', 'ordinances.description as orddescription')
+    public function expenditureByAccount($id){
+        $expenditures = Expenditure::where('account_id', $id)
+        ->leftJoin('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->select('expenditures.*', 'pays.id as pay_id')
         ->paginate(25);
 
-        dd();
-        //return $incomes;
+        return $expenditures;
 
     }
 
