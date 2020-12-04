@@ -74,6 +74,7 @@ Route::get('/despesa/update/{id}', [ExpenditureController::class, 'setUpdate'])-
 Route::post('/despesa/update', [ExpenditureController::class, 'update'])->name('upExpenditurePost');
 Route::get('/despesa/detail/{id}', [ExpenditureController::class, 'detail'])->name('detailExpenditure')->middleware('checkSchool');
 
+Route::get('/pagar/{id}', [PayController::class, 'setPay'])->name('payExpenditure')->middleware('checkSchool');
 
 Route::get('/provider', [ProviderController::class, 'show'])->name('provider')->middleware('checkSchool');
 Route::get('/provider/add', [ProviderController::class, 'setCreate'])->name('addProvider')->middleware('checkSchool');

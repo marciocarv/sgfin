@@ -8,6 +8,7 @@ use App\Models\FixedExpenditure;
 use App\Models\Account;
 use App\Models\School;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class ExpenditureController extends Controller
 {
@@ -169,6 +170,11 @@ class ExpenditureController extends Controller
 
     public function detail($id){
         $expenditure = Expenditure::find($id);
+
+        if($expenditure->pay){
+            $expenditure->pay->date_pay = Carbon::parse($expenditure->pay->date_pay);
+            $expenditure->pay->emission_invoice = Carbon::parse($expenditure->pay->emission_invoice);
+        }
 
         if($expenditure->account->school_id === session('school')->id){
             

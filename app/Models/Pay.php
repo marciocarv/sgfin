@@ -19,6 +19,8 @@ class Pay extends Model
         'emission_invoice',
     ];
 
+    protected $dateFormat = 'd/m/Y';
+
     public function expenditure(){
         return $this->belongsTo(Expenditure::class);
     }
