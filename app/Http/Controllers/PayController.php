@@ -53,7 +53,15 @@ class PayController extends Controller
         
     }
 
-    public function delete(){
-        
+    public function delete($id){
+        $pay = Pay::find($id);
+        $expenditure = $pay->expenditure;
+
+        if($expenditure->account->school_id === session('school')->id){
+            $pay->delete();
+            return redirect()->route('detailExpenditure', ['id'=>$expenditure->id])->with('msg', 'Pagamento Cancelado com sucesso!');
+        }else{
+            return redirect()->route('dashboard');
+        }
     }
 }

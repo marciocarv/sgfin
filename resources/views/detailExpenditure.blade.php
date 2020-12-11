@@ -20,7 +20,7 @@
     @endif
 @if($acesso)
     <div>
-        <table class="border-collapse w-full mt-5">
+        <table class="border-collapse w-full mt-5 mb-5">
             <tr>
                 <th class="p-2 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Data de emissão</th>
                 <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Vencimento</th>
@@ -56,11 +56,14 @@
                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->account->description}}</td>
             </tr>
         </table>
+        @if(!$expenditure->pay)
+            <a href="{{route('payExpenditure', ['id'=>$expenditure->id])}}" class="p-3 mb-5 mr-3  bg-green-600 text-white rounded  hover:bg-green-500 hover:font-semibold"><i class="fas fa-comment-dollar"></i> Pagar Conta</a>
+        @endif
         @if($expenditure->pay)
         <div class="">
             <br /><h1 class="mb-5 text-2xl font-bold"><i class="fas fa-file-contract"></i> Dados do pagamento</h1>
         </div>
-        <table class="border-collapse w-full mt-5">
+        <table class="border-collapse w-full mt-5 mb-5">
             <tr>
                 <th class="p-2 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Status</th>
                 <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Data de Pagamento</th>
@@ -78,6 +81,7 @@
                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->pay->payment_method}}</td>
             </tr>
         </table>
+    <a href="{{route('delPay', ['id'=>$expenditure->pay->id])}}" class="p-3 mr-3 text-2x1 bg-red-600 text-white rounded  hover:bg-red-500 hover:font-semibold"><i class="fas fa-ban"></i> Cancelar Pagamento</a>
         @endif
     </div>
 @else
