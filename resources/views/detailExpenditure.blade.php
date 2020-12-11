@@ -7,7 +7,7 @@
     <div class="flex justify-between flex-wrap">
         <a href="{{route('expenditure', ['id'=>$expenditure->account->id])}}" class="p-3 mb-5 mr-3 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
         @if(!$expenditure->pay)
-            <a href="{{route('payExpenditure', ['id'=>$expenditure->id])}}" class="p-3 mb-5 mr-3  bg-blue-600 text-white rounded  hover:bg-blue-500 hover:font-semibold"><i class="fas fa-comment-dollar"></i> Pagar Conta</a>
+            <a href="{{route('payExpenditure', ['id'=>$expenditure->id])}}" class="p-3 mb-5 mr-3  bg-green-600 text-white rounded  hover:bg-green-500 hover:font-semibold"><i class="fas fa-comment-dollar"></i> Pagar Conta</a>
         @endif
     </div>
     @if($acesso)
@@ -15,13 +15,16 @@
             <h1 class="mb-5 text-2xl font-bold"><i class="fas fa-file-contract"></i> Detalhes da Despesa - Status:  @if($expenditure->pay)<span class="text-green-400">Paga</span> <i class="far fa-check-circle text-green-400"></i> @else <span class="text-orange-400">Pendente</span> <i class="fas fa-exclamation text-orange-400"></i>@endif</h1> 
         </div>
     @endif
+    @if (session('msg'))
+        <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">{{ session('msg') }}</p>
+    @endif
 @if($acesso)
     <div>
         <table class="border-collapse w-full mt-5">
             <tr>
                 <th class="p-2 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Data de emissão</th>
                 <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Vencimento</th>
-            </tr>
+            </tr>   
             <tr>
                 <td class="w-full lg:w-auto p-2 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->date_expenditure->format('d/m/Y')}}</td>
                 <td class="w-full lg:w-auto p-3 uppercase text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->expiration->format('d/m/Y')}}</td>
@@ -63,7 +66,7 @@
                 <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Data de Pagamento</th>
             </tr>
             <tr>
-                <td class="w-full lg:w-auto p-2 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">status</td>
+                <td class="w-full lg:w-auto p-2 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl"><span class="text-green-400 font-bold">Paga</span></td>
                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->pay->date_pay->format('d/m/Y')}}</td>
             </tr>
             <tr>

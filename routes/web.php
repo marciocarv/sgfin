@@ -9,6 +9,7 @@ use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ExpenditureController;
 use App\Http\Controllers\testeController;
 use App\Http\Controllers\ProviderController;
+use App\Http\Controllers\PayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,7 @@ Route::post('/despesa/update', [ExpenditureController::class, 'update'])->name('
 Route::get('/despesa/detail/{id}', [ExpenditureController::class, 'detail'])->name('detailExpenditure')->middleware('checkSchool');
 
 Route::get('/pagar/{id}', [PayController::class, 'setPay'])->name('payExpenditure')->middleware('checkSchool');
+Route::post('/pagar/add', [PayController::class, 'create'])->name('addPay');
 
 Route::get('/provider', [ProviderController::class, 'show'])->name('provider')->middleware('checkSchool');
 Route::get('/provider/add', [ProviderController::class, 'setCreate'])->name('addProvider')->middleware('checkSchool');

@@ -70,7 +70,7 @@
           placeholder="Data Portaria"
           style="transition: all 0.15s ease 0s;"
         />
-      </div>
+    </div>
       <div class="relative w-full mb-3">
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
