@@ -31,6 +31,15 @@ class Account extends Model
         return $this->hasMany(Expenditure::class);
     }
 
+    public function expenditurePaid($id, $dataInicial, $dataFinal){
+        return Expenditure::where('account_id', $id)
+        ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->where('pays.date_pay','>=', $dataInicial)->where('pays.date_pay', '<=', $dataFinal)
+        ->select('expenditures.*', 'pays.date_pay')
+        ->orderBy('pays.date_pay', 'desc')
+        ->get();
+    }
+
     public function accountBySchool($id){
         $account = Account::where('school_id', $id)->paginate(25);
         return $account;

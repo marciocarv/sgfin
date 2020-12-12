@@ -25,10 +25,10 @@ class Expenditure extends Model
         $expenditures = Expenditure::where('account_id', $id)
         ->leftJoin('pays', 'pays.expenditure_id', '=', 'expenditures.id')
         ->select('expenditures.*', 'pays.id as pay_id')
+        ->orderBy('expenditures.expiration', 'desc')
         ->paginate(25);
 
         return $expenditures;
-
     }
 
     public function account(){

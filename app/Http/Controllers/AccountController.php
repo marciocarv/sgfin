@@ -63,26 +63,29 @@ class AccountController extends Controller
         }
     }
 
-    public function manage($id, $dataInicial = NULL, $dataFinal = NULL){
+    public function manage($id, Request $request){
 
         //se a data inicial e a data final vierem vazias, as datas padrão serão o primeiro e ultimo dia do mês atual
-        if(!$dataInicial || $dataFinal){
+        if(!$request->dataInicial || !$request->dataFinal){
             $data_incio = mktime(0, 0, 0, date('m') , 1 , date('Y'));
             $data_fim = mktime(23, 59, 59, date('m'), date("t"), date('Y'));
 
-            $dataInicial = date('Y-m-d h:i:s',$data_incio);
-            $dataFinal = date('Y-m-d h:i:s',$data_fim);
-
+            $dataInicial = date('Y-m-d',$data_incio);
+            $dataFinal = date('Y-m-d',$data_fim);
+        }else{
+            $dataInicial = $request->dataInicial;
+            $dataFinal = $request->dataFinal;
         }
+
 
         $account = Account::find($id);
 
         if($account->school_id === session('school')->id){
             $incomes = $account->incomes->where('date_income','>=', $dataInicial)->where('date_income', '<=', $dataFinal);
 
-            $expenditures = $account->expenditures->where('expiration','>=', $dataInicial)->where('expiration', '<=', $dataFinal);
+            $expenditures = $account->expenditurePaid($id, $dataInicial, $dataFinal);
 
-            return view('manageAccount', ['account'=>$account, 'incomes'=>$incomes, 'expenditures'=>$expenditures]);
+            return view('manageAccount', ['account'=>$account, 'incomes'=>$incomes, 'expenditures'=>$expenditures, 'dataInicial'=>$dataInicial, 'dataFinal'=>$dataFinal]);
         }else{
             return redirect('dashboard');
         }
