@@ -5,14 +5,14 @@
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
   <div class="">
-      <h1 class="mb-20 text-2xl font-bold"><i class="fas fa-file-contract"></i> Cadastre sua Portaria</h1>
+      <h1 class="mb-13 text-2xl font-bold"><i class="fas fa-file-contract"></i> Cadastre sua Portaria</h1>
   </div>
   <a href="{{route('ordinance')}}" class="p-3 mb-5 bg-gray-800 text-white rounded"><i class="fas fa-undo-alt"></i> Voltar</a>
   @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">{{ session('msg') }}</p>
   @endif
   
-  <form id="register-form" class="w-full mt-5 max-w-2xl block" action="{{route($route)}}" method="post" enctype="multipart/form-data">
+  <form id="register-form" class="w-full mt-5 max-w-2xl block rounded border shadow p-5" action="{{route($route)}}" method="post" enctype="multipart/form-data">
     @csrf
     @if ($action == 'update')
       <input type="hidden" value="{{$ordinance->id}}" name="id"/>

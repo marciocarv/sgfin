@@ -4,14 +4,15 @@
 <div class="px-4 md:px-10 mx-auto w-full">
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
+  <a href="{{route('addOrdinance')}}" class="p-3 mb-5 bg-gray-800 text-white rounded hover:bg-gray-700"><i class="fas fa-plus"></i> Adicionar Portaria</a>
 <div class="">
-    <h1 class="mb-5 text-2xl font-bold"><i class="fas fa-file-contract"></i> Portarias</h1>
+    <h1 class="mt-5 text-2xl text-center font-bold"><i class="fas fa-file-contract"></i> Relação Portarias</h1>
 </div>
-<a href="{{route('addOrdinance')}}" class="p-3 mb-5 bg-gray-800 text-white rounded"><i class="fas fa-plus"></i> Adicionar Portaria</a>
+
 @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 mt-3 rounded-lg text-green-800">{{ session('msg') }}</p>
 @endif
-<div>
+<div class="rounded border shadow py-5 my-5">
   <table class="border-collapse w-full mt-5">
     <thead>
         <tr>

@@ -4,12 +4,12 @@
 <div class="px-4 md:px-10 mx-auto w-full">
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
+    <a href="{{route('provider')}}" class="p-3 mb-5 bg-gray-800 text-white rounded"><i class="fas fa-undo-alt"></i> Voltar</a>
     @if($acesso)
         <div class="">
-            <h1 class="mb-5 text-2xl font-bold"><i class="fas fa-file-contract"></i> Detalhes do Fornecedor Nº {{$provider->name}}</h1>
+            <h1 class="mt-5 text-2xl text-center font-bold"><i class="fas fa-file-contract"></i> Detalhes do Fornecedor Nº {{$provider->name}}</h1>
         </div>
     @endif
-<a href="{{route('provider')}}" class="p-3 mb-5 bg-gray-800 text-white rounded"><i class="fas fa-undo-alt"></i> Voltar</a>
 @if($acesso)
     <div>
         <table class="border-collapse w-full mt-5">
@@ -44,9 +44,9 @@
         </table>
     </div>
     <div class="flex flex-wrap mx-auto">
-        <div class="w-full">
-            <h1 class="mb-5 mt-13 text-2xl font-bold">Despesas pendentes com o fornecedor: {{$provider->name}}</h1>
-            <table class="border-collapse w-full mt-5">
+        <div class="w-full rounded border shadow mt-3 p-3">
+            <h1 class="my-5 mt-3 text-2xl text-center font-bold">Despesas pendentes com o fornecedor: {{$provider->name}}</h1>
+            <table class="border-collapse w-full">
                 <thead>
                     <tr>
                         <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Data de execução</th>
@@ -85,8 +85,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="w-full">
-            <h1 class="mb-5 mt-13 text-2xl font-bold">Despesas faturadas com o fornecedor: {{$provider->name}}</h1>
+        <div class="w-full rounded border shadow mt-3 p-3">
+            <h1 class="mb-5 mt-3 text-2xl font-bold">Despesas faturadas com o fornecedor: {{$provider->name}}</h1>
             <table class="border-collapse w-full mt-5">
                 <thead>
                     <tr>

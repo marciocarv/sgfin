@@ -31,6 +31,30 @@ class Account extends Model
         return $this->hasMany(Expenditure::class);
     }
 
+    public function sumIncome($id){
+        return Income::where('account_id', $id)
+        ->sum('amount');
+    }
+
+    public function ballance($id){
+        $expenditure = Expenditure::where('account_id', $id)
+        ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->sum('expenditures.value');
+
+        $income = Income::where('account_id', $id)
+        ->sum('amount');
+
+        $ballance = $income - $expenditure;
+
+        return $ballance;
+    }
+
+    public function sumExpenditures($id){
+        return Expenditure::where('account_id', $id)
+        ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->sum('expenditures.value');
+    }
+
     public function expenditurePaid($id, $dataInicial, $dataFinal){
         return Expenditure::where('account_id', $id)
         ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')

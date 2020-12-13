@@ -4,15 +4,15 @@
 <div class="px-4 md:px-10 mx-auto w-full">
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
+    <a href="{{route('ordinance')}}" class="p-3 bg-gray-800 text-white rounded"><i class="fas fa-undo-alt"></i> Voltar</a>
     @if($acesso)
         <div class="">
-            <h1 class="mb-5 text-2xl font-bold"><i class="fas fa-file-contract"></i> Detalhes da portaria Nº {{number_format($ordinance->number, 0, '', '.')}}</h1>
+            <h1 class="mt-5 text-2xl font-bold text-center"><i class="fas fa-file-contract"></i> Detalhes da portaria Nº {{number_format($ordinance->number, 0, '', '.')}}</h1>
         </div>
     @endif
-<a href="{{route('ordinance')}}" class="p-3 mb-5 bg-gray-800 text-white rounded"><i class="fas fa-undo-alt"></i> Voltar</a>
 @if($acesso)
     <div>
-        <table class="border-collapse w-full mt-5">
+        <table class="border-collapse w-full rounded border shadow my-5">
             <tr>
                 <th class="p-2 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Data</th>
                 <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Número</th>
@@ -53,8 +53,8 @@
         </table>
     </div>
     <div class="flex flex-wrap mx-auto">
-        <div class="w-full">
-            <h1 class="mb-5 mt-13 text-2xl font-bold">Entrada de Recursos da Portaria Nº {{number_format($ordinance->number, 0, '', '.')}}</h1>
+        <div class="w-full rounded border shadow p-3 my-5">
+            <h1 class="mb-5 text-2xl text-center font-bold">Entrada de Recursos da Portaria Nº {{number_format($ordinance->number, 0, '', '.')}}</h1>
             <table class="border-collapse w-full mt-5">
                 <thead>
                     <tr>
@@ -99,8 +99,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="w-full">
-            <h1 class="mb-5 mt-13 text-2xl font-bold">Licitação da Portaria Nº {{number_format($ordinance->number, 0, '', '.')}}</h1>
+        <div class="w-full rounded border shadow p-3 my-5">
+            <h1 class="text-2xl text-center font-bold">Licitação da Portaria Nº {{number_format($ordinance->number, 0, '', '.')}}</h1>
             <table class="border-collapse w-full mt-5">
                 <thead>
                     <tr>

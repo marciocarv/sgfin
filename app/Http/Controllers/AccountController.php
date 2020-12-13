@@ -19,7 +19,14 @@ class AccountController extends Controller
 
         $accounts = $account->accountBySchool($school->id);
 
-        return view('account', ['accounts'=>$accounts, 'acesso'=>true]);
+        foreach($accounts as $account){
+            /*$income = $account->sumIncome($account->id);
+            $expenditure = $account->sumExpenditure($account->id);*/
+            $ballance = $account->ballance($account->id);
+            $accountsSaldo[] = ["ballance"=>$ballance, "account"=>$account];
+        }
+
+        return view('account', ['accountsSaldo'=>$accountsSaldo, 'acesso'=>true]);
     }
 
     public function choose($movimento){
