@@ -19,9 +19,9 @@ class AccountController extends Controller
 
         $accounts = $account->accountBySchool($school->id);
 
+        $accountsSaldo = [];
+
         foreach($accounts as $account){
-            /*$income = $account->sumIncome($account->id);
-            $expenditure = $account->sumExpenditure($account->id);*/
             $ballance = $account->ballance($account->id);
             $accountsSaldo[] = ["ballance"=>$ballance, "account"=>$account];
         }

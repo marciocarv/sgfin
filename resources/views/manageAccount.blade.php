@@ -34,7 +34,7 @@
     <div class="flex flex-wrap rounded border shadow py-3">
         <div class="w-full xl:w-6/12 px-4 mt-5">
             <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-                <p class="font-bold text-center text-xl text-gra-600">Recursos recebidos - {{date('d/m/Y', strtotime($dataInicial))}} à {{date('d/m/Y', strtotime($dataFinal))}}</p>
+                <p class="font-bold text-center text-xl text-gray-600">Recursos recebidos - {{date('d/m/Y', strtotime($dataInicial))}} à {{date('d/m/Y', strtotime($dataFinal))}}</p>
                 <table class="border-collapse w-full mt-5">
                     <thead>
                         <tr>
@@ -72,7 +72,7 @@
     </div>
     <div class="w-full xl:w-6/12 px-4 mt-5">
         <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-            <p class="font-bold text-center text-xl text-gra-600">Pagamentos - {{date('d/m/Y', strtotime($dataInicial))}} à {{date('d/m/Y', strtotime($dataFinal))}}</p>
+            <p class="font-bold text-center text-xl text-gray-600">Pagamentos - {{date('d/m/Y', strtotime($dataInicial))}} à {{date('d/m/Y', strtotime($dataFinal))}}</p>
             <table class="border-collapse w-full mt-5">
                 <thead>
                     <tr>
@@ -110,7 +110,7 @@
     </div>
     <div class="w-full xl:w-6/12 px-4 mt-5">
         <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
-            <p class="font-bold text-center text-xl text-gra-600">Rendimentos - {{date('d/m/Y', strtotime($dataInicial))}} à {{date('d/m/Y', strtotime($dataFinal))}}</p>
+            <p class="font-bold text-center text-xl text-gray-600">Rendimentos - {{date('d/m/Y', strtotime($dataInicial))}} à {{date('d/m/Y', strtotime($dataFinal))}}</p>
             <table class="border-collapse w-full mt-5">
                 <thead>
                     <tr>
@@ -142,15 +142,21 @@
                     Nâo há Receitas! <a href="" class="text-green-500 hover:text-green-800 font-semibold">Cadastrar Receita</a>
                 </td>
                 @endif
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
+    <div class="w-full xl:w-6/12 px-4 mt-5">
+        <div class="relative flex flex-col min-w-0 break-words bg-teal-100 rounded mb-6 xl:mb-0 shadow-lg">
+            <p class="font-bold text-center text-xl text-blue-800">Gerenciamento de Rendimentos</p>
+            <p class="flex justify-center my-5">
+                <a href="{{route('addBankIncome', ['id'=>$account->id])}}" class="p-3 mb-5 mr-3 bg-gray-800 text-white rounded text-center  hover:bg-gray-600 hover:font-semibold w-36"><i class="far fa-list-alt"></i> Listar</a>
+            </p>
+        </div>
     </div>
 </div>
 </div>
 </div>
 @endsection
-            
-
 
 

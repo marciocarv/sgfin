@@ -23,7 +23,7 @@ class Account extends Model
         return $this->hasMany(Income::class);
     }
 
-    public function bankIncome(){
+    public function bankIncomes(){
         return $this->hasMany(BankIncome::class);
     }
 

@@ -10,7 +10,7 @@ use App\Http\Controllers\ExpenditureController;
 use App\Http\Controllers\testeController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PayController;
-
+use App\Http\Controllers\BankIncomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -86,5 +86,9 @@ Route::get('/provider/delete/{id}', [ProviderController::class, 'delete'])->name
 Route::get('/provider/update/{id}', [ProviderController::class, 'setUpdate'])->name('upProvider')->middleware('checkSchool');
 Route::post('/provider/update', [ProviderController::class, 'update'])->name('upProviderPost');
 Route::get('/provider/detail/{id}', [ProviderController::class, 'detail'])->name('detailProvider')->middleware('checkSchool');
+
+Route::get('/conta/rendimento/{id}', [BankIncomeController::class, 'setCreate'])->name('addBankIncome')->middleware('checkSchool');
+Route::post('/conta/rendimento', [BankIncomeController::class, 'create'])->name('addBankIncomePost');
+Route::get('/conta/rendimento/delete/{id}', [BankIncomeController::class, 'delete'])->name('delBankIncome')->middleware('checkSchool');
 
 

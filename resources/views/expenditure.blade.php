@@ -4,13 +4,13 @@
 <div class="px-4 md:px-10 mx-auto w-full">
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
+  <a href="{{route('addExpenditure', ['id'=>$account->id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded hover:bg-gray-600"><i class="fas fa-plus"></i> Registrar Despesas</a>
 <div class="">
-  <h1 class="mb-5 text-2xl font-bold">
+  <h1 class="mt-5 text-2xl text-center font-bold">
     <i class="fas fa-file-contract"></i> Despesas - {{$account->description}}
     <a href="{{route('chooseAccount', ['movimento'=>'out'])}}" class="text-sm text-blue-500 hover:text-blue-700"><i class="fas fa-sync-alt"></i> Alterar Conta</a>
   </h1>
 </div>
-<a href="{{route('addExpenditure', ['id'=>$account->id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded hover:bg-gray-600"><i class="fas fa-plus"></i> Registrar Despesas</a>
 @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 mt-3 rounded-lg text-green-800">{{ session('msg') }}</p>
 @endif

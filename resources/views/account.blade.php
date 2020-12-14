@@ -4,10 +4,10 @@
 <div class="px-4 md:px-10 mx-auto w-full">
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
-<div class="">
-    <h1 class="mb-5 text-2xl font-bold"><i class="fas fa-file-invoice-dollar"></i> Contas</h1>
-</div>
 <a href="{{route('addAccount')}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-plus"></i> Adicionar Conta</a>
+<div class="">
+  <h1 class="mt-5 text-2xl text-center font-bold"><i class="fas fa-file-invoice-dollar"></i> Contas disponíveis</h1>
+</div>
 @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 mt-3 rounded-lg text-green-800">{{ session('msg') }}</p>
 @endif

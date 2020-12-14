@@ -4,15 +4,20 @@
 <div class="px-4 md:px-10 mx-auto w-full">
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
-  <div class="">
-    <h1 class="mb-20 text-2xl font-bold"><i class="fas fa-file-contract"></i> Cadastre sua Receita - {{$account->description}}</h1>
-  </div>
   <a href="{{route('income', ['id'=>$account->id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
+  <div class="">
+    <h1 class="mt-5 text-2xl font-bold"><i class="fas fa-file-contract"></i> Cadastre sua Receita - {{$account->description}}</h1>
+  </div>
+  @if ($options->count() === 1)
+    <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">
+      Você não possui Portarias Cadastradas, se o Recurso veio através de uma portaria, <a href="{{route('addOrdinance')}}" class="text-red-600 hover:text-red-400">cadastre aqui</a>
+    </p>
+  @endif
   @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">{{ session('msg') }}</p>
   @endif
   
-  <form id="register-form" class="w-full mt-5 max-w-2xl block" action="{{route($route)}}" method="post" enctype="multipart/form-data">
+  <form id="register-form" class="w-full mt-5 max-w-2xl block rounded border shadow p-3" action="{{route($route)}}" method="post" enctype="multipart/form-data">
     @csrf
     @if ($action == 'update')
       <input type="hidden" value="{{$income->id}}" name="id"/>

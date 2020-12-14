@@ -46,10 +46,12 @@ class ExpenditureController extends Controller
         $options = $school->providers;
 
         //verifica se o usuário tem acesso a conta.
-        if($account->school_id === $school->id){
+        if($account->school_id === $school->id && !$options->isEmpty()){
             return view('formExpenditure', ['javascript'=>$javascript, 'script'=>'expenditure', 'route'=>'addExpenditurePost', 'action'=>'create', 'account'=>$account, 'options'=>$options, 'validate'=>$validate]);
+        }else if($options->isEmpty()){
+            return redirect()->route('provider')->with('msg', 'Você não possui fornecedores, antes de cadastrar uma Despesa, cadastre o Fornecedor do produto/serviço');
         }else{
-            return redirect('dashoboard');
+            return redirect()->route('dashboard');
         }
     }
 

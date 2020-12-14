@@ -58,7 +58,7 @@
                 <tbody>
                     @foreach ($expenditures as $expenditure)
                     <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                        <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Data</span>
                         {{$expenditure->date_expenditure->format('d/m/Y')}}
                         </td>
@@ -66,18 +66,18 @@
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Descrição</span>
                             {{$expenditure->description}}
                         </td>
-                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                        <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor Custeio</span>
                             R$ {{number_format($expenditure->value, 2, ',', '.')}}
                         </td>
-                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                        <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Data</span>
                             {{$expenditure->expiration->format('d/m/Y')}}
                             </td>
                     </tr>
                     @endforeach
                     @if($expenditures->isEmpty())
-                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static" colspan="5">
+                    <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="5">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Sem Registro</span>
                         Nâo há despesas pendentes com o fornecedor!
                     </td>
@@ -86,7 +86,7 @@
             </table>
         </div>
         <div class="w-full rounded border shadow mt-3 p-3">
-            <h1 class="mb-5 mt-3 text-2xl font-bold">Despesas faturadas com o fornecedor: {{$provider->name}}</h1>
+            <h1 class="mb-5 mt-3 text-2xl text-center font-bold">Despesas faturadas com o fornecedor: {{$provider->name}}</h1>
             <table class="border-collapse w-full mt-5">
                 <thead>
                     <tr>
@@ -99,7 +99,7 @@
                 <tbody>
                     @foreach ($expenditures as $expenditure)
                     <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
-                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                        <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Data</span>
                         {{$expenditure->date_expenditure->format('d/m/Y')}}
                         </td>
@@ -107,18 +107,18 @@
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Descrição</span>
                             {{$expenditure->description}}
                         </td>
-                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                        <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor Custeio</span>
                             R$ {{number_format($expenditure->value, 2, ',', '.')}}
                         </td>
-                        <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static">
+                        <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Data Pagamento</span>
                             {{$expenditure->expiration->format('d/m/Y')}}
                             </td>
                     </tr>
                     @endforeach
                     @if($expenditures->isEmpty())
-                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b text-center block lg:table-cell relative lg:static" colspan="5">
+                    <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="5">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Sem Registro</span>
                         Nâo há despesas pendentes com o fornecedor!
                     </td>

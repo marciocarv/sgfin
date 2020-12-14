@@ -6,7 +6,7 @@
 <div class="block w-full mt-24">
 <a href="{{route('dashboard')}}" class="p-3 mb-5 bg-gray-800 text-white rounded hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
 <div class="">
-  <h1 class="mb-2 mt-5 text-2xl font-bold">{{$titulo}}</h1>
+  <h1 class="mb-2 mt-5 text-2xl text-center font-bold">{{$titulo}}</h1>
 </div>
 @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 mt-3 rounded-lg text-green-800">{{ session('msg') }}</p>

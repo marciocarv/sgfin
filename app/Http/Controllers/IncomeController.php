@@ -45,11 +45,12 @@ class IncomeController extends Controller
         //busca todas as ordinances para montar o select
         $options = $school->ordinances;
 
+
         //verifica se o usuário tem acesso a conta.
         if($account->school_id === $school->id){
             return view('formIncome', ['javascript'=>$javascript, 'script'=>'validate', 'route'=>'addIncomePost', 'action'=>'create', 'account'=>$account, 'options'=>$options, 'validate'=>$validate]);
         }else{
-            return redirect('dashoboard');
+            return redirect('dashboard');
         }
     }
 

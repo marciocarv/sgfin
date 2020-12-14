@@ -17,6 +17,7 @@ class CreateBankIncomesTable extends Migration
             $table->id();
             $table->foreignId('account_id')->constrained();
             $table->decimal('value', 10, 2);
+            $table->dateTime('date_bank_income');
             $table->timestamps();
         });
     }
