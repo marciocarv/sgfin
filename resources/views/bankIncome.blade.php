@@ -46,7 +46,7 @@
         required
         id="value"
         @if ($action == 'update')
-        value="{{$account->agency}}"
+        value="{{$bankIncome->value}}"
         @endif
         class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
         placeholder="Valor do rendimento"
@@ -90,7 +90,7 @@
           <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Ações</span>
             <a href="{{route('delBankIncome', ['id'=> $bank_income->id])}}" class="text-red-600 hover:text-red-400 underline mr-3" alt="Excluir"><i class="fas fa-trash-alt"></i></a>
-            <a href="{{route('upIncome', ['id'=> $bank_income->id])}}" class="text-gray-600 hover:text-gray-400 underline ml-3" alt="Editar"><i class="fas fa-edit"></i></a>
+            <a href="{{route('upBankIncome', ['id'=> $bank_income->id])}}" class="text-gray-600 hover:text-gray-400 underline ml-3" alt="Editar"><i class="fas fa-edit"></i></a>
           </td>
         </tr>
         @endforeach
@@ -104,6 +104,13 @@
 </div>
 @endsection
             
+@section('script')
+  <script src="{{asset('js/vanilla-masker.min.js')}}" charset="utf-8"></script>
+  <script charset="utf-8" type="text/javascript">
 
+    VMasker(document.querySelector("#value")).maskMoney();
+
+  </script>
+@endsection
 
 

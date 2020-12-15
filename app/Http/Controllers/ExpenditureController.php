@@ -35,10 +35,6 @@ class ExpenditureController extends Controller
 
     public function setCreate($id){
         $account = Account::find($id);
-        $javascript = true;
-        $validate = [
-            ['campo'=>'value','value'=>'', 'mask'=>'maskMoney'],
-        ];
 
         $school = School::find(session('school')->id);
 
@@ -47,7 +43,7 @@ class ExpenditureController extends Controller
 
         //verifica se o usuário tem acesso a conta.
         if($account->school_id === $school->id && !$options->isEmpty()){
-            return view('formExpenditure', ['javascript'=>$javascript, 'script'=>'expenditure', 'route'=>'addExpenditurePost', 'action'=>'create', 'account'=>$account, 'options'=>$options, 'validate'=>$validate]);
+            return view('formExpenditure', ['route'=>'addExpenditurePost', 'action'=>'create', 'account'=>$account, 'options'=>$options]);
         }else if($options->isEmpty()){
             return redirect()->route('provider')->with('msg', 'Você não possui fornecedores, antes de cadastrar uma Despesa, cadastre o Fornecedor do produto/serviço');
         }else{
@@ -94,10 +90,6 @@ class ExpenditureController extends Controller
     }
 
     public function setUpdate($id){
-        $javascript = true;
-        $validate = [
-            ['campo'=>'value','value'=>'', 'mask'=>'maskMoney'],
-        ];
         $expenditure = Expenditure::find($id);
         $school = School::find(session('school')->id);
 
@@ -107,7 +99,7 @@ class ExpenditureController extends Controller
         $account = $expenditure->account;
 
         if($account->school_id === session('school')->id){
-            return view('formExpenditure', ['javascript'=>$javascript, 'script'=>'expenditure', 'expenditure'=>$expenditure, 'route'=>'upExpenditurePost', 'action'=>'update', 'account'=>$account, 'options'=>$options, 'validate'=>$validate]);
+            return view('formExpenditure', ['expenditure'=>$expenditure, 'route'=>'upExpenditurePost', 'action'=>'update', 'account'=>$account, 'options'=>$options]);
         }else{
             return redirect()->route('expenditure',['id'=>$expenditure->account_id])->with('msg', 'Você não tem acesso a essa Despesa!');
         }

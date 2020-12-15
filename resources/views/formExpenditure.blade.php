@@ -171,6 +171,28 @@
 </div>
 @endsection
             
+@section('script')
 
+<script src="{{asset('js/vanilla-masker.min.js')}}" charset="utf-8"></script>
+<script charset="utf-8" type="text/javascript">
+  VMasker(document.querySelector("#value")).maskMoney();
+
+  var select = document.querySelector('#fixed');
+  if(select.options[select.selectedIndex].value === 'true'){
+    document.querySelector('#msg-fixed').removeAttribute('class', 'hidden');
+  }else{
+    document.querySelector('#msg-fixed').setAttribute('class', 'hidden');
+  }
+  select.addEventListener('change', ()=>{
+    if(select.options[select.selectedIndex].value === 'true'){
+      document.querySelector('#msg-fixed').removeAttribute('class', 'hidden');
+      document.querySelector('#msg-fixed').setAttribute('class', 'text-green-600 mt-2 bg-blue-100 p-3 text-bold');
+    }else{
+      document.querySelector('#msg-fixed').setAttribute('class', 'hidden');
+    }            
+  });
+</script>
+
+@endsection
 
 

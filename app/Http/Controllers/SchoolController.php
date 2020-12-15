@@ -19,14 +19,8 @@ class SchoolController extends Controller
     }
 
     public function create(Request $request){
-        $javascript = true;
-        $validate = [
-            ['campo'=>'cnpj','value'=>'99.999.999/9999-99', 'mask'=>'maskPattern'],
-            ['campo'=>'cep','value'=>'99.999-999', 'mask'=>'maskPattern'],
-            ['campo'=>'telefone','value'=>'(99) 9999-9999', 'mask'=>'maskPattern']
-        ];
         if($request->input('name') == null || $request->input('cnpj') == null){
-            return view('formSchool', ['javascript'=>$javascript, 'script'=>'validate', 'route'=>'addOrdinance', 'action'=>'create', 'validate'=>$validate]);
+            return view('formSchool', ['javascript'=>false, 'route'=>'addOrdinance', 'action'=>'create']);
         }else{
             
             $school = new School;

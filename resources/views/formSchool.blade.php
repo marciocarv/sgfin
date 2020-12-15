@@ -87,7 +87,7 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >Telofone</label
+          >Telefone</label
         ><input
           type="text"
           name="telefone"
@@ -246,4 +246,15 @@
     </div>
   </form>
 </div>
+@endsection
+
+@section('script')
+  <script src="{{asset('js/vanilla-masker.min.js')}}" charset="utf-8"></script>
+        <script charset="utf-8" type="text/javascript">
+
+            VMasker(document.querySelector("#cnpj")).maskPattern("99.999.999/9999-99");
+            VMasker(document.querySelector("#cep")).maskPattern("99.999-999");
+            VMasker(document.querySelector("#telefone")).maskPattern("(99) 9999-9999");
+
+  </script>
 @endsection

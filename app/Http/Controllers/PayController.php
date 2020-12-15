@@ -15,7 +15,6 @@ class PayController extends Controller
 
     public function setPay($id){
 
-        $javascript = true;
         $validate = [
             ['campo'=>'','value'=>'', 'mask'=>''],
         ];
@@ -27,7 +26,7 @@ class PayController extends Controller
         $school = $expenditure->account->school;
 
         if($school->id === session('school')->id){
-            return view('formPay', ['expenditure'=>$expenditure, 'javascript'=>$javascript, 'script'=>'validate', 'route'=>'addPay', 'action'=>'create', 'validate'=>$validate]);
+            return view('formPay', ['expenditure'=>$expenditure, 'route'=>'addPay', 'action'=>'create']);
         }else{
             return redirect()->route('dashboard');
         }

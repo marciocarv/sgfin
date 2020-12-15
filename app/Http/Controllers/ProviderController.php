@@ -23,14 +23,8 @@ class ProviderController extends Controller
     }
 
     public function setCreate(){
-        $javascript = true;
-        $validate = [
-            ['campo'=>'cnpj','value'=>'99.999.999/9999-99', 'mask'=>'maskPattern'],
-            ['campo'=>'cpf','value'=>'999.999.999-99', 'mask'=>'maskPattern'],
-            ['campo'=>'phone','value'=>'(99) 99999-9999', 'mask'=>'maskPattern']
-        ];
 
-        return view('formProvider', ['javascript'=>$javascript, 'script'=>'provider', 'route'=>'addProviderPost', 'action'=>'create', 'validate'=>$validate]);
+        return view('formProvider', ['route'=>'addProviderPost', 'action'=>'create']);
     }
 
     public function create(Request $request){
@@ -75,15 +69,10 @@ class ProviderController extends Controller
     }
 
     public function setUpdate($id){
-        $javascript = true;
-        $validate = [
-            ['campo'=>'cnpj','value'=>'99.999.999/9999-99', 'mask'=>'maskPattern'],
-            ['campo'=>'cpf','value'=>'999.999.999-99', 'mask'=>'maskPattern'],
-            ['campo'=>'phone','value'=>'(99) 99999-9999', 'mask'=>'maskPattern']
-        ];
+        
         $provider = Provider::find($id);
         if($provider->school_id === session('school')->id){
-            return view('formProvider', ['javascript'=>$javascript, 'script'=>'provider', 'provider'=>$provider, 'route'=>'upProviderPost', 'action'=>'update', 'validate'=>$validate]);
+            return view('formProvider', ['provider'=>$provider, 'route'=>'upProviderPost', 'action'=>'update']);
         }else{
             return redirect('provider')->with('msg', 'Você não tem acesso a esse Fornecedor!');
         }

@@ -157,6 +157,57 @@
 </div>
 @endsection
             
+@section('script')
+  <script src="{{asset('js/vanilla-masker.min.js')}}" charset="utf-8"></script>
+  <script charset="utf-8" type="text/javascript">
+    VMasker(document.querySelector("#cnpj")).maskPattern("99.999.999/9999-99");
+    VMasker(document.querySelector("#cpf")).maskPattern("999.999.999-99");
+    VMasker(document.querySelector("#phone")).maskPattern("(99) 9999-9999");
+
+    var cpf = document.querySelector('#form_cpf');
+    var cpf_input = document.querySelector('#cpf');
+    var cnpj = document.querySelector('#form_cnpj');
+    var cnpj_input = document.querySelector('#cnpj');
+    var razao = document.querySelector('#form_razao');
+    var razao_input = document.querySelector('#company_name');
+    var select = document.querySelector('#select_provider');
+    select.addEventListener('change', ()=>{
+      if(select.options[select.selectedIndex].value === 'Física'){
+        cnpj.setAttribute('class', 'hidden');
+        cnpj_input.removeAttribute("required");
+        razao.setAttribute('class', 'hidden');
+        razao_input.removeAttribute("required");
+        cpf_input.setAttribute('required', 'required');
+        cpf.removeAttribute('class', 'hidden');
+      }else{
+        cpf.setAttribute('class', 'hidden');
+        cpf_input.removeAttribute("required");
+        razao_input.setAttribute('required', 'required');
+        razao.removeAttribute('class','hidden');
+        cnpj_input.setAttribute('required', 'required');
+        cnpj.removeAttribute('class','hidden');
+      }            
+    });
+    if(select.options[select.selectedIndex].value === 'Física'){
+        cnpj.setAttribute('class', 'hidden');
+        cnpj_input.removeAttribute("required");
+        razao.setAttribute('class', 'hidden');
+        razao_input.removeAttribute("required");
+        cpf_input.setAttribute('required', 'required');
+        cpf.removeAttribute('class', 'hidden');
+      }else if(select.options[select.selectedIndex].value === 'Jurídica'){
+        cpf.setAttribute('class', 'hidden');
+        cpf_input.removeAttribute("required");
+        razao_input.setAttribute('required', 'required');
+        razao.removeAttribute('class','hidden');
+        cnpj_input.setAttribute('required', 'required');
+        cnpj.removeAttribute('class','hidden');
+      }else{
+        
+      }
+    
+  </script>
+@endsection
 
 
 

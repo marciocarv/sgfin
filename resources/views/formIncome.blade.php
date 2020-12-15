@@ -147,6 +147,15 @@
 </div>
 @endsection
             
+@section('script')
 
+<script src="{{asset('js/vanilla-masker.min.js')}}" charset="utf-8"></script>
+<script charset="utf-8" type="text/javascript">
+  VMasker(document.querySelector("#amount")).maskMoney();
+  VMasker(document.querySelector("#value_capital")).maskMoney();
+  VMasker(document.querySelector("#value_custeio")).maskMoney();
+</script>
+
+@endsection
 
 

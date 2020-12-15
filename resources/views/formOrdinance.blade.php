@@ -4,10 +4,11 @@
 <div class="px-4 md:px-10 mx-auto w-full">
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
+  <a href="{{route('ordinance')}}" class="p-3 mb-5 bg-gray-800 text-white rounded hover:bg-gray-700"><i class="fas fa-undo-alt"></i> Voltar</a>
   <div class="">
-      <h1 class="mb-13 text-2xl font-bold"><i class="fas fa-file-contract"></i> Cadastre sua Portaria</h1>
+      <h1 class="mt-8 text-2xl font-bold"><i class="fas fa-file-contract"></i> Cadastre sua Portaria</h1>
   </div>
-  <a href="{{route('ordinance')}}" class="p-3 mb-5 bg-gray-800 text-white rounded"><i class="fas fa-undo-alt"></i> Voltar</a>
+  
   @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">{{ session('msg') }}</p>
   @endif
@@ -172,6 +173,15 @@
     </div>
   </form>
 </div>
+@endsection
+
+@section('script')
+  <script src="{{asset('js/vanilla-masker.min.js')}}" charset="utf-8"></script>
+        <script charset="utf-8" type="text/javascript">
+
+            VMasker(document.querySelector("#amount")).maskMoney();
+
+  </script>
 @endsection
             
 

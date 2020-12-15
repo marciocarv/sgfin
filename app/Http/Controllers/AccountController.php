@@ -49,9 +49,9 @@ class AccountController extends Controller
     }
 
     public function create(Request $request){
-        $javascript = false;
+
         if($request->input('number') == null || $request->input('agency') == null){
-            return view('formAccount', ['javascript'=>$javascript, 'route'=>'addAccount', 'action'=>'create']);
+            return view('formAccount', ['route'=>'addAccount', 'action'=>'create']);
         }else{
             
             //montagem do objeto account para inserir
@@ -99,10 +99,10 @@ class AccountController extends Controller
     }
 
     public function setUpdate($id){
-        $javascript = false;
+
         $account = Account::find($id);
         if($account->school_id === session('school')->id){
-            return view('formAccount', ['javascript'=>$javascript, 'account'=>$account, 'route'=>'upAccountPost', 'action'=>'update']);
+            return view('formAccount', ['account'=>$account, 'route'=>'upAccountPost', 'action'=>'update']);
         }else{
             return redirect('conta')->with('msg', 'Você não tem acesso a essa Conta!');
         }

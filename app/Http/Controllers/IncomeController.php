@@ -33,13 +33,7 @@ class IncomeController extends Controller
 
     public function setCreate($id){
         $account = Account::find($id);
-        $javascript = true;
-        $validate = [
-            ['campo'=>'amount','value'=>'', 'mask'=>'maskMoney'],
-            ['campo'=>'value_capital','value'=>'', 'mask'=>'maskMoney'],
-            ['campo'=>'value_custeio','value'=>'', 'mask'=>'maskMoney']
-        ];
-
+        
         $school = School::find(session('school')->id);
 
         //busca todas as ordinances para montar o select
@@ -48,7 +42,7 @@ class IncomeController extends Controller
 
         //verifica se o usuário tem acesso a conta.
         if($account->school_id === $school->id){
-            return view('formIncome', ['javascript'=>$javascript, 'script'=>'validate', 'route'=>'addIncomePost', 'action'=>'create', 'account'=>$account, 'options'=>$options, 'validate'=>$validate]);
+            return view('formIncome', ['route'=>'addIncomePost', 'action'=>'create', 'account'=>$account, 'options'=>$options]);
         }else{
             return redirect('dashboard');
         }
@@ -82,12 +76,7 @@ class IncomeController extends Controller
     }
 
     public function setUpdate($id){
-        $javascript = true;
-        $validate = [
-            ['campo'=>'amount','value'=>'', 'mask'=>'maskMoney'],
-            ['campo'=>'value_capital','value'=>'', 'mask'=>'maskMoney'],
-            ['campo'=>'value_custeio','value'=>'', 'mask'=>'maskMoney']
-        ];
+
         $income = Income::find($id);
         $school = School::find(session('school')->id);
 
@@ -96,7 +85,7 @@ class IncomeController extends Controller
 
         $account = $income->account;
         if($account->school_id === session('school')->id){
-            return view('formIncome', ['javascript'=>$javascript, 'income'=>$income, 'route'=>'upIncomePost', 'action'=>'update', 'account'=>$account, 'options'=>$options, 'validate'=>$validate]);
+            return view('formIncome', ['income'=>$income, 'route'=>'upIncomePost', 'action'=>'update', 'account'=>$account, 'options'=>$options]);
         }else{
             return redirect()->route('income',['id'=>$income->account_id])->with('msg', 'Você não tem acesso a essa Receita!');
         }
