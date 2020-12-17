@@ -111,7 +111,12 @@ class ProviderController extends Controller
 
         if($provider->school_id === session('school')->id){
             $expenditures = $provider->expenditures;
-            return view('detailProvider', ['provider'=>$provider, 'acesso'=>true, 'expenditures'=>$expenditures]);
+
+            $pendingExpenditures = $provider->pendingExpenditures($id);
+
+            $expendituresPaid = $provider->expendituresPaid($id);
+
+            return view('detailProvider', ['provider'=>$provider, 'acesso'=>true, 'pendingExpenditures'=>$pendingExpenditures, 'expendituresPaid'=>$expendituresPaid]);
         }else{
             return view('detailProvider', ['acesso'=>false]);
         }

@@ -45,7 +45,7 @@
     </div>
     <div class="flex flex-wrap mx-auto">
         <div class="w-full rounded border shadow mt-3 p-3">
-            <h1 class="my-5 mt-3 text-2xl text-center font-bold">Despesas pendentes com o fornecedor: {{$provider->name}}</h1>
+            <h1 class="my-5 mt-3 text-2xl text-center font-bold">Despesas pendentes</h1>
             <table class="border-collapse w-full">
                 <thead>
                     <tr>
@@ -56,27 +56,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($expenditures as $expenditure)
+                    @foreach ($pendingExpenditures as $pendingExpenditure)
                     <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
                         <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Data</span>
-                        {{$expenditure->date_expenditure->format('d/m/Y')}}
+                        {{$pendingExpenditure->date_expenditure->format('d/m/Y')}}
                         </td>
                         <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Descrição</span>
-                            {{$expenditure->description}}
+                            {{$pendingExpenditure->description}}
                         </td>
                         <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor Custeio</span>
-                            R$ {{number_format($expenditure->value, 2, ',', '.')}}
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor</span>
+                            <span class="text-red-600 font-bold">R$ {{number_format($pendingExpenditure->value, 2, ',', '.')}}</span>
                         </td>
                         <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
-                            <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Data</span>
-                            {{$expenditure->expiration->format('d/m/Y')}}
+                            <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Vencimento</span>
+                            <span class="text-red-600 font-bold">{{$pendingExpenditure->expiration->format('d/m/Y')}}</span>
                             </td>
                     </tr>
                     @endforeach
-                    @if($expenditures->isEmpty())
+                    @if($pendingExpenditures->isEmpty())
                     <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="5">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Sem Registro</span>
                         Nâo há despesas pendentes com o fornecedor!
@@ -86,7 +86,7 @@
             </table>
         </div>
         <div class="w-full rounded border shadow mt-3 p-3">
-            <h1 class="mb-5 mt-3 text-2xl text-center font-bold">Despesas faturadas com o fornecedor: {{$provider->name}}</h1>
+            <h1 class="mb-5 mt-3 text-2xl text-center font-bold">Despesas faturadas</h1>
             <table class="border-collapse w-full mt-5">
                 <thead>
                     <tr>
@@ -97,7 +97,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($expenditures as $expenditure)
+                    @foreach ($expendituresPaid as $expenditure)
                     <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
                         <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Data</span>
@@ -109,15 +109,15 @@
                         </td>
                         <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor Custeio</span>
-                            R$ {{number_format($expenditure->value, 2, ',', '.')}}
+                            <span class="text-green-500 font-bold">R$ {{number_format($expenditure->value, 2, ',', '.')}}</span>
                         </td>
                         <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Data Pagamento</span>
-                            {{$expenditure->expiration->format('d/m/Y')}}
+                            <span class="text-green-500 font-bold">{{date('d/m/Y', strtotime($expenditure->date_pay))}}</span>
                             </td>
                     </tr>
                     @endforeach
-                    @if($expenditures->isEmpty())
+                    @if($expendituresPaid->isEmpty())
                     <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="5">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Sem Registro</span>
                         Nâo há despesas pendentes com o fornecedor!

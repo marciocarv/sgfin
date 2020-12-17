@@ -23,7 +23,9 @@
           <div class="flex flex-wrap">
             <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
               <h5 class="text-gray-500 uppercase font-bold text-xs">
-                Saldo: {{number_format($accountSaldo["ballance"], 2, ',', '.')}}
+                Saldo: <span class="{{$accountSaldo["ballance"] < 0 ? 'text-red-500' : 'text-green-500'}} font-bold">
+                        R$ {{number_format($accountSaldo["ballance"], 2, ',', '.')}}
+                      </span>
               </h5>
               <span class="font-semibold uppercase text-xl text-gray-800">
                 {{$accountSaldo["account"]->number}} - {{$accountSaldo["account"]->description}}

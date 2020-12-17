@@ -42,7 +42,7 @@
           </td>
             <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                 <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor</span>
-                R$ {{number_format($expenditure->value, 2, ',', '.')}}
+                <span class="text-red-500 font-bold">R$ {{number_format($expenditure->value, 2, ',', '.')}}</span>
             </td>
             <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
               <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Natureza</span>

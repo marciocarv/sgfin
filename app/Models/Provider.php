@@ -23,6 +23,21 @@ class Provider extends Model
         return $this->hasMany(Expenditure::class);
     }
 
+    public function pendingExpenditures($id){
+        return Expenditure::where('provider_id', $id)
+        ->leftJoin('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->where('pays.id', '=', NULL)
+        ->orderBy('expenditures.expiration', 'asc')
+        ->get();
+    }
+
+    public function expendituresPaid($id){
+        return Expenditure::where('provider_id', $id)
+        ->join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->orderBy('pays.date_pay', 'asc')
+        ->get();
+    }
+
     public function school(){
         return $this->belongsTo(School::class);
     }
