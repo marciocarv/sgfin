@@ -74,16 +74,15 @@ class AccountController extends Controller
 
         //se a data inicial e a data final vierem vazias, as datas padrão serão o primeiro e ultimo dia do mês atual
         if(!$request->dataInicial || !$request->dataFinal){
-            $data_incio = mktime(0, 0, 0, date('m') , 1 , date('Y'));
+            $data_inicio = mktime(0, 0, 0, date('m') , 1 , date('Y'));
             $data_fim = mktime(23, 59, 59, date('m'), date("t"), date('Y'));
 
-            $dataInicial = date('Y-m-d',$data_incio);
+            $dataInicial = date('Y-m-d',$data_inicio);
             $dataFinal = date('Y-m-d',$data_fim);
         }else{
             $dataInicial = $request->dataInicial;
             $dataFinal = $request->dataFinal;
         }
-
 
         $account = Account::find($id);
 
@@ -92,7 +91,15 @@ class AccountController extends Controller
 
             $expenditures = $account->expenditurePaid($id, $dataInicial, $dataFinal);
 
-            return view('manageAccount', ['account'=>$account, 'incomes'=>$incomes, 'expenditures'=>$expenditures, 'dataInicial'=>$dataInicial, 'dataFinal'=>$dataFinal]);
+            $bankIncomes = $account->bankIncomes->where('date_bank_income','>=', $dataInicial)->where('date_bank_income', '<=', $dataFinal);
+
+            $previousBallance = $account->previousBallance($id, $dataInicial);
+
+            $ballancePeriod = $account->ballance($id, $dataInicial, $dataFinal);
+
+            $ballanceFinal = $previousBallance + $ballancePeriod;
+
+            return view('manageAccount', ['ballanceFinal'=>$ballanceFinal, 'previousBallance'=>$previousBallance, 'account'=>$account, 'incomes'=>$incomes, 'expenditures'=>$expenditures, 'bankIncomes'=>$bankIncomes, 'dataInicial'=>$dataInicial, 'dataFinal'=>$dataFinal]);
         }else{
             return redirect('dashboard');
         }

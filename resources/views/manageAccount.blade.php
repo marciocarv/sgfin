@@ -27,8 +27,9 @@
 @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 mt-3 rounded-lg text-green-800">{{ session('msg') }}</p>
 @endif
+
 <div class="flex flex-wrap justify-between rounded border shadow my-5">
-    <p class="font-semibold text-2xl m-5">Saldo Anterior: <span class="font-bold">1.500,00</span></p><p class="font-semibold text-2xl m-5">Saldo Atual: <span class="font-bold">10.000,00</span></p>
+    <p class="font-semibold text-2xl m-5">Saldo Anterior: <span class="font-bold">R$ {{number_format($previousBallance, 2, ',', '.')}}</span></p><p class="font-semibold text-2xl m-5">Saldo Final: <span class="font-bold">R$ {{number_format($ballanceFinal, 2, ',', '.')}}</span></p>
 </div>
 <div class="w-full mt-5">
     <div class="flex flex-wrap rounded border shadow py-3">
@@ -56,7 +57,7 @@
                         </td>
                         <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor</span>
-                            {{number_format($income->amount, 2, ',', '.')}}
+                            <span class="text-green-800 font-semibold">R$ {{number_format($income->amount, 2, ',', '.')}}</span>
                         </td>
                     </tr>
                     @endforeach
@@ -94,7 +95,7 @@
                         </td>
                         <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor</span>
-                            {{number_format($expenditure->value, 2, ',', '.')}}
+                            <span class="text-red-700 font-semibold">R$ {{number_format($expenditure->value, 2, ',', '.')}}</span>
                         </td>
                     </tr>
                     @endforeach
@@ -115,31 +116,26 @@
                 <thead>
                     <tr>
                         <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Data</th>
-                        <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Descrição</th>
                         <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Valor</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach($incomes as $income)
+                @foreach($bankIncomes as $bankIncome)
                 <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
                     <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                     <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Data</span>
-                    {{$income->date_income->format('d/m/Y')}}
-                    </td>
-                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-                        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Descrição</span>
-                        {{$income->description}}
+                    {{$bankIncome->date_bank_income->format('d/m/Y')}}
                     </td>
                     <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor</span>
-                        {{number_format($income->amount, 2, ',', '.')}}
+                        <span class="text-green-800 font-semibold">R$ {{number_format($bankIncome->value, 2, ',', '.')}}</span>
                     </td>
                 </tr>
                 @endforeach
-                @if($incomes->isEmpty())
+                @if($bankIncomes->isEmpty())
                 <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="5">
-                    <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor Total</span>
-                    Nâo há Receitas! <a href="" class="text-green-500 hover:text-green-800 font-semibold">Cadastrar Receita</a>
+                    <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"></span>
+                    Nâo há Rendimentos! <a href="" class="text-green-500 hover:text-green-800 font-semibold">Cadastrar Rendimento</a>
                 </td>
                 @endif
                 </tbody>

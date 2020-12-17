@@ -36,23 +36,53 @@ class Account extends Model
         ->sum('amount');
     }
 
-    public function ballance($id){
+    public function ballance($id, $dataInicial = null, $dataFinal = null){
+
+        if($dataInicial == null){
+            $data_inicial = mktime(0, 0, 0, date('1'), 1, date('Y'));
+            $dataInicial = date('Y-m-d',$data_inicial);
+        }
+        if($dataFinal == null){
+            $data_final = mktime(0, 0, 0, date('12'), 31, date('Y'));
+            $dataFinal = date('Y-m-d',$data_final);
+        }
+
         $expenditure = Expenditure::where('account_id', $id)
         ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->where('pays.date_pay','>=', $dataInicial)->where('pays.date_pay', '<=', $dataFinal)
         ->sum('expenditures.value');
 
         $income = Income::where('account_id', $id)
+        ->where('date_income','>=', $dataInicial)->where('date_income', '<=', $dataFinal)
         ->sum('amount');
 
-        $ballance = $income - $expenditure;
+        $bankIncome = BankIncome::where('account_id', $id)
+        ->where('date_bank_income','>=', $dataInicial)->where('date_bank_income', '<=', $dataFinal)
+        ->sum('value');
+
+        $ballance = ($income + $bankIncome) - $expenditure;
 
         return $ballance;
     }
 
-    public function sumExpenditures($id){
-        return Expenditure::where('account_id', $id)
+    public function previousBallance($id, $data){
+
+        $expenditure = Expenditure::where('account_id', $id)
         ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->where('pays.date_pay','<', $data)
         ->sum('expenditures.value');
+
+        $income = Income::where('account_id', $id)
+        ->where('date_income','<', $data)
+        ->sum('amount');
+
+        $bankIncome = BankIncome::where('account_id', $id)
+        ->where('date_bank_income','<', $data)
+        ->sum('value');
+
+        $previousBallance = ($income + $bankIncome) - $expenditure;
+
+        return $previousBallance;
     }
 
     public function expenditurePaid($id, $dataInicial, $dataFinal){
