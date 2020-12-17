@@ -39,8 +39,7 @@ class Account extends Model
     public function ballance($id, $dataInicial = null, $dataFinal = null){
 
         if($dataInicial == null){
-            $data_inicial = mktime(0, 0, 0, date('1'), 1, date('Y'));
-            $dataInicial = date('Y-m-d',$data_inicial);
+            $dataInicial = session('school')->created_at;
         }
         if($dataFinal == null){
             $data_final = mktime(0, 0, 0, date('12'), 31, date('Y'));
