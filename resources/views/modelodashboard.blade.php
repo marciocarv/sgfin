@@ -1,13 +1,13 @@
 @extends('layouts.site')
 
 @section('content')
-        <div class="relative bg-teal-800 md:pt-32 pb-32 pt-12">
+        <div class="relative bg-green-600 md:pt-32 pb-32 pt-12">
           <div class="px-4 md:px-10 mx-auto w-full">
             <div>
               <!-- Card stats -->
               <div class="flex flex-wrap">
                 @foreach($accountsSaldo as $accountSaldo)
-                <div class="w-full lg:w-6/12 xl:w-3/12 px-3 mt-2">
+                <div class="w-full lg:w-6/12 xl:w-3/12 px-4 mt-5">
                   <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                     <div class="flex-auto p-4">
                       <div class="flex flex-wrap">
@@ -17,18 +17,18 @@
                                     R$ {{number_format($accountSaldo["ballance"], 2, ',', '.')}}
                                   </span>
                           </h5>
-                          <span class="font-semibold uppercase text-base text-gray-800">
+                          <span class="font-semibold uppercase text-xl text-gray-800">
                             {{$accountSaldo["account"]->number}} - {{$accountSaldo["account"]->description}}
                           </span>
                         </div>
                         <div class="relative w-auto pl-4 flex-initial">
-                          <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-teal-800">
+                          <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-blue-500">
                             <i class="fas fa-comment-dollar"></i>
                           </div>
                         </div>
                       </div>
                       <p class="text-xl text-gray-500 mt-4">
-                        <span class="text-teal-800 mr-2">
+                        <span class="text-blue-500 mr-2">
                           <i class="fas fa-cog"></i></i>
                         </span>
                         <span class="whitespace-no-wrap">
@@ -44,111 +44,66 @@
           </div>
         </div>
         <div class="px-4 md:px-10 mx-auto w-full -m-24">
-          <div class="flex flex-wrap mt-2">
-            <div class="w-full xl:w-6/12 mb-12 xl:mb-0 px-4">
-              <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
-                <div class="rounded-t mb-0 px-4 py-3 border-0">
+          <div class="flex flex-wrap">
+            <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
+              <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-gray-900">
+                <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
                   <div class="flex flex-wrap items-center">
-                    <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-                      <h3 class="font-semibold text-base text-gray-800">
-                        Contas a Vencer
-                      </h3>
-                    </div>
-                    <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                      <button
-                        class="bg-teal-800 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
-                        type="button"
-                        style="transition:all .15s ease"
+                    <div class="relative w-full max-w-full flex-grow flex-1">
+                      <h6
+                        class="uppercase text-gray-200 mb-1 text-xs font-semibold"
                       >
-                        Ver mais
-                      </button>
+                        Overview
+                      </h6>
+                      <h2 class="text-white text-xl font-semibold">
+                        Sales value
+                      </h2>
                     </div>
                   </div>
                 </div>
-                <div class="block w-full overflow-x-auto">
-                  <!-- Projects table -->
-                  <table class="items-center w-full bg-transparent border-collapse">
-                    <thead>
-                      <tr>
-                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Vencimento
-                        </th>
-                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          Descrição
-                        </th>
-                        <th class="px-6 bg-gray-100 text-gray-600 align-middle border border-solid border-gray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-no-wrap font-semibold text-left">
-                          valor
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          /argon/
-                        </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          4,569
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          340
-                        </td>
-                      </tr>
-                      <tr>
-                        <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          /argon/index.html
-                        </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          3,985
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          319
-                        </td>
-                      </tr>
-                      <tr>
-                        <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          /argon/charts.html
-                        </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          3,513
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          294
-                        </td>
-                      </tr>
-                      <tr>
-                        <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          /argon/tables.html
-                        </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          2,050
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          147
-                        </td>
-                      </tr>
-                      <tr>
-                        <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          /argon/profile.html
-                        </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          1,795
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          190
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                <div class="p-4 flex-auto">
+                  <!-- Chart -->
+                  <div class="relative" style="height:350px">
+                    <canvas id="line-chart"></canvas>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="w-full xl:w-6/12 mb-12 xl:mb-0 px-4">
+            <div class="w-full xl:w-4/12 px-4">
+              <div
+                class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded"
+              >
+                <div class="rounded-t mb-0 px-4 py-3 bg-transparent">
+                  <div class="flex flex-wrap items-center">
+                    <div class="relative w-full max-w-full flex-grow flex-1">
+                      <h6
+                        class="uppercase text-gray-500 mb-1 text-xs font-semibold"
+                      >
+                        Performance
+                      </h6>
+                      <h2 class="text-gray-800 text-xl font-semibold">
+                        Total orders
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="p-4 flex-auto">
+                  <!-- Chart -->
+                  <div class="relative" style="height:350px">
+                    <canvas id="bar-chart"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap mt-4">
+            <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
               <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
                 <div class="rounded-t mb-0 px-4 py-3 border-0">
                   <div class="flex flex-wrap items-center">
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1">
                       <h3 class="font-semibold text-base text-gray-800">
-                        Contas a Vencer
+                        Page visits
                       </h3>
                     </div>
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">

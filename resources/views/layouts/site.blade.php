@@ -288,7 +288,7 @@
       </nav>
       <div class="relative md:ml-64 bg-gray-100">
         <nav
-          class="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-no-wrap md:justify-start flex items-center bg-green-600"
+          class="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-no-wrap md:justify-start flex items-center bg-teal-800"
         >
           <div
             class="w-full mx-auto items-center flex justify-between md:flex-no-wrap flex-wrap md:px-10 lg:py-4 md:py-0"

@@ -27,7 +27,7 @@
                         R$ {{number_format($accountSaldo["ballance"], 2, ',', '.')}}
                       </span>
               </h5>
-              <span class="font-semibold uppercase text-xl text-gray-800">
+              <span class="font-semibold uppercase text-base text-gray-800">
                 {{$accountSaldo["account"]->number}} - {{$accountSaldo["account"]->description}}
               </span>
             </div>

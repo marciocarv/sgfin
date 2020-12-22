@@ -62,11 +62,19 @@
                     </tr>
                     @endforeach
                     @if($incomes->isEmpty())
-                    <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="5">
+                    <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="3">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor Total</span>
-                        Nâo há Receitas! <a href="" class="text-green-500 hover:text-green-800 font-semibold">Cadastrar Receita</a>
+                        Nâo há Receitas! <a href="{{route('income', ['id'=>$account->id])}}" class="text-green-500 hover:text-green-800 font-semibold">Cadastrar Receita</a>
                     </td>
                     @endif
+                    <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                        <td class="bg-gray-200 w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="2">
+                            <span class="text-gray-900 font-semibold">Total de receitas do período:</span>
+                        </td>
+                        <td class="bg-gray-200 w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
+                            <span class="text-green-900 font-bold">$ {{number_format($fullIncomes, 2, ',', '.')}}</span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -95,16 +103,24 @@
                         </td>
                         <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor</span>
-                            <span class="text-red-600 font-bold">R$ {{number_format($expenditure->value, 2, ',', '.')}}</span>
+                            <span class="text-red-600 font-bold">R$ {{number_format($expenditure->value + $expenditure->interest, 2, ',', '.')}}</span>
                         </td>
                     </tr>
                     @endforeach
                     @if($expenditures->isEmpty())
-                    <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="5">
-                        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor Total</span>
-                        Nâo há Despesas! <a href="" class="text-green-500 hover:text-green-800 font-semibold">Cadastrar Despesa</a>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="3">
+                        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"></span>
+                        Nâo há Despesas! <a href="{{route('expenditure', ['id'=>$account->id])}}" class="text-green-500 hover:text-green-800 font-semibold">Cadastrar Despesa</a>
                     </td>
                     @endif
+                    <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                        <td class="bg-gray-200 w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="2">
+                            <span class="text-gray-900 font-semibold">Total de despesas do período:</span>
+                        </td>
+                        <td class="bg-gray-200 w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
+                            <span class="text-red-900 font-bold">$ {{number_format($fullExpenditures, 2, ',', '.')}}</span>
+                        </td>
+                    </tr>
                 </tbody>
         </table>
         </div>
@@ -133,11 +149,19 @@
                 </tr>
                 @endforeach
                 @if($bankIncomes->isEmpty())
-                <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="5">
+                <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="2">
                     <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"></span>
-                    Nâo há Rendimentos! <a href="" class="text-green-500 hover:text-green-800 font-semibold">Cadastrar Rendimento</a>
+                    Nâo há Rendimentos! <a href="{{route('addBankIncome', ['id'=>$account->id])}}" class="text-green-500 hover:text-green-800 font-semibold">Cadastrar Rendimento</a>
                 </td>
                 @endif
+                <tr class="bg-white lg:hover:bg-gray-100 flex lg:table-row flex-row lg:flex-row flex-wrap lg:flex-no-wrap mb-10 lg:mb-0">
+                    <td class="bg-gray-200 w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
+                        <span class="text-gray-900 font-semibold">Total de rendimentos do período:</span>
+                    </td>
+                    <td class="bg-gray-200 w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
+                        <span class="text-green-900 font-bold">$ {{number_format($fullBankIncomes, 2, ',', '.')}}</span>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -146,7 +170,7 @@
         <div class="relative flex flex-col min-w-0 break-words bg-teal-100 rounded mb-6 xl:mb-0 shadow-lg">
             <p class="font-bold text-center text-xl text-blue-800">Gerenciamento de Rendimentos</p>
             <p class="flex justify-center my-5">
-                <a href="{{route('addBankIncome', ['id'=>$account->id])}}" class="p-3 mb-5 mr-3 bg-gray-800 text-white rounded text-center  hover:bg-gray-600 hover:font-semibold w-36"><i class="far fa-list-alt"></i> Listar</a>
+                <a href="{{route('addBankIncome', ['id'=>$account->id])}}" class="p-3 mb-5 mr-3 bg-gray-800 text-white rounded text-center  hover:bg-gray-600 hover:font-semibold w-36"><i class="far fa-list-alt"></i> Cadastrar</a>
             </p>
         </div>
     </div>

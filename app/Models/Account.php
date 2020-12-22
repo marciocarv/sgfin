@@ -31,35 +31,23 @@ class Account extends Model
         return $this->hasMany(Expenditure::class);
     }
 
-    public function sumIncome($id){
-        return Income::where('account_id', $id)
-        ->sum('amount');
-    }
-
     public function ballance($id, $dataInicial = null, $dataFinal = null){
 
         if($dataInicial == null){
-            $dataInicial = session('school')->created_at;
+            $dataInicial = '2000-01-01';
         }
         if($dataFinal == null){
             $data_final = mktime(0, 0, 0, date('12'), 31, date('Y'));
             $dataFinal = date('Y-m-d',$data_final);
         }
 
-        $expenditure = Expenditure::where('account_id', $id)
-        ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
-        ->where('pays.date_pay','>=', $dataInicial)->where('pays.date_pay', '<=', $dataFinal)
-        ->sum('expenditures.value');
+        $expenditure = $this->sumExpenditure($id, $dataInicial, $dataFinal);
 
-        $income = Income::where('account_id', $id)
-        ->where('date_income','>=', $dataInicial)->where('date_income', '<=', $dataFinal)
-        ->sum('amount');
+        $income = $this->sumIncome($id, $dataInicial, $dataFinal);
 
-        $bankIncome = BankIncome::where('account_id', $id)
-        ->where('date_bank_income','>=', $dataInicial)->where('date_bank_income', '<=', $dataFinal)
-        ->sum('value');
+        $bankIncome = $this->sumBankIncome($id, $dataInicial, $dataFinal);
 
-        $ballance = ($income + $bankIncome) - $expenditure;
+        $ballance = ($income + $bankIncome) - ($expenditure);
 
         return $ballance;
     }
@@ -88,7 +76,7 @@ class Account extends Model
         return Expenditure::where('account_id', $id)
         ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
         ->where('pays.date_pay','>=', $dataInicial)->where('pays.date_pay', '<=', $dataFinal)
-        ->select('expenditures.*', 'pays.date_pay')
+        ->select('expenditures.*', 'pays.date_pay', 'pays.interest')
         ->orderBy('pays.date_pay', 'desc')
         ->get();
     }
@@ -96,5 +84,35 @@ class Account extends Model
     public function accountBySchool($id){
         $account = Account::where('school_id', $id)->paginate(25);
         return $account;
+    }
+
+    public function sumExpenditure($id, $dataInicial, $dataFinal){
+        $expenditure = Expenditure::where('account_id', $id)
+        ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->where('pays.date_pay','>=', $dataInicial)->where('pays.date_pay', '<=', $dataFinal)
+        ->sum('expenditures.value');
+
+        $interest = Expenditure::where('account_id', $id)
+        ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->where('pays.date_pay','>=', $dataInicial)->where('pays.date_pay', '<=', $dataFinal)
+        ->sum('pays.interest');
+
+        return $interest + $expenditure;
+    }
+
+    public function sumIncome($id, $dataInicial, $dataFinal){
+        $income = Income::where('account_id', $id)
+        ->where('date_income','>=', $dataInicial)->where('date_income', '<=', $dataFinal)
+        ->sum('amount');
+
+        return $income;
+    }
+
+    public function sumBankIncome($id, $dataInicial, $dataFinal){
+        $bankIncome = BankIncome::where('account_id', $id)
+        ->where('date_bank_income','>=', $dataInicial)->where('date_bank_income','<=', $dataFinal)
+        ->sum('value');
+
+        return $bankIncome;
     }
 }

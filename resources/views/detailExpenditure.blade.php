@@ -47,6 +47,16 @@
             <tr>
                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl" colspan="2">R$ {{number_format($expenditure->value, 2, ',', '.')}}</td>
             </tr>
+            @if($expenditure->pay)
+            <tr>  
+                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Juros / Multa</th>
+                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Valor Total Pago</th>
+            </tr>
+            <tr>
+                <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">R$ {{number_format($expenditure->pay->interest, 2, ',', '.')}}</td>
+                <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">R$ {{number_format($valorTotal, 2, ',', '.')}}</td>
+            </tr>
+            @endif
             <tr>
                 <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Natureza da despesa</th>
                 <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Conta</th>
@@ -77,7 +87,9 @@
                 <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Método de Pagamento</th>
             </tr>
             <tr>
-                <td class="w-full lg:w-auto p-2 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->pay->number_invoice}} - {{$expenditure->pay->emission_invoice->format('d/m/Y')}}</td>
+                <td class="w-full lg:w-auto p-2 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->pay->number_invoice}} - 
+                    @if($expenditure->pay->emission_invoice === " ") {{$expenditure->pay->emission_invoice->format('d/m/Y')}} 
+                    @else   @endif</td>
                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->pay->payment_method}}</td>
             </tr>
         </table>

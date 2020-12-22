@@ -25,6 +25,14 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
+        >Vencimento</label>
+        <p class="font-bold text-3x1 text-blue-800" id="expiration">{{$expenditure->expiration->format('d/m/Y')}}</p>
+        <p class="hidden" id="msg-expiration">Pagamento realizado após o vencimento, informe o valor de eventuais juros/multas</p>
+    </div>
+    <div class="relative w-full mb-3">
+      <label
+        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        for="grid-password"
         >Data</label
       ><input
         type="date"
@@ -39,15 +47,34 @@
         style="transition: all 0.15s ease 0s;"
       />
     </div>
+    <div class="relative w-full mb-3 hidden" id="form_interest">
+      <label
+        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        for="grid-password"
+        >Juros / Multa</label
+      ><input
+        type="text"
+        name="interest"
+        required
+        id="interest"
+        @if ($action == 'update')
+        value="{{$pay->interest}}"
+        @else
+        value="0.00"
+        @endif
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        placeholder="valor de Juros ou multas referente ao pagamento"
+        style="transition: all 0.15s ease 0s;"
+      />
+    </div>
     <div class="relative w-full mb-3">
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Número da Nota Fiscal</label
+        >Número da Nota Fiscal / Boleto</label
       ><input
         type="text"
         name="number_invoice"
-        required
         id="number_invoice"
         @if ($action == 'update')
         value="{{$pay->number_invoice}}"
@@ -61,11 +88,10 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Data de Emissão (Nota Fiscal)</label
+        >Data de Emissão (Nota Fiscal / Boleto)</label
       ><input
         type="date"
         name="emission_invoice"
-        required
         id="emission_invoice"
         @if ($action == 'update')
         value="{{$pay->emission_invoice->format('Y-m-d')}}"
@@ -82,21 +108,21 @@
         >Método de Pagamento</label
       ><select name="payment_method" class="px-3 py-3 text-gray-700 rounded text-sm shadow w-full" id="select_provider">
         <option value="">-</option>
-        <option value="Dinheiro"
-        @if($action == 'update' && $pay->payment_method == 'Dinheiro')
-        selected
-        @endif
-        >Dinheiro</option>
         <option value="Cheque"
-        @if($action == 'update' && $provider->person_type == 'Cheque')
+        @if($action == 'update' && $pay->payment_method == 'Cheque')
         selected
         @endif
         >Cheque</option>
         <option value="Transferência"
-        @if($action == 'update' && $pay->payment_method == 'Transferência')
+        @if($action == 'update' && $provider->person_type == 'Transferência')
         selected
         @endif
-        >Transferência</option>
+        >Transferência Bancária</option>
+        <option value="Boleto"
+        @if($action == 'update' && $pay->payment_method == 'Boleto')
+        selected
+        @endif
+        >Boleto</option>
         <option value="Depósito"
         @if($action == 'update' && $pay->payment_method == 'Depósito')
         selected
@@ -121,4 +147,38 @@
     </div>
   </form>
 </div>
+@endsection
+
+@section('script')
+<script src="{{asset('js/vanilla-masker.min.js')}}" charset="utf-8"></script>
+<script charset="utf-8" type="text/javascript">
+  VMasker(document.querySelector("#interest")).maskMoney();
+
+  var elemento = document.querySelector('#date_pay');
+  var formInterest = document.querySelector('#form_interest');
+  var msg_expiration = document.querySelector('#msg-expiration');
+  var expiration = document.querySelector('#expiration');
+
+  elemento.addEventListener('blur', ()=>{
+    var dataString = elemento.value;
+    var arrayData = dataString.split("-");
+    var dataFormatada = `${arrayData[1]}/${arrayData[2]}/${arrayData[0]}`;
+    var data_pagamento = new Date(dataFormatada);
+    var vencimento = new Date("{{$expenditure->expiration->format('m/d/Y')}}");
+
+    if(data_pagamento > vencimento){
+      formInterest.removeAttribute('class', 'hidden');
+      msg_expiration.removeAttribute('class', 'hidden');
+      msg_expiration.setAttribute('class', 'bg-red-300 text-red-900 font-bold p-2 rounded');
+      expiration.setAttribute('class', 'font-bold text-3x1 text-red-800');
+    }else{
+      msg_expiration.setAttribute('class', 'hidden');
+      formInterest.setAttribute('class', 'hidden');
+      expiration.setAttribute('class', 'font-bold text-3x1 text-blue-800');
+    }
+
+  });
+
+</script>
+
 @endsection

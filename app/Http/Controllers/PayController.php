@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pay;
 use App\Models\Expenditure;
+use Illuminate\Support\Str;
 
 class PayController extends Controller
 {
@@ -34,12 +35,16 @@ class PayController extends Controller
 
     public function create(Request $request){
         $pay = new Pay;
+
+        $interest = Str::of($request->interest)->replace('.', '');
+        $interest = Str::of($interest)->replace(',', '.');
         
         $pay->expenditure_id = $request->id_expenditure;
         $pay->date_pay = $request->date_pay;
         $pay->number_invoice = $request->number_invoice;
         $pay->emission_invoice = $request->emission_invoice;
         $pay->payment_method = $request->payment_method;
+        $pay->interest = $interest;
 
         if($pay->save()){
             return redirect()->route('detailExpenditure',['id'=>$pay->expenditure_id])->with('msg', 'Pagamento Registrado com sucesso!');                

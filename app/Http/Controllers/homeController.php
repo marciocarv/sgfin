@@ -17,13 +17,25 @@ class homeController extends Controller
 
         if($user->tenancy){
             if (session()->exists('school')) {
-                return view('dashboard');
+                $school = School::find(session('school')->id);
+
+                $accounts = $school->accounts;
+
+                $accountsSaldo = [];
+
+                foreach($accounts as $account){
+                    $ballance = $account->ballance($account->id);
+                    $accountsSaldo[] = ["ballance"=>$ballance, "account"=>$account];
+                }
+
+                return view('dashboard', ['accountsSaldo'=>$accountsSaldo]);
             }else{
                 $schoolSession = $user->tenancy->school;
                 $school = School::find($schoolSession->id);
                 session(['school' => $school]);
-                return view('dashboard');
-            }            
+                
+                return redirect()->route('dashboard');
+            }
         }else{
             return redirect()->route('addSchool');
         }

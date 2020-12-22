@@ -55,7 +55,7 @@
             <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
               <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Situação</span>
               @if($expenditure->pay_id)
-              <i class="far fa-check-circle text-green-400"></i> <a href="#" class="text-green-700 hover:text-green-600">Paga</a>
+              <i class="far fa-check-circle text-green-400"></i> <a href="#" class="text-green-700 hover:text-green-600 font-bold">Paga</a>
               @else
               <i class="fas fa-exclamation text-orange-400"></i> Pendente
               @endif
@@ -74,7 +74,7 @@
         </tr>
         @endforeach
         @if($expenditures->isEmpty())
-          <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="7">
+          <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="8">
             Nâo há Despesas registradas, favor adicione uma nova despesa <a href="{{route('addIncome', ['id'=>$account->id])}}" class="text-green-500 hover:text-green-600">Registrar Despesa</a>
           </td>
         @endif
