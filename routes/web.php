@@ -7,6 +7,7 @@ use App\Http\Controllers\OrdinanceController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\ExpenditureController;
+use App\Http\Controllers\FixedExpenditureController;
 use App\Http\Controllers\testeController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PayController;
@@ -69,6 +70,8 @@ Route::get('/despesa/delete/{id}', [ExpenditureController::class, 'delete'])->na
 Route::get('/despesa/alterar/{id}', [ExpenditureController::class, 'setUpdate'])->name('upExpenditure')->middleware('checkSchool');
 Route::post('/despesa/alterar', [ExpenditureController::class, 'update'])->name('upExpenditurePost');
 Route::get('/despesa/detalhe/{id}', [ExpenditureController::class, 'detail'])->name('detailExpenditure')->middleware('checkSchool');
+
+Route::get('/despesa_fixa', [FixedExpenditureController::class, 'show'])->name('fixedExpenditure')->middleware('checkSchool');
 
 Route::get('/pagamento/pagar/{id}', [PayController::class, 'setPay'])->name('payExpenditure')->middleware('checkSchool');
 Route::post('/pagamento/pagar/add', [PayController::class, 'create'])->name('addPay');

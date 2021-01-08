@@ -19,9 +19,10 @@ class CreateFixedExpendituresTable extends Migration
             $table->integer('provider_id');
             $table->string('description');
             $table->datetime('emission_date');
-            $table->decimal('value', 10, 2);
+            $table->decimal('value', 10, 2)->nullable();
             $table->string('nature');
             $table->datetime('expiration_date');
+            $table->integer('reference_month')->nullable();
             $table->timestamps();
         });
     }

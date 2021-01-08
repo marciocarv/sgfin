@@ -155,7 +155,7 @@
         style="transition: all 0.15s ease 0s;">Sim</option>
       </select>
       <p id="msg-fixed" style="transition: all 0.15s ease 0s;">Esta despesa será incluída automaticamente em todos os meses 
-        subsequentes, na data de emissão informada, você precisará apenas alterar o valor caso o valor não seja fixo.</p>
+        subsequentes, na data de emissão informada, você precisará apenas informar o valor da despesa.</p>
     </div>
     <div class="text-center mt-6">
       <button

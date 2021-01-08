@@ -15,10 +15,15 @@ class FixedExpenditure extends Model
         'descripton',
         'value',
         'nature',
+        'reference_month'
     ];
 
     protected $dates = [
         'emission_date',
         'expiration_date',
     ];
+
+    function fixedExpendituresBySchool($id){
+        return FixedExpenditure::where('school_id', $id)->paginate(25);
+    }
 }

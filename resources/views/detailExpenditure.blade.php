@@ -83,7 +83,7 @@
                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->pay->date_pay->format('d/m/Y')}}</td>
             </tr>
             <tr>
-                <th class="p-2 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Número Nota Fiscal - Emissão</th>
+                <th class="p-2 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Nº Documento Fiscal - Emissão</th>
                 <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Método de Pagamento</th>
             </tr>
             <tr>

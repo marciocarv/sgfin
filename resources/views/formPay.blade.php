@@ -7,7 +7,7 @@
   <div class="">
       <h1 class="mb-20 text-2xl font-bold"><i class="fas fa-file-contract"></i> Registrar Pagamento</h1>
   </div>
-  <a href="{{route('detailExpenditure', ['id'=>$expenditure->account_id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a> 
+  <a href="{{route('detailExpenditure', ['id'=>$expenditure->id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a> 
   <form id="register-form" class="w-full mt-5 max-w-2xl block" action="{{route($route)}}" method="post" enctype="multipart/form-data">
     @csrf
     @if ($action == 'update')
