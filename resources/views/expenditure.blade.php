@@ -4,7 +4,10 @@
 <div class="px-4 md:px-10 mx-auto w-full">
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
-  <a href="{{route('addExpenditure', ['id'=>$account->id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded hover:bg-gray-600"><i class="fas fa-plus"></i> Registrar Despesas</a>
+  <div class="flex justify-between flex-wrap">
+    <a href="{{route('addExpenditure', ['id'=>$account->id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded hover:bg-gray-600"><i class="fas fa-plus"></i> Registrar Despesas</a>
+    <a href="{{route('addExpenditure', ['id'=>$account->id])}}" class="p-3 mb-5 bg-pink-900 text-white rounded hover:bg-gray-600"><i class="fas fa-thumbtack"></i> Despesas Fixas</a>
+  </div>
 <div class="">
   <h1 class="mt-5 text-2xl text-center font-bold">
     <i class="fas fa-file-contract"></i> Despesas - {{$account->description}}
