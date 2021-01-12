@@ -71,7 +71,9 @@ Route::get('/despesa/alterar/{id}', [ExpenditureController::class, 'setUpdate'])
 Route::post('/despesa/alterar', [ExpenditureController::class, 'update'])->name('upExpenditurePost');
 Route::get('/despesa/detalhe/{id}', [ExpenditureController::class, 'detail'])->name('detailExpenditure')->middleware('checkSchool');
 
-Route::get('/despesa_fixa', [FixedExpenditureController::class, 'show'])->name('fixedExpenditure')->middleware('checkSchool');
+Route::get('/despesa_fixa/{id}', [FixedExpenditureController::class, 'show'])->name('fixedExpenditure')->middleware('checkSchool');
+Route::get('/despesa_fixa/gerar/{id}', [FixedExpenditureController::class, 'setGerar'])->name('gerExpenditure')->middleware('checkSchool');
+Route::post('/despesa_fixa/gerar', [FixedExpenditureController::class, 'Gerar'])->name('gerExpenditurePost')->middleware('checkSchool');
 
 Route::get('/pagamento/pagar/{id}', [PayController::class, 'setPay'])->name('payExpenditure')->middleware('checkSchool');
 Route::post('/pagamento/pagar/add', [PayController::class, 'create'])->name('addPay');

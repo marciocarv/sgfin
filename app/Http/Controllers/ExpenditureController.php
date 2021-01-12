@@ -69,13 +69,15 @@ class ExpenditureController extends Controller
         if($request->fixed === 'true'){
             $expenditure->fixed = true;
             $fixed = new FixedExpenditure;
+            $fixed->school_id = session('school')->id;
             $fixed->account_id = $expenditure->account_id;
             $fixed->provider_id = $expenditure->provider_id;
             $fixed->description = $expenditure->description;
             $fixed->value = $expenditure->value;
             $fixed->nature = $expenditure->nature;
-            $fixed->emission_date = $expenditure->date_expenditure;
-            $fixed->expiration_date = $expenditure->expiration;
+            $fixed->emission_date = date('Y-m-d', strtotime('+1 month', strtotime($expenditure->date_expenditure)));
+            $fixed->expiration_date =date('Y-m-d', strtotime('+1 month', strtotime($expenditure->expiration)));
+            $fixed->reference_month = date('m', strtotime($expenditure->date_expenditure));
             $fixed->save();
         }else{
             $expenditure->fixed = false;
@@ -131,13 +133,15 @@ class ExpenditureController extends Controller
             if($request->fixed === 'true'){
                 $expenditure->fixed = true;
                 $fixed = new FixedExpenditure;
+                $fixed->school_id = session('school')->id;
                 $fixed->account_id = $expenditure->account_id;
                 $fixed->provider_id = $expenditure->provider_id;
                 $fixed->description = $expenditure->description;
                 $fixed->value = $expenditure->value;
                 $fixed->nature = $expenditure->nature;
-                $fixed->emission_date = $expenditure->date_expenditure;
-                $fixed->expiration_date = $expenditure->expiration;
+                $fixed->emission_date = date('Y-m-d', strtotime('+1 month', strtotime($expenditure->date_expenditure)));
+                $fixed->expiration_date =date('Y-m-d', strtotime('+1 month', strtotime($expenditure->expiration)));
+                $fixed->reference_month = date('m', strtotime($expenditure->date_expenditure));
                 $fixed->save();
             }else{
                 $expenditure->fixed = false;

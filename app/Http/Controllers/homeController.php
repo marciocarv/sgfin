@@ -17,7 +17,14 @@ class homeController extends Controller
 
         if($user->tenancy){
             if (session()->exists('school')) {
+
+                $fe = new FixedExpenditureController;
+
                 $school = School::find(session('school')->id);
+
+                $result = $fe->verifyFixedExpenditure($school->id);
+
+                print_r($result->description);exit;
 
                 $accounts = $school->accounts;
 
@@ -40,4 +47,5 @@ class homeController extends Controller
             return redirect()->route('addSchool');
         }
     }
+
 }

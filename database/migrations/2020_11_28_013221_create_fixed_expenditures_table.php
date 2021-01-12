@@ -15,6 +15,7 @@ class CreateFixedExpendituresTable extends Migration
     {
         Schema::create('fixed_expenditures', function (Blueprint $table) {
             $table->id();
+            $table->integer('school_id');
             $table->integer('account_id');
             $table->integer('provider_id');
             $table->string('description');
@@ -22,7 +23,7 @@ class CreateFixedExpendituresTable extends Migration
             $table->decimal('value', 10, 2)->nullable();
             $table->string('nature');
             $table->datetime('expiration_date');
-            $table->integer('reference_month')->nullable();
+            $table->string('reference_month')->nullable();
             $table->timestamps();
         });
     }
