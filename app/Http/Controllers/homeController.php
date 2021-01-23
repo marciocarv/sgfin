@@ -24,8 +24,6 @@ class homeController extends Controller
 
                 $result = $fe->verifyFixedExpenditure($school->id);
 
-                print_r($result->description);exit;
-
                 $accounts = $school->accounts;
 
                 $accountsSaldo = [];
@@ -35,7 +33,7 @@ class homeController extends Controller
                     $accountsSaldo[] = ["ballance"=>$ballance, "account"=>$account];
                 }
 
-                return view('dashboard', ['accountsSaldo'=>$accountsSaldo]);
+                return view('dashboard', ['accountsSaldo'=>$accountsSaldo, 'result'=>$result]);
             }else{
                 $schoolSession = $user->tenancy->school;
                 $school = School::find($schoolSession->id);

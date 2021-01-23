@@ -54,6 +54,55 @@ class FixedExpenditureController extends Controller
 
     }
 
+    public function delete($id){
+        $fixedExpenditure = FixedExpenditure::find($id);
+
+        $account = Account::find($fixedExpenditure->account_id);
+        $school = session('school');
+
+        if($account->school_id === $school->id){
+            $fixedExpenditure->delete();
+            return redirect()->route('fixedExpenditure', ['id'=>$fixedExpenditure->account_id])->with('msg', 'Despesa Apagada com sucesso!');
+        }else{
+            return redirect()->route('dashboard');
+        }
+    }
+
+    public function setUpdate($id){
+        $fixedExpenditure = FixedExpenditure::find($id);
+
+        $school = session('school');
+
+        if($fixedExpenditure->school_id === $school->id){
+            return view('formFixedExpenditure', ['fe'=>$fixedExpenditure]);
+        }else{
+            return redirect()->route('dashboard');
+        }
+    }
+
+    public function update(Request $request){
+        $fixedExpenditure = FixedExpenditure::find($request->fe);
+
+        $value = Str::of($request->value)->replace('.', '');
+        $value = Str::of($value)->replace(',', '.');
+
+        $fixedExpenditure->account_id = $request->account_id;
+        $fixedExpenditure->school_id = session('school')->id;
+        $fixedExpenditure->provider_id = $request->provider_id;
+        $fixedExpenditure->nature = $request->nature;
+        $fixedExpenditure->reference_month = $request->ref_month;
+        $fixedExpenditure->emission_date = $request->date_expenditure;
+        $fixedExpenditure->description = $request->description;
+        $fixedExpenditure->value = $value;
+        $fixedExpenditure->expiration_date = $request->expiration;
+
+
+        $fixedExpenditure->save();
+
+        return redirect()->route('fixedExpenditure', ['id'=>$fixedExpenditure->account_id])->with('msg','Despesa Fixa alterada com sucesso!');
+
+    }
+
     public function gerar(Request $request){
 
         $fe = FixedExpenditure::find($request->fe);
