@@ -31,6 +31,17 @@ class Expenditure extends Model
         return $expenditures;
     }
 
+    public function PendingExpenditureBySchool($id){
+        $expenditures = Account::where('accounts.school_id', $id)
+        ->Join('expenditures', 'expenditures.account_id', '=', 'accounts.id')
+        ->leftJoin('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->where('pays.id', '=', NULL)
+        ->orderBy('expenditures.expiration', 'asc')
+        ->limit(5)
+        ->get();
+        return $expenditures;
+    }
+
     public function account(){
         return $this->belongsTo(Account::class);
     }

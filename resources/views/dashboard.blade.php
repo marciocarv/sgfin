@@ -5,7 +5,7 @@
           <div class="px-4 md:px-10 mx-auto w-full">
             <div>
               <!-- Card stats -->
-    @if($result)  
+    @if($pendingFixedExpenditures)  
       <div class="fixed z-10 inset-0 overflow-y-auto">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <!--
@@ -71,7 +71,7 @@
 
               <div class="flex flex-wrap">
                 @foreach($accountsSaldo as $accountSaldo)
-                <div class="w-full lg:w-6/12 xl:w-3/12 px-3 mt-2">
+                <div class="w-full lg:w-6/12 xl:w-2/12 px-3 mt-2">
                   <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg">
                     <div class="flex-auto p-4">
                       <div class="flex flex-wrap">
@@ -81,22 +81,22 @@
                                     R$ {{number_format($accountSaldo["ballance"], 2, ',', '.')}}
                                   </span>
                           </h5>
-                          <span class="font-semibold uppercase text-base text-gray-800">
-                            {{$accountSaldo["account"]->number}} - {{$accountSaldo["account"]->description}}
+                          <span class="font-semibold uppercase text-gray-800 text-xs">
+                            Conta: {{$accountSaldo["account"]->number}} <br /> {{$accountSaldo["account"]->description}}
                           </span>
                         </div>
-                        <div class="relative w-auto pl-4 flex-initial">
+                        <div class="relative w-auto pl-2 flex-initial">
                           <div class="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full bg-teal-800">
                             <i class="fas fa-comment-dollar"></i>
                           </div>
                         </div>
                       </div>
-                      <p class="text-xl text-gray-500 mt-4">
+                      <p class="text-xs text-gray-500 mt-4">
                         <span class="text-teal-800 mr-2">
                           <i class="fas fa-cog"></i></i>
                         </span>
                         <span class="whitespace-no-wrap">
-                        <a href="{{route('manageAcount', ['id'=> $accountSaldo["account"]->id])}}" class="font-semibold  hover:text-gray-600 hover:font-bold">Gerenciar</a>
+                        <a href="{{route('manageAcount', ['id'=> $accountSaldo["account"]->id])}}" class="font-semibold hover:text-gray-600 hover:font-bold">Gerenciar</a>
                         </span>
                       </p>
                     </div>
@@ -146,61 +146,19 @@
                       </tr>
                     </thead>
                     <tbody>
+                      @foreach($pendingExpenditures as $expendituresPending)
                       <tr>
                         <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          /argon/
+                          {{date('d/m/Y', strtotime($expendituresPending->expiration))}}
                         </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          4,569
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          340
-                        </td>
-                      </tr>
-                      <tr>
                         <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          /argon/index.html
+                          {{$expendituresPending->description}}
                         </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          3,985
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          319
-                        </td>
-                      </tr>
-                      <tr>
                         <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          /argon/charts.html
+                          R$ {{number_format($expendituresPending->value, 2, ',', '.')}}
                         </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          3,513
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          294
-                        </td>
                       </tr>
-                      <tr>
-                        <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          /argon/tables.html
-                        </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          2,050
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          147
-                        </td>
-                      </tr>
-                      <tr>
-                        <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4 text-left">
-                          /argon/profile.html
-                        </th>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          1,795
-                        </td>
-                        <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-no-wrap p-4">
-                          190
-                        </td>
-                      </tr>
+                      @endforeach
                     </tbody>
                   </table>
                 </div>
