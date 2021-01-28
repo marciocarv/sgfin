@@ -88,8 +88,7 @@
             </tr>
             <tr>
                 <td class="w-full lg:w-auto p-2 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->pay->number_invoice}} - 
-                    @if($expenditure->pay->emission_invoice === " ") {{$expenditure->pay->emission_invoice->format('d/m/Y')}} 
-                    @else   @endif</td>
+                    {{$expenditure->pay->emission_invoice->format('d/m/Y')}}
                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->pay->payment_method}}</td>
             </tr>
         </table>

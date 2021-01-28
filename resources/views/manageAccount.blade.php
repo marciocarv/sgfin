@@ -29,7 +29,12 @@
 @endif
 
 <div class="flex flex-wrap justify-between rounded border shadow my-5">
-    <p class="font-semibold text-2xl m-5">Saldo Anterior: <span class="font-bold">R$ {{number_format($previousBallance, 2, ',', '.')}}</span></p><p class="font-semibold text-2xl m-5">Saldo Final: <span class="font-bold">R$ {{number_format($ballanceFinal, 2, ',', '.')}}</span></p>
+    <p class="font-semibold text-2xl m-5">Saldo Anterior: <span class="font-bold">R$ {{number_format($previousBallance, 2, ',', '.')}}</span></p>
+    <p class="font-semibold text-2xl m-5">Saldo Final: <span class="font-bold">R$ {{number_format($ballanceFinal, 2, ',', '.')}}</span></p>
+</div>
+<div class="flex flex-wrap justify-between rounded border shadow my-5">
+    <p class="font-semibold text-2xl m-5"></p>
+    <p class="font-semibold text-sm m-5">Saldo Capital: <span class="font-bold">R$ {{number_format($ballanceCapital, 2, ',', '.')}}</span>  | Saldo Custeio: <span class="font-bold">R$ {{number_format($ballanceCusteio, 2, ',', '.')}}</span></p>
 </div>
 <div class="w-full mt-5">
     <div class="flex flex-wrap rounded border shadow py-3">

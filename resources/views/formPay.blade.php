@@ -71,7 +71,31 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Número da Nota Fiscal / Boleto</label
+        >Tipo de Documento</label
+      ><select name="document_type" class="px-3 py-3 text-gray-700 rounded text-sm shadow w-full" id="select_provider">
+        <option value="">-</option>
+        <option value="DANFE"
+        @if($action == 'update' && $pay->document_type == 'DANFE')
+        selected
+        @endif
+        >DANFE</option>
+        <option value="DAM"
+        @if($action == 'update' && $pay->document_type == 'DAM')
+        selected
+        @endif
+        >DAM</option>
+        <option value="FATURA"
+        @if($action == 'update' && $pay->document_type == 'FATURA')
+        selected
+        @endif
+        >FATURA</option>
+      </select>
+    </div>
+    <div class="relative w-full mb-3">
+      <label
+        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        for="grid-password"
+        >Número do documento</label
       ><input
         type="text"
         name="number_invoice"
@@ -88,7 +112,7 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Data de Emissão (Nota Fiscal / Boleto)</label
+        >Data de Emissão (Documento)</label
       ><input
         type="date"
         name="emission_invoice"
@@ -114,7 +138,7 @@
         @endif
         >Cheque</option>
         <option value="Transferência"
-        @if($action == 'update' && $provider->person_type == 'Transferência')
+        @if($action == 'update' && $pay->payment_method == 'Transferência')
         selected
         @endif
         >Transferência Bancária</option>

@@ -119,13 +119,13 @@
                       </h3>
                     </div>
                     <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                      <button
+                      <a href="{{route('chooseAccount', ['movimento'=>'out'])}}"
                         class="bg-teal-800 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
                         type="button"
                         style="transition:all .15s ease"
                       >
                         Ver mais
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -164,7 +164,7 @@
                 </div>
               </div>
             </div>
-            <div class="w-full xl:w-6/12 mb-12 xl:mb-0 px-4">
+            <div class="w-full xl:w-6/12 mb-12 xl:mb-0 px-4 hidden">
               <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
                 <div class="rounded-t mb-0 px-4 py-3 border-0">
                   <div class="flex flex-wrap items-center">
@@ -284,7 +284,7 @@
                 </div>
               </div>
             </div>
-            <div class="w-full xl:w-4/12 px-4">
+            <div class="w-full xl:w-4/12 px-4 hidden">
               <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
                 <div class="rounded-t mb-0 px-4 py-3 border-0">
                   <div class="flex flex-wrap items-center">

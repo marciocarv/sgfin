@@ -12,7 +12,8 @@ class Pay extends Model
     protected $fillable = [
         'number_invoice',
         'payment_method',
-        'interest'
+        'interest',
+        'document_type'
     ];
 
     protected $date = [

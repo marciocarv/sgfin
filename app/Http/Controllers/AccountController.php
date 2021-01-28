@@ -105,6 +105,9 @@ class AccountController extends Controller
 
             $fullBankIncomes = $account->sumBankIncome($id, $dataInicial, $dataFinal);
 
+            $ballanceCapital = $account->ballanceCapital($id, $dataInicial, $dataFinal);
+
+            $ballanceCusteio = $account->ballanceCusteio($id, $dataInicial, $dataFinal);
 
             return view('manageAccount', ['ballanceFinal'=>$ballanceFinal,
                                         'previousBallance'=>$previousBallance,
@@ -115,7 +118,9 @@ class AccountController extends Controller
                                         'dataFinal'=>$dataFinal,
                                         'fullExpenditures'=>$fullExpenditures,
                                         'fullIncomes'=>$fullIncomes,
-                                        'fullBankIncomes'=>$fullBankIncomes
+                                        'fullBankIncomes'=>$fullBankIncomes,
+                                        'ballanceCusteio'=>$ballanceCusteio,
+                                        'ballanceCapital'=>$ballanceCapital,
                                         ]);
         }else{
             return redirect('dashboard');

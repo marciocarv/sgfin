@@ -21,6 +21,7 @@ class CreatePaysTable extends Migration
             $table->dateTime('emission_invoice')->nullable();
             $table->string('payment_method')->nullable();
             $table->decimal('interest')->nullable();
+            $table->string('document_type')->nullable();
             $table->timestamps();
         });
     }

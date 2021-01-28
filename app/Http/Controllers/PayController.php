@@ -45,6 +45,7 @@ class PayController extends Controller
         $pay->emission_invoice = $request->emission_invoice;
         $pay->payment_method = $request->payment_method;
         $pay->interest = $interest;
+        $pay->document_type = $request->document_type;
 
         if($pay->save()){
             return redirect()->route('detailExpenditure',['id'=>$pay->expenditure_id])->with('msg', 'Pagamento Registrado com sucesso!');                

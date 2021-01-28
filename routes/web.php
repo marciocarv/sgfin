@@ -12,6 +12,7 @@ use App\Http\Controllers\testeController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\BankIncomeController;
+use App\Http\Controllers\AccountabilityController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -95,4 +96,6 @@ Route::post('/conta/rendimento', [BankIncomeController::class, 'create'])->name(
 Route::get('/conta/rendimento/delete/{id}', [BankIncomeController::class, 'delete'])->name('delBankIncome')->middleware('checkSchool');
 Route::get('/conta/rendimento/alterar/{id}', [BankIncomeController::class, 'setUpdate'])->name('upBankIncome')->middleware('checkSchool');
 Route::post('/conta/rendimento/alterar', [BankIncomeController::class, 'update'])->name('upBankIncomePost');
+
+Route::get('/prestacao', [AccountabilityController::class, 'show'])->name('accountability')->middleware('checkSchool');
 
