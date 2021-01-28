@@ -38,6 +38,10 @@ class PayController extends Controller
 
         $interest = Str::of($request->interest)->replace('.', '');
         $interest = Str::of($interest)->replace(',', '.');
+        $tax = Str::of($request->tax)->replace('.', '');
+        $tax = Str::of($tax)->replace(',', '.');
+        $value_paid = Str::of($request->value_paid)->replace('.', '');
+        $value_paid = Str::of($value_paid)->replace(',', '.');
         
         $pay->expenditure_id = $request->id_expenditure;
         $pay->date_pay = $request->date_pay;
@@ -46,6 +50,8 @@ class PayController extends Controller
         $pay->payment_method = $request->payment_method;
         $pay->interest = $interest;
         $pay->document_type = $request->document_type;
+        $pay->tax = $tax;
+        $pay->value_paid = $value_paid;
 
         if($pay->save()){
             return redirect()->route('detailExpenditure',['id'=>$pay->expenditure_id])->with('msg', 'Pagamento Registrado com sucesso!');                

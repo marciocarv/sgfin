@@ -50,11 +50,17 @@
             @if($expenditure->pay)
             <tr>  
                 <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Juros / Multa</th>
-                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Valor Total Pago</th>
+                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell">Impostos / Taxas</th>
             </tr>
             <tr>
                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">R$ {{number_format($expenditure->pay->interest, 2, ',', '.')}}</td>
-                <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">R$ {{number_format($valorTotal, 2, ',', '.')}}</td>
+                <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">R$ {{number_format($expenditure->pay->tax, 2, ',', '.')}}</td>
+            </tr>
+            <tr>
+                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell" colspan="2">Valor Pago</th>
+            </tr>
+            <tr>
+                <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl" colspan="2">R$ {{number_format($expenditure->pay->value_paid, 2, ',', '.')}}</td>
             </tr>
             @endif
             <tr>
@@ -63,7 +69,7 @@
             </tr>
             <tr>
                 <td class="w-full lg:w-auto p-3 text-gray-800 uppercase text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->nature}}</td>
-                <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->account->description}}</td>
+                <td class="w-full lg:w-auto p-3 text-gray-800 uppercase text-center border border-b lg:table-cell lg:static text-2xl">{{$expenditure->account->description}}</td>
             </tr>
         </table>
         @if(!$expenditure->pay)

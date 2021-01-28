@@ -20,8 +20,10 @@ class CreatePaysTable extends Migration
             $table->string('number_invoice')->nullable();
             $table->dateTime('emission_invoice')->nullable();
             $table->string('payment_method')->nullable();
-            $table->decimal('interest')->nullable();
+            $table->decimal('interest', 10, 2)->nullable();
             $table->string('document_type')->nullable();
+            $table->decimal('value_paid', 10, 2)->nullable();
+            $table->decimal('tax', 10, 2);
             $table->timestamps();
         });
     }

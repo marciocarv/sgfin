@@ -174,13 +174,11 @@ class ExpenditureController extends Controller
         if($expenditure->pay){
             $expenditure->pay->date_pay = Carbon::parse($expenditure->pay->date_pay);
             $expenditure->pay->emission_invoice = Carbon::parse($expenditure->pay->emission_invoice);
-
-            $valorTotal = $expenditure->pay->interest + $expenditure->value;
         }
 
         if($expenditure->account->school_id === session('school')->id){
             
-            return view('detailExpenditure', ['expenditure'=>$expenditure, 'valorTotal'=>$valorTotal, 'acesso'=>true]);
+            return view('detailExpenditure', ['expenditure'=>$expenditure, 'acesso'=>true]);
         }else{
             return view('detailExpenditure', ['acesso'=>false]);
         }
