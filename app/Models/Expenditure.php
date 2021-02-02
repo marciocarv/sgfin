@@ -24,7 +24,7 @@ class Expenditure extends Model
     public function expenditureByAccount($id){
         $expenditures = Expenditure::where('account_id', $id)
         ->leftJoin('pays', 'pays.expenditure_id', '=', 'expenditures.id')
-        ->select('expenditures.*', 'pays.id as pay_id')
+        ->select('expenditures.*', 'pays.id as pay_id', 'pays.date_pay')
         ->orderBy('expenditures.expiration', 'desc')
         ->paginate(25);
 

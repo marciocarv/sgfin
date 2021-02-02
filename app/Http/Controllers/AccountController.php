@@ -87,11 +87,11 @@ class AccountController extends Controller
         $account = Account::find($id);
 
         if($account->school_id === session('school')->id){
-            $incomes = $account->incomes->where('date_income','>=', $dataInicial)->where('date_income', '<=', $dataFinal);
+            $incomes = $account->incomesByAccount($id, $dataInicial, $dataFinal);
 
             $expenditures = $account->expenditurePaid($id, $dataInicial, $dataFinal);
 
-            $bankIncomes = $account->bankIncomes->where('date_bank_income','>=', $dataInicial)->where('date_bank_income', '<=', $dataFinal);
+            $bankIncomes = $account->bankIncomesByAccount($id, $dataInicial, $dataFinal);
 
             $previousBallance = $account->previousBallance($id, $dataInicial);
 
@@ -105,9 +105,9 @@ class AccountController extends Controller
 
             $fullBankIncomes = $account->sumBankIncome($id, $dataInicial, $dataFinal);
 
-            $ballanceCapital = $account->ballanceCapital($id, $dataInicial, $dataFinal);
+            $ballanceCapital = $account->ballanceCapital($id, $dataFinal);
 
-            $ballanceCusteio = $account->ballanceCusteio($id, $dataInicial, $dataFinal);
+            $ballanceCusteio = $account->ballanceCusteio($id, $dataFinal);
 
             return view('manageAccount', ['ballanceFinal'=>$ballanceFinal,
                                         'previousBallance'=>$previousBallance,

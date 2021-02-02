@@ -31,6 +31,20 @@ class Account extends Model
         return $this->hasMany(Expenditure::class);
     }
 
+    public function incomesByAccount($id, $dataInicial, $dataFinal){
+        return Income::where('account_id', $id)
+        ->where('date_income', '>=', $dataInicial)->where('date_income', '<=', $dataFinal)
+        ->orderBy('date_income')
+        ->get();
+    }
+
+    public function bankIncomesByAccount($id, $dataInicial, $dataFinal){
+        return bankIncome::where('account_id', $id)
+        ->where('date_bank_income', '>=', $dataInicial)->where('date_bank_income', '<=', $dataFinal)
+        ->orderBy('date_bank_income')
+        ->get();
+    }
+
     public function ballance($id, $dataInicial = null, $dataFinal = null){
 
         if($dataInicial == null){
@@ -52,35 +66,31 @@ class Account extends Model
         return $ballance;
     }
 
-    public function ballanceCapital($id, $dataInicial = null, $dataFinal = null){
-        if($dataInicial == null){
-            $dataInicial = '2000-01-01';
-        }
+    public function ballanceCapital($id, $dataFinal = null){
         if($dataFinal == null){
             $data_final = mktime(0, 0, 0, date('12'), 31, date('Y'));
             $dataFinal = date('Y-m-d',$data_final);
         }
 
-        $expenditureCapital = $this->sumExpenditureNature($id, $dataInicial, $dataFinal, 'Capital');
+        $expenditureCapital = $this->sumExpenditureNature($id, $dataFinal, 'Capital');
 
-        $incomeCapital = $this->sumIncomeNature($id, $dataInicial, $dataFinal, 'value_capital');
+        $incomeCapital = $this->sumIncomeNature($id, $dataFinal, 'value_capital');
 
         return $incomeCapital - $expenditureCapital;
 
     }
 
-    public function ballanceCusteio($id, $dataInicial = null, $dataFinal = null){
-        if($dataInicial == null){
-            $dataInicial = '2000-01-01';
-        }
+    public function ballanceCusteio($id, $dataFinal = null){
         if($dataFinal == null){
             $data_final = mktime(0, 0, 0, date('12'), 31, date('Y'));
             $dataFinal = date('Y-m-d',$data_final);
         }
 
-        $expenditureCusteio = $this->sumExpenditureNature($id, $dataInicial, $dataFinal, 'Custeio');
+        $dataInicial = '2000-01-01';
 
-        $incomeCusteio = $this->sumIncomeNature($id, $dataInicial, $dataFinal, 'value_custeio') + $this->sumBankIncome($id, $dataInicial, $dataFinal);
+        $expenditureCusteio = $this->sumExpenditureNature($id, $dataFinal, 'Custeio');
+
+        $incomeCusteio = $this->sumIncomeNature($id, $dataFinal, 'value_custeio') + $this->sumBankIncome($id, $dataInicial, $dataFinal);
 
         return $incomeCusteio - $expenditureCusteio;
     }
@@ -128,10 +138,10 @@ class Account extends Model
         return $expenditure;
     }
 
-    public function sumExpenditureNature($id, $dataInicial, $dataFinal, $nature){
+    public function sumExpenditureNature($id, $dataFinal, $nature){
         $expenditure = Expenditure::where('account_id', $id)
         ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
-        ->where('pays.date_pay','>=', $dataInicial)->where('pays.date_pay', '<=', $dataFinal)
+        ->where('pays.date_pay','<=', $dataFinal)
         ->where('expenditures.nature', '=', $nature)
         ->sum('pays.value_paid');
 
@@ -146,9 +156,9 @@ class Account extends Model
         return $income;
     }
 
-    public function sumIncomeNature($id, $dataInicial, $dataFinal, $value_nature){
+    public function sumIncomeNature($id, $dataFinal, $value_nature){
         $income = Income::where('account_id', $id)
-        ->where('date_income','>=', $dataInicial)->where('date_income', '<=', $dataFinal)
+        ->where('date_income','<=', $dataFinal)
         ->sum($value_nature);
 
         return $income;
