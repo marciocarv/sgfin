@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tenancy;
+use Illuminate\Support\Facades\Auth;
 
 class TenancyController extends Controller
 {
@@ -14,13 +15,17 @@ class TenancyController extends Controller
 
     public function show(){
         
+        $school = session('school');
+        $user = Auth::user();
+
+        return view('profile', ['school'=>$school, 'user'=>$user]);
     }
 
-    public function create($school, $user){
+    public function create($school, $user, $module){
         $tenancy = new Tenancy();
         $tenancy->school_id = $school;
         $tenancy->user_id = $user;
-        $tenancy->module = 'FINANCEIRO';
+        $tenancy->module = $module;
 
         if($tenancy->save()){
             return true;

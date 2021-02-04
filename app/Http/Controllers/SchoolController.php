@@ -51,7 +51,7 @@ class SchoolController extends Controller
                 $ordinance->school_id = $school->id;
                 $ordinance->description = 'Recurso sem Portaria';
                 $ordinance->save();
-                if($tenancyC->create($school->id, Auth::id())){
+                if($tenancyC->create($school->id, Auth::id(), 'FINANCEIRO')){
                     return redirect()->route('dashboard');
                 }                
             }else{

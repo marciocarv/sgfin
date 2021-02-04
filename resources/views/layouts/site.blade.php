@@ -60,7 +60,7 @@
                 id="notification-dropdown"
               >
                 <a
-                  href="#pablo"
+                  href="{{route('profile')}}"
                   class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
                   >Perfil</a
                 ><a
@@ -87,12 +87,8 @@
                 onclick="openDropdown(event,'user-responsive-dropdown')"
                 ><div class="items-center flex">
                   <span
-                    class="w-12 h-12 text-sm text-white bg-gray-300 inline-flex items-center justify-center rounded-full"
-                    ><img
-                      alt="..."
-                      class="w-full rounded-full align-middle border-none shadow-lg"
-                      src="{{asset('img/team-1-800x800.jpg')}}"
-                  /></span></div
+                    class="uppercase w-12 h-12 text-sm text-white bg-gray-600 inline-flex items-center justify-center rounded-full"
+                    >{{auth()->user()->name[0]}}</span></div
               ></a>
               <div
                 class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
@@ -100,7 +96,7 @@
                 id="user-responsive-dropdown"
               >
                 <a
-                  href="#pablo"
+                  href="{{route('profile')}}"
                   class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
                   >Perfil</a
                 ><a
@@ -312,27 +308,15 @@
               <div class="relative flex w-full flex-wrap items-stretch">
                 <span
                   class="z-10 h-full leading-snug font-normal text-center text-gray-400 absolute bg-transparent rounded text-base items-center justify-center w-8 pl-3 py-3"
-                  ><i class="fas fa-search"></i
-                ></span>
-                <input
-                  type="text"
-                  placeholder="Search here..."
-                  class="px-3 py-3 placeholder-gray-400 text-gray-700 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:shadow-outline w-full pl-10"
-                />
+                  ></span>
               </div>
             </form>
             <ul
               class="flex-col md:flex-row list-none items-center hidden md:flex"
             >
-              <a class="text-gray-600 block" href="#pablo" onclick="openDropdown(event,'user-dropdown')">
+              <a class="text-white block" href="#pablo" onclick="openDropdown(event,'user-dropdown')">
                 <div class="items-center flex">
-                  <span
-                    class="w-12 h-12 text-sm text-white bg-gray-300 inline-flex items-center justify-center rounded-full"
-                    ><img
-                      alt="..."
-                      class="w-full rounded-full align-middle border-none shadow-lg"
-                      src="{{asset('img/team-1-800x800.jpg')}}"
-                  /></span>
+                  {{session('school')->name. ' - ' .auth()->user()->name}}
                 </div>
               </a>
               <div
@@ -341,7 +325,7 @@
                 id="user-dropdown"
               >
                 <a
-                  href="#pablo"
+                  href="{{route('profile')}}"
                   class="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800"
                   >Perfil</a
                 ><a

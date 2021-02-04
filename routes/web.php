@@ -13,6 +13,7 @@ use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\BankIncomeController;
 use App\Http\Controllers\AccountabilityController;
+use App\Http\Controllers\TenancyController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +37,8 @@ Route::get('/', function () {
 Route::get('/teste', [testeController::class, 'teste']);
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+
+Route::get('/perfil', [TenancyController::class, 'show'])->name('profile')->middleware('checkSchool');
 
 Route::get('/escola', [SchoolController::class, 'create'])->middleware('checkTen');
 Route::post('/escola', [SchoolController::class, 'create'])->name('addSchool');
