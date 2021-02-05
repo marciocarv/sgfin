@@ -88,7 +88,11 @@
                 ><div class="items-center flex">
                   <span
                     class="uppercase w-12 h-12 text-sm text-white bg-gray-600 inline-flex items-center justify-center rounded-full"
-                    >{{auth()->user()->name[0]}}</span></div
+                    >
+                    @if(session('school'))
+                    {{auth()->user()->name[0]}}
+                    @endif
+                  </span></div
               ></a>
               <div
                 class="hidden bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg mt-1"
@@ -316,7 +320,9 @@
             >
               <a class="text-white block" href="#pablo" onclick="openDropdown(event,'user-dropdown')">
                 <div class="items-center flex">
+                  @if(session('school'))
                   {{session('school')->name. ' - ' .auth()->user()->name}}
+                  @endif
                 </div>
               </a>
               <div

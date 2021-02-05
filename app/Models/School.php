@@ -10,11 +10,10 @@ class School extends Model
     use HasFactory;
     protected $fillable = [
         'name',
-        'associacao',
         'codigo_inep',
         'email',
         'telefone',
-        'presidente',
+        'diretor',
         'secretario',
         'caf',
         'modulo',
@@ -44,5 +43,9 @@ class School extends Model
 
     public function providers(){
         return $this->hasMany(Provider::class);
+    }
+
+    public function ace(){
+        return $this->hasOne(Ace::class);
     }
 }

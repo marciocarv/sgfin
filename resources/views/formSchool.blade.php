@@ -30,20 +30,6 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Associação</label
-      ><input
-        type="text"
-        name="associacao"
-        required
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-        placeholder="Informe o Nome da ACE"
-        style="transition: all 0.15s ease 0s;"
-      />
-    </div>
-    <div class="relative w-full mb-3">
-      <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
-        for="grid-password"
         >Código Inep</label
       ><input
         type="text"
@@ -102,13 +88,13 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >Presidente / Diretor</label
+          >Diretor</label
         ><input
           type="text"
-          name="presidente"
+          name="diretor"
           required
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-          placeholder="Infome o nome do Diretor / Presidente da Escola/Associação"
+          placeholder="Infome o nome do Diretor"
           style="transition: all 0.15s ease 0s;"
         />
       </div>

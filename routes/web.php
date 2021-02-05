@@ -42,6 +42,7 @@ Route::get('/perfil', [TenancyController::class, 'show'])->name('profile')->midd
 
 Route::get('/escola', [SchoolController::class, 'create'])->middleware('checkTen');
 Route::post('/escola', [SchoolController::class, 'create'])->name('addSchool');
+Route::get('/escola/alterar/{id}', [SchoolController::class, 'setUpdate'])->name('upSchool')->middleware('checkSchool');
 
 Route::get('/portaria', [OrdinanceController::class, 'show'])->middleware('checkSchool')->name('ordinance');
 Route::get('/portaria/add', [OrdinanceController::class, 'create'])->name('addOrdinance')->middleware('checkSchool');

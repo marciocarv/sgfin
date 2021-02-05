@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tenancy;
+use App\Models\School;
 use Illuminate\Support\Facades\Auth;
 
 class TenancyController extends Controller
@@ -15,7 +16,7 @@ class TenancyController extends Controller
 
     public function show(){
         
-        $school = session('school');
+        $school = School::find(session('school')->id);
         $user = Auth::user();
 
         return view('profile', ['school'=>$school, 'user'=>$user]);

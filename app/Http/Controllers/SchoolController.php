@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\School;
+use App\Models\Ace;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Ordinance;
 
@@ -25,11 +26,10 @@ class SchoolController extends Controller
             
             $school = new School;
             $school->name = $request->name;
-            $school->associacao = $request->associacao;
             $school->codigo_inep = $request->codigo_inep;
             $school->email = $request->email;
             $school->telefone = $request->telefone;
-            $school->presidente = $request->presidente;
+            $school->diretor = $request->diretor;
             $school->secretario = $request->secretario;
             $school->caf = $request->caf;
             $school->modulo = $request->modulo;
@@ -51,6 +51,11 @@ class SchoolController extends Controller
                 $ordinance->school_id = $school->id;
                 $ordinance->description = 'Recurso sem Portaria';
                 $ordinance->save();
+                $ace = new Ace();
+                $ace->school_id = $school->id;
+                $ace->presidente = $school->diretor;
+                $ace->secretario = $school->secretario;
+                $ace->save();
                 if($tenancyC->create($school->id, Auth::id(), 'FINANCEIRO')){
                     return redirect()->route('dashboard');
                 }                
