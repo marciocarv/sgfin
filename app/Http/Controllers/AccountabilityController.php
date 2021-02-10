@@ -3,15 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Accountability;
 
 class AccountabilityController extends Controller
 {
-    public function show(){
+    public function show(Request $request){
         $accountability = new Accountability;
 
-        $accountabilitys = $accountability->accountabilityBySchool(session('school')->id);
+        if($request->year){
+            $year = $request->year;
+        }else{
+            $year = now()->format('Y');
+        }
 
-        print_r($accountabilitys);
+        $accountabilities = $accountability->accountabilityBySchool(session('school')->id, $year);
+
+        return view('accountability', ['accountabilities'=>$accountabilities, 'year'=>$request->year]);
 
     }
 }

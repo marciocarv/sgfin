@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Models\User;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -20,8 +21,25 @@ class UserController extends Controller
         
     }
 
-    public function update(){
-        
+    public function setUpdate($id){
+        $user = User::find($id);
+
+        if($user->id === Auth::user()->id){
+            return view('formUser', ['user'=>$user]);
+        }else{
+            return redirect()->route('dashboard');
+        }
+    }
+
+    public function update(Request $request){
+        $user = User::find($request->id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        $user->save();
+
+        return redirect()->route('profile')->with('msg', 'Perfil Alterado com sucesso!');
     }
 
     public function delete(){

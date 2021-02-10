@@ -12,10 +12,15 @@ class Accountability extends Model
     protected $fillable = [
         'num_process',
         'description',
-        'year'
+        'year',
+        'format'
     ];
 
-    public function accountabilityBySchool($id){
-
+    public function accountabilityBySchool($id, $year){
+        return Accountability::where('accounts.school_id', $id)
+        ->Join('accounts', 'accountabilities.account_id', '=', 'accounts.id')
+        ->where('accountabilities.year', '=', $year)
+        ->select('accountabilities.*')
+        ->get();
     }
 }

@@ -14,6 +14,8 @@ use App\Http\Controllers\PayController;
 use App\Http\Controllers\BankIncomeController;
 use App\Http\Controllers\AccountabilityController;
 use App\Http\Controllers\TenancyController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,9 +42,16 @@ Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
 Route::get('/perfil', [TenancyController::class, 'show'])->name('profile')->middleware('checkSchool');
 
+Route::get('/perfil/editar/{id}', [UserController::class, 'setUpdate'])->name('upUser')->middleware('checkSchool');
+Route::post('/perfil/editar', [UserController::class, 'update'])->name('upUserPost');
+
 Route::get('/escola', [SchoolController::class, 'create'])->middleware('checkTen');
 Route::post('/escola', [SchoolController::class, 'create'])->name('addSchool');
-Route::get('/escola/alterar/{id}', [SchoolController::class, 'setUpdate'])->name('upSchool')->middleware('checkSchool');
+Route::get('/escola/editar/{id}', [SchoolController::class, 'setUpdate'])->name('upSchool')->middleware('checkSchool');
+Route::post('/escola/editar', [SchoolController::class, 'update'])->name('upSchoolPost');
+
+Route::get('/ace/editar/{id}', [AceController::class, 'setUpdate'])->name('upAce')->middleware('checkSchool');
+Route::post('/ace/editar', [AceController::class, 'update'])->name('upAcePost');
 
 Route::get('/portaria', [OrdinanceController::class, 'show'])->middleware('checkSchool')->name('ordinance');
 Route::get('/portaria/add', [OrdinanceController::class, 'create'])->name('addOrdinance')->middleware('checkSchool');

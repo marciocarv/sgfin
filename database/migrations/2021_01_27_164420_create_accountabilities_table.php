@@ -19,6 +19,7 @@ class CreateAccountabilitiesTable extends Migration
             $table->string('num_process');
             $table->string('description');
             $table->string('year');
+            $table->string('format');
             $table->timestamps();
         });
     }

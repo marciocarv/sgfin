@@ -217,7 +217,7 @@
               <li class="items-center">
                 <a
                   class="text-gray-800 text-xs uppercase py-3 font-bold block"
-                  href="#pablo"
+                  href="{{route('accountability')}}"
                   ><i class="fas fa-fax text-gray-500 mr-2 text-sm"></i>
                   Prestação de contas</a
                 >
