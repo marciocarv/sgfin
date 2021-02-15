@@ -4,16 +4,33 @@
 <div class="px-4 md:px-10 mx-auto w-full">
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
-<a href="{{route('dashboard')}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-plus"></i> Adicionar Prestação de Conta</a>
+<a href="{{route('addAccountability')}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-plus"></i> Adicionar Prestação de Conta</a>
 <div class="">
   <h1 class="mt-5 text-2xl text-center font-bold"><i class="fas fa-fax"></i> Prestações de Contas</h1>
 </div>
 @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 mt-3 rounded-lg text-green-800">{{ session('msg') }}</p>
 @endif
+<div>
+  <form action="" method="GET" class="flex flex-wrap justify-center mt-5">
+      <div class="lg:w-auto">
+        <label class="font-semibold m-2">Ano:</label>
+        <input type="number" name="year" value="{{$year}}" class="px-3 py-2 m-1 text-gray-700 rounded text-sm shadow focus:outline-none focus:shadow-outline" />
+      </div>
+      <div class="lg:w-auto"><button
+          class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mx-3 w-full max-w-xs"
+          type="submit"
+          id="btn-submit"
+          style="transition: all 0.15s ease 0s;"
+          >
+          Aplicar
+      </button>
+      </div>
+  </form>
+</div>
 <div class="w-full mt-5">
   @if($accountabilities->isEmpty())
-    <p class="text-gray-800">Você ainda não possui Prestação de Contas cadastrada, favor cadastrar <a href="{{route('dashboard')}}" class="text-green-500 hover:text-green-800 font-bold">Adicionar Prestação de Contas</a></p>
+    <p class="text-gray-800">Você ainda não possui Prestação de Contas cadastrada nesse período</p>
   @endif
   <div class="flex flex-wrap">
 @foreach($accountabilities as $accountability)
@@ -42,7 +59,7 @@
               <i class="fas fa-cog"></i></i>
             </span>
             <span class="whitespace-no-wrap">
-            <a href="{{route('dashboard')}}" class="font-semibold  hover:text-gray-600 hover:font-bold">Gerenciar</a>
+            <a href="{{route('manageAccountability', ['id'=>$accountability->id])}}" class="font-semibold  hover:text-gray-600 hover:font-bold">Gerenciar</a>
             </span>
           </p>
         </div>

@@ -42,7 +42,7 @@
           >
           <a
             class="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
-            href="/dashboard"
+            href="{{route('dashboard')}}"
           >
             SGFIN - ESCOLAR
           </a>
@@ -132,7 +132,7 @@
                 <div class="w-6/12">
                   <a
                     class="md:block text-left md:pb-2 text-gray-700 mr-0 inline-block whitespace-no-wrap text-sm uppercase font-bold p-4 px-0"
-                    href="javascript:void(0)"
+                    href="{{route('dashboard')}}"
                   >
                     SEFIN - ESCOLAR
                   </a>
@@ -161,7 +161,7 @@
               <li class="items-center">
                 <a
                   class="text-green-500 hover:text-green-600 text-xs uppercase py-3 font-bold block"
-                  href="/dashboard"
+                  href="{{route('dashboard')}}"
                   ><i class="fas fa-tv opacity-75 mr-2 text-sm"></i>
                   Início</a
                 >
@@ -303,7 +303,7 @@
           >
             <a
               class="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-        href="/dashboard"
+        href="{{route('dashboard')}}"
               >Início</a
             >
             <form

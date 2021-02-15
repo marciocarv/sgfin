@@ -16,6 +16,14 @@ class Accountability extends Model
         'format'
     ];
 
+    public function accFormats(){
+        return $this::hasMany(AccFormat::class);
+    }
+
+    public function account(){
+        return $this::belongsTo(Account::class);
+    }
+
     public function accountabilityBySchool($id, $year){
         return Accountability::where('accounts.school_id', $id)
         ->Join('accounts', 'accountabilities.account_id', '=', 'accounts.id')

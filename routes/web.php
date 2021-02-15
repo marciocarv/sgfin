@@ -111,4 +111,6 @@ Route::get('/conta/rendimento/alterar/{id}', [BankIncomeController::class, 'setU
 Route::post('/conta/rendimento/alterar', [BankIncomeController::class, 'update'])->name('upBankIncomePost');
 
 Route::get('/prestacao', [AccountabilityController::class, 'show'])->name('accountability')->middleware('checkSchool');
-
+Route::get('/prestacao/add', [AccountabilityController::class, 'setCreate'])->name('addAccountability')->middleware('checkSchool');
+Route::post('/prestacao/add', [AccountabilityController::class, 'create'])->name('addAccountabilityPost');
+Route::get('/prestacao/gerenciar/{id}', [AccountabilityController::class, 'manage'])->name('manageAccountability')->middleware('checkSchool');
