@@ -184,6 +184,10 @@ class AccountabilityController extends Controller
             $accFormat->income = $income;
             $accFormat->expenditure = $expenditure;
             $accFormat->previous_ballance = $previous_ballance;
+
+            setlocale(LC_TIME, 'pt_br'); // LC_TIME é formatação de data e hora com strftime()
+            $accFormat->mes_inicial = $accFormat->initial_date->formatLocalized('%B');
+            $accFormat->mes_final = $accFormat->final_date->formatLocalized('%B');
         }
 
         //dd($accFormats);exit;

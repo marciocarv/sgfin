@@ -16,6 +16,7 @@ use App\Http\Controllers\AccountabilityController;
 use App\Http\Controllers\TenancyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AceController;
+use App\Http\Controllers\DocumentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -114,3 +115,5 @@ Route::get('/prestacao', [AccountabilityController::class, 'show'])->name('accou
 Route::get('/prestacao/add', [AccountabilityController::class, 'setCreate'])->name('addAccountability')->middleware('checkSchool');
 Route::post('/prestacao/add', [AccountabilityController::class, 'create'])->name('addAccountabilityPost');
 Route::get('/prestacao/gerenciar/{id}', [AccountabilityController::class, 'manage'])->name('manageAccountability')->middleware('checkSchool');
+
+Route::get('/prestacao/capa/{id}', [DocumentController::class, 'setCapa'])->name('capa')->middleware('checkSchool');
