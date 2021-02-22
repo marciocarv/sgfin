@@ -42,6 +42,15 @@ class Expenditure extends Model
         return $expenditures;
     }
 
+    public function expendituresPaid($id, $dataInicial, $dataFinal){
+        return Expenditure::where('account_id', $id)
+        ->join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->join('providers', 'providers.id', '=', 'expenditures.provider_id')
+        ->where('pays.date_pay', '>=', $dataInicial)->where('pays.date_pay', '<=', $dataFinal)
+        ->orderBy('pays.date_pay', 'asc')
+        ->get();
+    }
+
     public function account(){
         return $this->belongsTo(Account::class);
     }

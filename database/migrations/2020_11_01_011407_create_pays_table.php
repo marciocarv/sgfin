@@ -22,6 +22,7 @@ class CreatePaysTable extends Migration
             $table->string('payment_method')->nullable();
             $table->decimal('interest', 10, 2)->nullable();
             $table->string('document_type')->nullable();
+            $table->string('number_cheque')->nullable();
             $table->decimal('value_paid', 10, 2)->nullable();
             $table->decimal('tax', 10, 2);
             $table->timestamps();

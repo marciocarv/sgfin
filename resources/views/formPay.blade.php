@@ -168,7 +168,7 @@
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
         >Método de Pagamento</label
-      ><select name="payment_method" class="px-3 py-3 text-gray-700 rounded text-sm shadow w-full" id="select_provider">
+      ><select name="payment_method" class="px-3 py-3 text-gray-700 rounded text-sm shadow w-full" id="select">
         <option value="">-</option>
         <option value="Cheque"
         @if($action == 'update' && $pay->payment_method == 'Cheque')
@@ -197,6 +197,24 @@
         >Cartão</option>
       </select>
     </div>
+    <div class="relative w-full mb-3 hidden" id="cheque">
+      <label
+        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        for="grid-password"
+        >Número do cheque</label
+      ><input
+        type="text"
+        name="number_cheque"
+        id="number_cheque"
+        @if ($action == 'update')
+        value="{{$pay->number_cheque}}"
+        @endif
+        value="T-ONLINE"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        placeholder="Número do cheque"
+        style="transition: all 0.15s ease 0s;"
+      />
+    </div>
     <div class="text-center mt-6">
       <button
         class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full max-w-xs"
@@ -217,6 +235,20 @@
   VMasker(document.querySelector("#interest")).maskMoney();
   VMasker(document.querySelector("#value_paid")).maskMoney();
   VMasker(document.querySelector("#tax")).maskMoney();
+
+  var cheque = document.querySelector('#cheque');
+  var number_cheque = document.querySelector('#number_cheque')
+  var select = document.querySelector('#select');
+  select.addEventListener('change', ()=>{
+      if(select.options[select.selectedIndex].value === 'Cheque'){
+        cheque.removeAttribute('class', 'hidden');
+        number_cheque.value = '';
+      }else{
+        cheque.setAttribute('class', 'hidden');
+        number_cheque.value = 'T-ONLINE';
+      }            
+    });
+
 
 </script>
 

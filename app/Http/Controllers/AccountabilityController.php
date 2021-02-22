@@ -178,10 +178,12 @@ class AccountabilityController extends Controller
 
             $income = $account->sumIncome($account->id, $accFormat->initial_date, $accFormat->final_date);
 
+            $bankIncome = $account->sumBankIncome($account->id, $accFormat->initial_date, $accFormat->final_date);
+
             $previous_ballance = $account->previousBallance($account->id, $accFormat->initial_date);
 
             $accFormat->ballance = $ballance;
-            $accFormat->income = $income;
+            $accFormat->income = $income + $bankIncome;
             $accFormat->expenditure = $expenditure;
             $accFormat->previous_ballance = $previous_ballance;
 

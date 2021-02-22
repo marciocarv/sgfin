@@ -116,4 +116,7 @@ Route::get('/prestacao/add', [AccountabilityController::class, 'setCreate'])->na
 Route::post('/prestacao/add', [AccountabilityController::class, 'create'])->name('addAccountabilityPost');
 Route::get('/prestacao/gerenciar/{id}', [AccountabilityController::class, 'manage'])->name('manageAccountability')->middleware('checkSchool');
 
-Route::get('/prestacao/capa/{id}', [DocumentController::class, 'setCapa'])->name('capa')->middleware('checkSchool');
+Route::get('/prestacao/capa/{id}', [DocumentController::class, 'setPdfCapa'])->name('capa')->middleware('checkSchool');
+Route::get('/prestacao/rerd/{id}', [DocumentController::class, 'setPdfRerd'])->name('rerd')->middleware('checkSchool');
+Route::get('/prestacao/relPagamento/{id}', [DocumentController::class, 'setPdfRelPagamento'])->name('relPagamento')->middleware('checkSchool');
+

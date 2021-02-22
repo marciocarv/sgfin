@@ -16,10 +16,6 @@ class PayController extends Controller
 
     public function setPay($id){
 
-        $validate = [
-            ['campo'=>'','value'=>'', 'mask'=>''],
-        ];
-
         $expenditure = Expenditure::find($id);
 
         $account = $expenditure->account;
@@ -51,6 +47,7 @@ class PayController extends Controller
         $pay->interest = $interest;
         $pay->document_type = $request->document_type;
         $pay->tax = $tax;
+        $pay->number_cheque = $request->number_cheque;
         $pay->value_paid = $value_paid;
 
         if($pay->save()){

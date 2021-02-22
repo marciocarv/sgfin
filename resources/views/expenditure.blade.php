@@ -28,7 +28,6 @@
             <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Vencimento</th>
             <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Situação</th>
             <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Ações</th>
-            <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Detalhar</th>
         </tr>
         </tr>
     </thead>
@@ -66,13 +65,11 @@
           <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Ações</span>
             @if(!$expenditure->pay_id)
-            <a href="{{route('delExpenditure', ['id'=> $expenditure->id])}}" class="text-red-600 hover:text-red-400 underline mr-3" alt="Excluir"><i class="fas fa-trash-alt"></i></a>
-            <a href="{{route('upExpenditure', ['id'=> $expenditure->id])}}" class="text-gray-600 hover:text-gray-400 underline ml-3" alt="Editar"><i class="fas fa-edit"></i></a>
+            <a href="{{route('delExpenditure', ['id'=> $expenditure->id])}}" class="text-red-600 hover:text-red-400 underline mx-2" title="Excluir"><i class="fas fa-trash-alt"></i></a>
+            <a href="{{route('upExpenditure', ['id'=> $expenditure->id])}}" class="text-gray-600 hover:text-gray-400 underline mx-2" title="Editar"><i class="fas fa-edit"></i></a>
+            <a href="{{route('payExpenditure', ['id'=>$expenditure->id])}}" class="text-green-600 hover:text-green-400 underline mx-2" title="pagar"><i class="fas fa-comment-dollar"></i></a>
             @endif
-          </td>
-          <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
-            <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Detalhar</span>
-            <a href="{{route('detailExpenditure', ['id'=> $expenditure->id])}}" class="text-gray-600 hover:text-gray-400 underline"><i class="fas fa-eye"></i></a>
+            <a href="{{route('detailExpenditure', ['id'=> $expenditure->id])}}" class="text-gray-600 hover:text-gray-400 underline mx-2" title="detalhar"><i class="fas fa-eye"></i></a>
           </td>
         </tr>
         @endforeach

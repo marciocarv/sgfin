@@ -40,16 +40,46 @@
                         <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-left block lg:table-cell relative lg:static">
                             <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase"></span>
                             <ul class="text-lg font-bold">
-                                <li><i class="fas fa-file-invoice-dollar"></i> <a href="{{route('capa', ['id'=>$accFormat->id])}}" target="_blank">Capa Prestação de Contas</a></li>
-                                <li><i class="fas fa-file-invoice-dollar"></i> <a href="">Relação de Execução de Receitas e despesas</a></li>
-                                <li><i class="fas fa-file-invoice-dollar"></i> <a href="">Resumo Financeiro - PNAE</a></li>
-                                <li><i class="fas fa-file-invoice-dollar"></i> <a href="">Demonstrativo de Execução de Receitas e despesas - PDDE</a></li>
-                                <li><i class="fas fa-file-invoice-dollar"></i> <a href="">Relação de Alimentos - PNAE</a></li>
-                                <li><i class="fas fa-file-invoice-dollar"></i> <a href="">Relação de Pagamentos</a></li>
-                                <li><i class="fas fa-file-invoice-dollar"></i> <a href="">Relação de Béns</a></li>
-                                <li><i class="fas fa-file-invoice-dollar"></i> <a href="">Termo de doação</a></li>
-                                <li><i class="fas fa-file-invoice-dollar"></i> <a href="">Reprogramação de Saldo</a></li>
-                                <li><i class="fas fa-file-invoice-dollar"></i> <a href="">Parecer do Conselho Fiscal</a></li>
+                                <li>
+                                    <i class="fas fa-file-invoice-dollar"></i> 
+                                    <a href="{{route('capa', ['id'=>$accFormat->id])}}" target="_blank" class="hover:text-gray-700">Capa Prestação de Contas</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-invoice-dollar"></i> 
+                                    <a href="{{route('rerd', ['id'=>$accFormat->id])}}" target="_blank" class="hover:text-gray-700">Relação de Execução de Receitas e despesas</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-invoice-dollar"></i> 
+                                    <a href="">Resumo Financeiro - PNAE</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-invoice-dollar"></i> 
+                                    <a href="">Demonstrativo de Execução de Receitas e despesas - PDDE</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-invoice-dollar"></i> 
+                                    <a href="">Relação de Alimentos - PNAE</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-invoice-dollar"></i> 
+                                    <a href="{{route('relPagamento', ['id'=>$accFormat->id])}}" target="_blank" class="hover:text-gray-700">Relação de Pagamentos</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-invoice-dollar"></i> 
+                                    <a href="">Relação de Béns</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-invoice-dollar"></i> 
+                                    <a href="">Termo de doação</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-invoice-dollar"></i> 
+                                    <a href="">Reprogramação de Saldo</a>
+                                </li>
+                                <li>
+                                    <i class="fas fa-file-invoice-dollar"></i> 
+                                    <a href="">Parecer do Conselho Fiscal</a>
+                                </li>
                             </ul>
                         </td>
                     </tr>

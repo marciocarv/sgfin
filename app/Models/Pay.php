@@ -13,7 +13,8 @@ class Pay extends Model
         'number_invoice',
         'payment_method',
         'interest',
-        'document_type'
+        'document_type',
+        'number_cheque'
     ];
 
     protected $date = [

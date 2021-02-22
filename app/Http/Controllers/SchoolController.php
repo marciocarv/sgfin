@@ -50,7 +50,12 @@ class SchoolController extends Controller
                 $ordinance = new Ordinance;
                 $ordinance->school_id = $school->id;
                 $ordinance->description = 'Recurso sem Portaria';
+                $ordinance->number = '0';
                 $ordinance->save();
+                $ordinance2 = new Ordinance;
+                $ordinance2->description = 'Devolução de Valores';
+                $ordinance2->number = '1';
+                $ordinance2->save();
                 $ace = new Ace();
                 $ace->school_id = $school->id;
                 $ace->presidente = $school->diretor;

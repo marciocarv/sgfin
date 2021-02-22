@@ -72,9 +72,11 @@ class Account extends Model
             $dataFinal = date('Y-m-d',$data_final);
         }
 
-        $expenditureCapital = $this->sumExpenditureNature($id, $dataFinal, 'Capital');
+        $dataInicial = '2000-01-01';
 
-        $incomeCapital = $this->sumIncomeNature($id, $dataFinal, 'value_capital');
+        $expenditureCapital = $this->sumExpenditureNature($id, $dataInicial, $dataFinal, 'Capital');
+
+        $incomeCapital = $this->sumIncomeNature($id, $dataInicial, $dataFinal, 'value_capital');
 
         return $incomeCapital - $expenditureCapital;
 
@@ -88,9 +90,9 @@ class Account extends Model
 
         $dataInicial = '2000-01-01';
 
-        $expenditureCusteio = $this->sumExpenditureNature($id, $dataFinal, 'Custeio');
+        $expenditureCusteio = $this->sumExpenditureNature($id, $dataInicial, $dataFinal, 'Custeio');
 
-        $incomeCusteio = $this->sumIncomeNature($id, $dataFinal, 'value_custeio') + $this->sumBankIncome($id, $dataInicial, $dataFinal);
+        $incomeCusteio = $this->sumIncomeNature($id, $dataInicial, $dataFinal, 'value_custeio') + $this->sumBankIncome($id, $dataInicial, $dataFinal);
 
         return $incomeCusteio - $expenditureCusteio;
     }
@@ -138,10 +140,10 @@ class Account extends Model
         return $expenditure;
     }
 
-    public function sumExpenditureNature($id, $dataFinal, $nature){
+    public function sumExpenditureNature($id, $dataInicial, $dataFinal, $nature){
         $expenditure = Expenditure::where('account_id', $id)
         ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
-        ->where('pays.date_pay','<=', $dataFinal)
+        ->where('pays.date_pay','>=', $dataInicial)->where('pays.date_pay', '<=', $dataFinal)
         ->where('expenditures.nature', '=', $nature)
         ->sum('pays.value_paid');
 
@@ -156,9 +158,9 @@ class Account extends Model
         return $income;
     }
 
-    public function sumIncomeNature($id, $dataFinal, $value_nature){
+    public function sumIncomeNature($id, $dataInicial, $dataFinal, $value_nature){
         $income = Income::where('account_id', $id)
-        ->where('date_income','<=', $dataFinal)
+        ->where('date_income','>=', $dataInicial)->where('date_income', '<=', $dataFinal)
         ->sum($value_nature);
 
         return $income;
@@ -170,5 +172,15 @@ class Account extends Model
         ->sum('value');
 
         return $bankIncome;
+    }
+
+    public function devolutionNature($id, $dataInicial, $dataFinal, $value_nature){
+        $income = Income::where('account_id', $id)
+        ->Join('ordinances', 'ordinances.id', '=', 'incomes.ordinance_id')
+        ->where('incomes.date_income','>=', $dataInicial)->where('incomes.date_income', '<=', $dataFinal)
+        ->where('ordinances.number', '1')
+        ->sum($value_nature);
+
+        return $income;
     }
 }
