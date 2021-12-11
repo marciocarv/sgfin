@@ -42,7 +42,7 @@ class SchoolController extends Controller
 
             if($request->image_lei){
                 $image_lei = $request->image_lei->store('images');
-                $ordinance->image_lei = $image_lei;
+                //$ordinance->image_lei = $image_lei;
             }
 
             if($school->save()){
@@ -53,6 +53,7 @@ class SchoolController extends Controller
                 $ordinance->number = '0';
                 $ordinance->save();
                 $ordinance2 = new Ordinance;
+                $ordinance2->school_id = $school->id;
                 $ordinance2->description = 'Devolução de Valores';
                 $ordinance2->number = '1';
                 $ordinance2->save();
