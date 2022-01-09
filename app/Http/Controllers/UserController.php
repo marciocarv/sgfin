@@ -25,7 +25,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if($user->id === Auth::user()->id){
-            return view('formUser', ['user'=>$user]);
+            return view('profile.formUser', ['user'=>$user]);
         }else{
             return redirect()->route('dashboard');
         }

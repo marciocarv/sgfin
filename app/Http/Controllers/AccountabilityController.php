@@ -22,7 +22,7 @@ class AccountabilityController extends Controller
 
         $accountabilities = $accountability->accountabilityBySchool(session('school')->id, $year);
 
-        return view('accountability', ['accountabilities'=>$accountabilities, 'year'=>$year]);
+        return view('accountability.accountability', ['accountabilities'=>$accountabilities, 'year'=>$year]);
 
     }
 
@@ -30,7 +30,7 @@ class AccountabilityController extends Controller
         $school = School::find(session('school')->id);
         $accounts = $school->accounts;
 
-        return view('formAccountability', ['accounts'=>$accounts, 'route'=>'addAccountabilityPost', 'action'=>'create']);
+        return view('accountability.formAccountability', ['accounts'=>$accounts, 'route'=>'addAccountabilityPost', 'action'=>'create']);
     }
 
     public function create(Request $request){
@@ -195,7 +195,7 @@ class AccountabilityController extends Controller
         //dd($accFormats);exit;
 
         if($accountability->account->school_id == session('school')->id){
-            return view('manageAccountability', ['accountability'=>$accountability, 'accFormats'=>$accFormats]);
+            return view('accountability.manageAccountability', ['accountability'=>$accountability, 'accFormats'=>$accFormats]);
         }else{
             return redirect()->route('dashboard');
         }

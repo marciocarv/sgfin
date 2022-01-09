@@ -15,7 +15,7 @@ class BankIncomeController extends Controller
         $bankIncomes = $account->bankIncomes;
 
         if($account->school->id === session('school')->id){
-            return view('bankIncome', ['account'=>$account, 'bankIncomes'=>$bankIncomes, 'route'=>'addBankIncomePost', 'action'=>'create']);
+            return view('bankIncome.bankIncome', ['account'=>$account, 'bankIncomes'=>$bankIncomes, 'route'=>'addBankIncomePost', 'action'=>'create']);
         }else{
             return redirect()->route('dashboard');
         }
@@ -58,7 +58,7 @@ class BankIncomeController extends Controller
         $bankIncomes = $account->bankIncomes;
 
         if($account->school->id === session('school')->id){
-            return view('bankIncome', ['account'=>$account, 'bankIncome'=>$bankIncome, 'bankIncomes'=>$bankIncomes, 'route'=>'upBankIncomePost', 'action'=>'update']);
+            return view('bankIncome.bankIncome', ['account'=>$account, 'bankIncome'=>$bankIncome, 'bankIncomes'=>$bankIncomes, 'route'=>'upBankIncomePost', 'action'=>'update']);
         }else{
             return redirect()->route('dashboard');
         }

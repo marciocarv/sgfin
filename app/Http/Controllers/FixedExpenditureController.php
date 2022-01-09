@@ -26,7 +26,7 @@ class FixedExpenditureController extends Controller
 
             $fixedExpenditures = $fixedExpenditure->fixedExpendituresBySchool($account->id);
 
-            return view('fixedExpenditure', ['fixedExpenditures'=>$fixedExpenditures, 'acesso'=>true, 'account'=>$account]);
+            return view('fixedExpenditure.fixedExpenditure', ['fixedExpenditures'=>$fixedExpenditures, 'acesso'=>true, 'account'=>$account]);
         }else{
             return redirect()->route('dashboard');
         }
@@ -47,7 +47,7 @@ class FixedExpenditureController extends Controller
 
             $provider = Provider::find($fe->provider_id);
 
-            return view('gerExpenditure', ['fe'=>$fe, 'account'=>$account, 'provider'=>$provider]);
+            return view('expenditure.gerExpenditure', ['fe'=>$fe, 'account'=>$account, 'provider'=>$provider]);
         }else{
             return redirect()->route('dashboard');
         }
@@ -74,7 +74,7 @@ class FixedExpenditureController extends Controller
         $school = session('school');
 
         if($fixedExpenditure->school_id === $school->id){
-            return view('formFixedExpenditure', ['fe'=>$fixedExpenditure]);
+            return view('fixedExpenditure.formFixedExpenditure', ['fe'=>$fixedExpenditure]);
         }else{
             return redirect()->route('dashboard');
         }

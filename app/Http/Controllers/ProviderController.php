@@ -19,12 +19,12 @@ class ProviderController extends Controller
 
         $providers = $provider->providerBySchool($school->id);
 
-        return view('provider', ['providers'=>$providers, 'acesso'=>true]);
+        return view('provider.provider', ['providers'=>$providers, 'acesso'=>true]);
     }
 
     public function setCreate(){
 
-        return view('formProvider', ['route'=>'addProviderPost', 'action'=>'create']);
+        return view('provider.formProvider', ['route'=>'addProviderPost', 'action'=>'create']);
     }
 
     public function create(Request $request){
@@ -72,7 +72,7 @@ class ProviderController extends Controller
         
         $provider = Provider::find($id);
         if($provider->school_id === session('school')->id){
-            return view('formProvider', ['provider'=>$provider, 'route'=>'upProviderPost', 'action'=>'update']);
+            return view('providerformProvider', ['provider'=>$provider, 'route'=>'upProviderPost', 'action'=>'update']);
         }else{
             return redirect('provider')->with('msg', 'Você não tem acesso a esse Fornecedor!');
         }
@@ -116,9 +116,9 @@ class ProviderController extends Controller
 
             $expendituresPaid = $provider->expendituresPaid($id);
 
-            return view('detailProvider', ['provider'=>$provider, 'acesso'=>true, 'pendingExpenditures'=>$pendingExpenditures, 'expendituresPaid'=>$expendituresPaid]);
+            return view('provider.detailProvider', ['provider'=>$provider, 'acesso'=>true, 'pendingExpenditures'=>$pendingExpenditures, 'expendituresPaid'=>$expendituresPaid]);
         }else{
-            return view('detailProvider', ['acesso'=>false]);
+            return view('provider.detailProvider', ['acesso'=>false]);
         }
     }
 }

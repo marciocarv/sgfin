@@ -19,7 +19,7 @@ class TenancyController extends Controller
         $school = School::find(session('school')->id);
         $user = Auth::user();
 
-        return view('profile', ['school'=>$school, 'user'=>$user]);
+        return view('profile.profile', ['school'=>$school, 'user'=>$user]);
     }
 
     public function create($school, $user, $module){

@@ -11,7 +11,7 @@ class AceController extends Controller
         $ace = Ace::find($id);
 
         if($ace->school_id === session('school')->id){
-            return view('formAce', ['ace'=>$ace]);
+            return view('ace.formAce', ['ace'=>$ace]);
         }else{
             return redirect()->route('dashboard');
         }

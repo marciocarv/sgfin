@@ -21,7 +21,7 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Conta Corrente</label
+        >Nº Conta Corrente</label
       ><input
         type="text"
         name="number"

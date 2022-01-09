@@ -23,7 +23,7 @@ class PayController extends Controller
         $school = $expenditure->account->school;
 
         if($school->id === session('school')->id){
-            return view('formPay', ['expenditure'=>$expenditure, 'route'=>'addPay', 'action'=>'create']);
+            return view('pay.formPay', ['expenditure'=>$expenditure, 'route'=>'addPay', 'action'=>'create']);
         }else{
             return redirect()->route('dashboard');
         }

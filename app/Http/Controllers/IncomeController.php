@@ -25,7 +25,7 @@ class IncomeController extends Controller
 
             $incomes = $income->incomeByAccount($account->id);
 
-            return view('income', ['incomes'=>$incomes, 'acesso'=>true, 'account'=>$account]);
+            return view('income.income', ['incomes'=>$incomes, 'acesso'=>true, 'account'=>$account]);
         }else{
             return redirect('dashboard');
         }
@@ -42,7 +42,7 @@ class IncomeController extends Controller
 
         //verifica se o usuário tem acesso a conta.
         if($account->school_id === $school->id){
-            return view('formIncome', ['route'=>'addIncomePost', 'action'=>'create', 'account'=>$account, 'options'=>$options]);
+            return view('income.formIncome', ['route'=>'addIncomePost', 'action'=>'create', 'account'=>$account, 'options'=>$options]);
         }else{
             return redirect('dashboard');
         }
@@ -85,7 +85,7 @@ class IncomeController extends Controller
 
         $account = $income->account;
         if($account->school_id === session('school')->id){
-            return view('formIncome', ['income'=>$income, 'route'=>'upIncomePost', 'action'=>'update', 'account'=>$account, 'options'=>$options]);
+            return view('income.formIncome', ['income'=>$income, 'route'=>'upIncomePost', 'action'=>'update', 'account'=>$account, 'options'=>$options]);
         }else{
             return redirect()->route('income',['id'=>$income->account_id])->with('msg', 'Você não tem acesso a essa Receita!');
         }
@@ -94,7 +94,7 @@ class IncomeController extends Controller
     public function update(Request $request){
         $income = Income::find($request->id);
 
-        $account = Account::find($request->account_id);
+        //$account = Account::find($request->account_id);
 
         $amount = Str::of($request->amount)->replace('.', '');
         $amount = Str::of($amount)->replace(',', '.');

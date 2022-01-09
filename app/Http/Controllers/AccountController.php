@@ -26,7 +26,7 @@ class AccountController extends Controller
             $accountsSaldo[] = ["ballance"=>$ballance, "account"=>$account];
         }
 
-        return view('account', ['accountsSaldo'=>$accountsSaldo, 'acesso'=>true]);
+        return view('account.account', ['accountsSaldo'=>$accountsSaldo, 'acesso'=>true]);
     }
 
     public function choose($movimento){
@@ -36,7 +36,7 @@ class AccountController extends Controller
             $titulo = 'Escolha a Conta em que o recurso será creditado';
             $route = 'income';
         }elseif($movimento === 'out'){
-            $titulo = 'Escolha a Conta em que o despesa será debitada';
+            $titulo = 'Escolha a Conta em que a despesa será debitada';
             $route = 'expenditure';
         }else{
             return redirect('dashboard');
@@ -45,13 +45,13 @@ class AccountController extends Controller
         $accounts = $school->accounts;
 
 
-        return view('choose', ['accounts'=>$accounts, 'acesso'=>true, 'titulo'=>$titulo, 'route'=>$route]);
+        return view('account.choose', ['accounts'=>$accounts, 'acesso'=>true, 'titulo'=>$titulo, 'route'=>$route]);
     }
 
     public function create(Request $request){
 
         if($request->input('number') == null || $request->input('agency') == null){
-            return view('formAccount', ['route'=>'addAccount', 'action'=>'create']);
+            return view('account.formAccount', ['route'=>'addAccount', 'action'=>'create']);
         }else{
             
             //montagem do objeto account para inserir
@@ -109,7 +109,7 @@ class AccountController extends Controller
 
             $ballanceCusteio = $account->ballanceCusteio($id, $dataFinal);
 
-            return view('manageAccount', ['ballanceFinal'=>$ballanceFinal,
+            return view('account.manageAccount', ['ballanceFinal'=>$ballanceFinal,
                                         'previousBallance'=>$previousBallance,
                                         'account'=>$account, 'incomes'=>$incomes,
                                         'expenditures'=>$expenditures,
@@ -131,7 +131,7 @@ class AccountController extends Controller
 
         $account = Account::find($id);
         if($account->school_id === session('school')->id){
-            return view('formAccount', ['account'=>$account, 'route'=>'upAccountPost', 'action'=>'update']);
+            return view('account.formAccount', ['account'=>$account, 'route'=>'upAccountPost', 'action'=>'update']);
         }else{
             return redirect('conta')->with('msg', 'Você não tem acesso a essa Conta!');
         }

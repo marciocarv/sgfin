@@ -21,7 +21,7 @@ class SchoolController extends Controller
 
     public function create(Request $request){
         if($request->input('name') == null || $request->input('cnpj') == null){
-            return view('formSchool', ['javascript'=>false, 'route'=>'addSchool', 'action'=>'create']);
+            return view('school.formSchool', ['javascript'=>false, 'route'=>'addSchool', 'action'=>'create']);
         }else{
             
             $school = new School;
@@ -66,7 +66,7 @@ class SchoolController extends Controller
                     return redirect()->route('dashboard');
                 }                
             }else{
-                return view('formSchool', ['msg'=>'Não foi possível salvar sua escola!']);
+                return view('scholl.formSchool', ['msg'=>'Não foi possível salvar sua escola!']);
             }
         }
         
@@ -76,7 +76,7 @@ class SchoolController extends Controller
         $school = School::find($id);
 
         if($school->id === session('school')->id){
-            return view('formSchool', ['school'=>$school, 'action'=>'update', 'route'=>'upSchoolPost']);
+            return view('school.formSchool', ['school'=>$school, 'action'=>'update', 'route'=>'upSchoolPost']);
         }else{
             return redirect()->route('dashboard');
         }

@@ -18,12 +18,12 @@ class OrdinanceController extends Controller
 
         $ordinances = $ordinance->ordinanceBySchool($school->id);
 
-        return view('ordinance', ['ordinances'=>$ordinances, 'acesso'=>true]);
+        return view('ordinance.ordinance', ['ordinances'=>$ordinances, 'acesso'=>true]);
     }
 
     public function create(Request $request){
         if($request->input('description') == null || $request->input('date_ordinance') == null){
-            return view('formOrdinance', ['route'=>'addOrdinance', 'action'=>'create']);
+            return view('ordinance.formOrdinance', ['route'=>'addOrdinance', 'action'=>'create']);
         }else{
             //tratamento dos valores
             $amount = Str::of($request->amount)->replace('.', '');
@@ -54,7 +54,7 @@ class OrdinanceController extends Controller
 
         $ordinance = Ordinance::find($id);
         if($ordinance->school_id === session('school')->id){
-            return view('formOrdinance', ['ordinance'=>$ordinance, 'route'=>'upOrdinancePost', 'action'=>'update']);
+            return view('ordinance.formOrdinance', ['ordinance'=>$ordinance, 'route'=>'upOrdinancePost', 'action'=>'update']);
         }else{
             return redirect('portaria')->with('msg', 'Você não tem acesso a essa Portaria!');
         }
@@ -98,9 +98,9 @@ class OrdinanceController extends Controller
         if($ordinance->school_id === session('school')->id){
             $incomes = $ordinance->incomes;
             $bidding = $ordinance->bidding;
-            return view('detailOrdinance', ['ordinance'=>$ordinance, 'acesso'=>true, 'incomes'=>$incomes, 'bidding'=>$bidding]);
+            return view('ordinance.detailOrdinance', ['ordinance'=>$ordinance, 'acesso'=>true, 'incomes'=>$incomes, 'bidding'=>$bidding]);
         }else{
-            return view('detailOrdinance', ['acesso'=>false]);
+            return view('ordinance.detailOrdinance', ['acesso'=>false]);
         }
     }
 }
