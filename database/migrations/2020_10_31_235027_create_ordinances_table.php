@@ -23,7 +23,8 @@ class CreateOrdinancesTable extends Migration
             $table->string('number_diario')->nullable();
             $table->string('nature')->nullable();
             $table->string('source')->nullable();
-            $table->string('image')->nullable();
+            $table->decimal('value_custeio', 10, 2)->default(0.00);
+            $table->decimal('value_capital', 10, 2)->default(0.00);
             $table->decimal('amount', 10, 2)->nullable();
             $table->timestamps();
         });
