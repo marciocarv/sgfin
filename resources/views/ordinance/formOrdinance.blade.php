@@ -146,10 +146,47 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
+          >Valor Custeio</label
+        ><input
+          type="text"
+          name="value_custeio"
+          required
+          id="value_custeio"
+          @if ($action == 'update')
+          value="{{$ordinance->value_custeio}}"
+          @endif
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Valor Total da Portaria"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
+          >Valor Capital</label
+        ><input
+          type="text"
+          name="value_capital"
+          required
+          id="value_capital"
+          @if ($action == 'update')
+          value="{{$ordinance->value_capital}}"
+          @endif
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          placeholder="Valor Total da Portaria"
+          style="transition: all 0.15s ease 0s;"
+        />
+      </div>
+      <div class="relative w-full mb-3">
+        <label
+          class="block uppercase text-gray-700 text-xs font-bold mb-2"
+          for="grid-password"
           >Valor Total</label
         ><input
           type="text"
           name="amount"
+          readonly
           required
           id="amount"
           @if ($action == 'update')
@@ -177,9 +214,65 @@
 
 @section('script')
   <script src="{{asset('js/vanilla-masker.min.js')}}" charset="utf-8"></script>
-        <script charset="utf-8" type="text/javascript">
+  <script charset="utf-8" type="text/javascript">
 
-            VMasker(document.querySelector("#amount")).maskMoney();
+      var value_custeio = document.querySelector('#value_custeio');
+      var value_capital = document.querySelector('#value_capital');
+      var total = 0.00;
+      var custeio;
+      var capital;
+      var historico_custeio = 0;
+      var historico_capital = 0;
+      var controle_custeio = false;
+      var controle_capital = false;
+
+      value_custeio.addEventListener('blur', ()=>{
+        custeio = value_custeio.value.replace('.', '');
+        custeio = custeio.replace(',', '');
+        if(controle_custeio){
+          total = total - historico_custeio + parseInt(custeio);
+          historico_custeio = parseInt(custeio);
+          console.log(historico_custeio);
+          console.log(total);
+          console.log('segunda ou terceira vez');
+        }else{
+          total += parseInt(custeio);
+          historico_custeio = parseInt(custeio);
+          controle_custeio = true;
+          console.log(historico_custeio);
+          console.log(total);
+          console.log('primeira vez');
+        }
+        document.querySelector('#amount').value = total;
+        VMasker(document.querySelector("#amount")).maskMoney();
+        
+      });
+
+      value_capital.addEventListener('blur', ()=>{
+        capital = value_capital.value.replace('.', '');
+        capital = capital.replace(',', '');
+        if(controle_capital){
+          total = total - historico_capital + parseInt(capital);
+          historico_capital = parseInt(capital);
+          console.log(historico_capital);
+          console.log(total);
+          console.log('segunda ou terceira vez');
+        }else{
+          total += parseInt(capital);
+          historico_capital = parseInt(capital);
+          controle_capital = true;
+          console.log(historico_capital);
+          console.log(total);
+          console.log('primeira vez');
+        }
+        document.querySelector('#amount').value = total;
+        VMasker(document.querySelector("#amount")).maskMoney();
+        
+      });
+
+      VMasker(document.querySelector("#amount")).maskMoney();
+      VMasker(document.querySelector("#value_custeio")).maskMoney();
+      VMasker(document.querySelector("#value_capital")).maskMoney();
 
   </script>
 @endsection

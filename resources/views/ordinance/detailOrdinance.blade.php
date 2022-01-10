@@ -28,6 +28,18 @@
                 <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl" colspan="2">{{$ordinance->description}}</td>
             </tr>
             <tr>
+                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell" colspan="2">Valor Custeio</th>
+            </tr>
+            <tr>
+                <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl" colspan="2">R$ {{number_format($ordinance->value_custeio, 2, ',', '.')}}</td>
+            </tr>
+            <tr>
+                <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell" colspan="2">Valor Capital</th>
+            </tr>
+            <tr>
+                <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b lg:table-cell lg:static text-2xl" colspan="2">R$ {{number_format($ordinance->value_capital, 2, ',', '.')}}</td>
+            </tr>
+            <tr>
                 <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 lg:table-cell" colspan="2">Valor</th>
             </tr>
             <tr>

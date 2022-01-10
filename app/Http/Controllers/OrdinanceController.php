@@ -29,6 +29,12 @@ class OrdinanceController extends Controller
             $amount = Str::of($request->amount)->replace('.', '');
             $amount = Str::of($amount)->replace(',', '.');
 
+            $value_custeio = Str::of($request->value_custeio)->replace('.', '');
+            $value_custeio = Str::of($value_custeio)->replace(',', '.');
+
+            $value_capital = Str::of($request->value_capital)->replace('.', '');
+            $value_capital = Str::of($value_capital)->replace(',', '.');
+
             //montagem do objeto ordinance para inserir
             $school = session('school');
             $ordinance = new Ordinance;
@@ -40,6 +46,8 @@ class OrdinanceController extends Controller
             $ordinance->number_process = $request->number_process;
             $ordinance->nature = $request->nature;
             $ordinance->source = $request->source;
+            $ordinance->value_custeio = $value_custeio;
+            $ordinance->value_capital = $value_capital;
             $ordinance->amount = $amount;
 
             if($ordinance->save()){
