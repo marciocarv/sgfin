@@ -12,19 +12,48 @@ class OrdinanceController extends Controller
         $this->middleware('auth');
     }
 
-    public function show(){
+    public function show(Request $request){
         $school = session('school');
         $ordinance =  new Ordinance;
 
-        $ordinances = $ordinance->ordinanceBySchool($school->id);
+         //se a data inicial e a data final vierem vazias, as datas padrão serão o primeiro e ultimo dia do mês atual
+         if(!$request->dataInicial || !$request->dataFinal){
+            $data_inicio = mktime(0, 0, 0, date('m') , 1 , date('Y'));
+            $data_fim = mktime(23, 59, 59, date('m'), date("t"), date('Y'));
 
-        return view('ordinance.ordinance', ['ordinances'=>$ordinances, 'acesso'=>true]);
+            $data_base_inicial = date('Y-m-d', $data_inicio);
+            $dataInicial = date("Y-m-d",strtotime(date("Y-m-d",strtotime($data_base_inicial))."-3 month"));
+            $dataFinal = date('Y-m-d',$data_fim);
+        }else{
+            $dataInicial = $request->dataInicial;
+            $dataFinal = $request->dataFinal;
+        }
+
+        $ordinances = $ordinance->ordinanceBySchool($school->id, $dataInicial, $dataFinal);
+
+        return view('ordinance.ordinance', ['ordinances'=>$ordinances, 
+                                            'acesso'=>true, 
+                                            'dataInicial'=>$dataInicial,
+                                            'dataFinal'=>$dataFinal]);
+    }
+
+    public function setCreate(){
+        return view('ordinance.formOrdinance', ['route'=>'addOrdinance', 'action'=>'create']);
     }
 
     public function create(Request $request){
-        if($request->input('description') == null || $request->input('date_ordinance') == null){
-            return view('ordinance.formOrdinance', ['route'=>'addOrdinance', 'action'=>'create']);
-        }else{
+
+            $request->validate([
+                'number'=>'required|numeric',
+                'description'=>'required',
+                'date_ordinance'=>'required|date_format',
+                'nature'=>'required',
+                'source'=>'required',
+                'value_custeio'=>'required',
+                'value_capital'=>'required',
+            ]);
+
+
             //tratamento dos valores
             $amount = Str::of($request->amount)->replace('.', '');
             $amount = Str::of($amount)->replace(',', '.');
@@ -55,7 +84,6 @@ class OrdinanceController extends Controller
             }else{
                 return redirect('portaria/add')->with('msg', 'Não foi possível Salvar a portaria!');
             }
-        }
     }
 
     public function setUpdate($id){

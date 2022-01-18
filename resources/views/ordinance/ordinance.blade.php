@@ -12,6 +12,21 @@
 @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 mt-3 rounded-lg text-green-800">{{ session('msg') }}</p>
 @endif
+<div class="mt-4">
+  <form action="{{route('ordinance')}}" method="GET" class="flex flex-wrap justify-center">
+      <div class="lg:w-auto"><label class="font-semibold m-2">Data Inicial:</label><input type="date" name="dataInicial" value="{{$dataInicial}}" class="px-3 py-2 m-1 text-gray-700 rounded text-sm shadow focus:outline-none focus:shadow-outline" /></div>
+      <div class="lg:w-auto"><label class="font-semibold m-2">Data Final:</label><input type="date" name="dataFinal" value="{{$dataFinal}}" class="px-3 py-2 m-1 text-gray-700 rounded text-sm shadow focus:outline-none focus:shadow-outline" /></div>
+      <div class="lg:w-auto"><button
+          class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mx-3 w-full max-w-xs"
+          type="submit"
+          id="btn-submit"
+          style="transition: all 0.15s ease 0s;"
+          >
+          Aplicar
+      </button>
+      </div>
+  </form>
+</div>
 <div class="rounded border shadow py-5 my-5">
   <table class="border-collapse w-full mt-5">
     <thead>

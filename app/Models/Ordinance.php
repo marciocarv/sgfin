@@ -35,11 +35,12 @@ class Ordinance extends Model
         return $this->hasMany(Income::class);
     }
 
-    public function ordinanceBySchool($id){
+    public function ordinanceBySchool($id, $dataInicial, $dataFinal){
 
         $ordinances = Ordinance::where('school_id', $id)
         ->where('number', '<>', '0')
         ->where('number', '<>', '1')
+        ->where('date_ordinance', '>=', $dataInicial)->where('date_ordinance', '<=', $dataFinal)
         ->paginate(25);
         return $ordinances;
     }

@@ -22,16 +22,22 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Número Portaria</label
+        >Número Portaria
+        @error('number')
+          <p class="text-red-600">{{$message}}</p>
+        @enderror
+        </label
       ><input
         type="number"
         name="number"
-        required
         id="edicao"
+        required
         @if ($action == 'update')
           value="{{$ordinance->number}}"
+        @else
+          value = "{{old('number')}}"
         @endif
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('number') border-2 border-pink-600 @enderror"
         placeholder="Número da Portaria"
         style="transition: all 0.15s ease 0s;"
       />
@@ -40,16 +46,22 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Descrição</label
+        >Descrição
+        @error('description')
+          <p class="text-red-600">{{$message}}</p>
+        @enderror
+        </label
       ><input
         type="text"
         name="description"
-        required
         id="description"
+        required
         @if ($action == 'update')
           value="{{$ordinance->description}}"
+        @else
+          value = "{{old('description')}}"
         @endif
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('description') border-2 border-pink-600 @enderror"
         placeholder="Descrição da Portaria"
         style="transition: all 0.15s ease 0s;"
       />
@@ -58,16 +70,22 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >Data</label
+          >Data
+          @error('date_ordinance')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+          </label
         ><input
           type="date"
           name="date_ordinance"
-          required
           id="date_ordinance"
+          required
           @if ($action == 'update')
-          value="{{$ordinance->date_ordinance->format('Y-m-d')}}"
+            value="{{$ordinance->date_ordinance->format('Y-m-d')}}"
+          @else
+            value = "{{old('date_ordinance')}}"
           @endif
-          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('date_ordinance') border-2 border-pink-600 @enderror"
           placeholder="Data Portaria"
           style="transition: all 0.15s ease 0s;"
         />
@@ -80,10 +98,9 @@
         ><input
           type="number"
           name="number_diario"
-          required
           id="number_diario"
           @if ($action == 'update')
-          value="{{$ordinance->number_diario}}"
+            value="{{$ordinance->number_diario}}"
           @endif
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="Número do diário oficial"
@@ -98,10 +115,9 @@
         ><input
           type="number"
           name="number_process"
-          required
           id="number_process"
           @if ($action == 'update')
-          value="{{$ordinance->number_process}}"
+            value="{{$ordinance->number_process}}"
           @endif
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="Número de Processo da Portaria"
@@ -112,15 +128,22 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >Natureza</label
+          >Natureza
+          @error('nature')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+          </label
         ><input
           type="text"
           name="nature"
           id="nature"
+          required
           @if ($action == 'update')
-          value="{{$ordinance->nature}}"
+            value="{{$ordinance->nature}}"
+          @else
+            value = "{{old('nature')}}"
           @endif
-          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('nature') border-2 border-pink-600 @enderror"
           placeholder="Natureza do Recurso"
           style="transition: all 0.15s ease 0s;"
         />
@@ -129,15 +152,22 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >Fonte</label
+          >Fonte
+          @error('source')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+          </label
         ><input
           type="text"
           name="source"
           id="source"
           @if ($action == 'update')
-          value="{{$ordinance->source}}"
+            value="{{$ordinance->source}}"
+          @else
+            value = "{{old('source')}}"
           @endif
-          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          required
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('source') border-2 border-pink-600 @enderror"
           placeholder="Fonte do Recurso"
           style="transition: all 0.15s ease 0s;"
         />
@@ -146,16 +176,22 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >Valor Custeio</label
+          >Valor Custeio
+          @error('value_custeio')
+            <p class="text-red-600 text-xs">{{$message}}</p>
+          @enderror
+          </label
         ><input
           type="text"
           name="value_custeio"
-          required
           id="value_custeio"
+          required
           @if ($action == 'update')
-          value="{{$ordinance->value_custeio}}"
+            value="{{$ordinance->value_custeio}}"
+          @else
+            value = "{{old('value_custeio')}}"
           @endif
-          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('value_custeio') border-2 border-pink-600 @enderror"
           placeholder="Valor Total da Portaria"
           style="transition: all 0.15s ease 0s;"
         />
@@ -164,16 +200,22 @@
         <label
           class="block uppercase text-gray-700 text-xs font-bold mb-2"
           for="grid-password"
-          >Valor Capital</label
+          >Valor Capital
+          @error('value_capital')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+          </label
         ><input
           type="text"
           name="value_capital"
-          required
           id="value_capital"
+          required
           @if ($action == 'update')
-          value="{{$ordinance->value_capital}}"
+            value="{{$ordinance->value_capital}}"
+          @else
+            value = "{{old('value_capital')}}"
           @endif
-          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+          class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('value_capital') border-2 border-pink-600 @enderror"
           placeholder="Valor Total da Portaria"
           style="transition: all 0.15s ease 0s;"
         />
@@ -187,10 +229,11 @@
           type="text"
           name="amount"
           readonly
-          required
           id="amount"
           @if ($action == 'update')
-          value="{{$ordinance->amount}}"
+            value="{{$ordinance->amount}}"
+          @else
+            value="{{ old('amount')}}"
           @endif
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="Valor Total da Portaria"

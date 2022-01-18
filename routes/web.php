@@ -57,7 +57,7 @@ Route::prefix('ace')->group(function(){
 
 Route::prefix('portaria')->group(function(){
     Route::get('/', [OrdinanceController::class, 'show'])->middleware('checkSchool')->name('ordinance');
-    Route::get('/add', [OrdinanceController::class, 'create'])->name('addOrdinance')->middleware('checkSchool');
+    Route::get('/add', [OrdinanceController::class, 'setCreate'])->name('addOrdinance')->middleware('checkSchool');
     Route::post('/add', [OrdinanceController::class, 'create'])->name('addOrdinancePost');
     Route::get('/delete/{id}', [OrdinanceController::class, 'delete'])->name('delOrdinance')->middleware('checkSchool');
     Route::get('/alterar/{id}', [OrdinanceController::class, 'setUpdate'])->name('upOrdinance')->middleware('checkSchool');
