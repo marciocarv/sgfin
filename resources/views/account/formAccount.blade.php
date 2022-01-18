@@ -5,7 +5,7 @@
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
   <div class="">
-      <h1 class="mb-20 text-2xl font-bold"><i class="fas fa-file-contract"></i> Cadastre sua Conta</h1>
+      <h1 class="mb-20 text-2xl font-bold"><i class="fas fa-file-contract"></i> @if ($action == 'update') Edite sua conta @else Cadastre sua Conta @endif</h1>
   </div>
   <a href="{{route('account')}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
   @if (session('msg'))

@@ -16,7 +16,7 @@ class OrdinanceController extends Controller
         $school = session('school');
         $ordinance =  new Ordinance;
 
-         //se a data inicial e a data final vierem vazias, as datas padrão serão o primeiro e ultimo dia do mês atual
+         //se a data inicial e a data final vierem vazias, as datas padrão os três ultimos meses
          if(!$request->dataInicial || !$request->dataFinal){
             $data_inicio = mktime(0, 0, 0, date('m') , 1 , date('Y'));
             $data_fim = mktime(23, 59, 59, date('m'), date("t"), date('Y'));
@@ -46,7 +46,7 @@ class OrdinanceController extends Controller
             $request->validate([
                 'number'=>'required|numeric',
                 'description'=>'required',
-                'date_ordinance'=>'required|date_format',
+                'date_ordinance'=>'required|date_format:Y-m-d',
                 'nature'=>'required',
                 'source'=>'required',
                 'value_custeio'=>'required',
@@ -97,10 +97,26 @@ class OrdinanceController extends Controller
     }
 
     public function update(Request $request){
+        $request->validate([
+            'number'=>'required|numeric',
+            'description'=>'required',
+            'date_ordinance'=>'required|date_format:Y-m-d',
+            'nature'=>'required',
+            'source'=>'required',
+            'value_custeio'=>'required',
+            'value_capital'=>'required',
+        ]);
+
         $ordinance = Ordinance::find($request->id);
 
         $amount = Str::of($request->amount)->replace('.', '');
         $amount = Str::of($amount)->replace(',', '.');
+
+        $value_custeio = Str::of($request->value_custeio)->replace('.', '');
+        $value_custeio = Str::of($value_custeio)->replace(',', '.');
+
+        $value_capital = Str::of($request->value_capital)->replace('.', '');
+        $value_capital = Str::of($value_capital)->replace(',', '.');
 
         $ordinance->number = $request->number;
         $ordinance->description = $request->description;
@@ -109,6 +125,8 @@ class OrdinanceController extends Controller
         $ordinance->number_process = $request->number_process;
         $ordinance->nature = $request->nature;
         $ordinance->source = $request->source;
+        $ordinance->value_custeio = $value_custeio;
+        $ordinance->value_capital = $value_capital;
         $ordinance->amount = $amount;
 
         if($ordinance->save()){

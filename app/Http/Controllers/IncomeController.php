@@ -15,17 +15,34 @@ class IncomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function show($id){
+    public function show($id, Request $request){
         $school = session('school');
 
         $account = Account::find($id);
 
+        //se a data inicial e a data final vierem vazias, as datas padrão os três ultimos meses
+        if(!$request->dataInicial || !$request->dataFinal){
+            $data_inicio = mktime(0, 0, 0, date('m') , 1 , date('Y'));
+            $data_fim = mktime(23, 59, 59, date('m'), date("t"), date('Y'));
+
+            $data_base_inicial = date('Y-m-d', $data_inicio);
+            $dataInicial = date("Y-m-d",strtotime(date("Y-m-d",strtotime($data_base_inicial))."-3 month"));
+            $dataFinal = date('Y-m-d',$data_fim);
+        }else{
+            $dataInicial = $request->dataInicial;
+            $dataFinal = $request->dataFinal;
+        }
+
         if($account->school_id === $school->id){
             $income =  new Income;
 
-            $incomes = $income->incomeByAccount($account->id);
+            $incomes = $income->incomeByAccount($account->id, $dataInicial, $dataFinal);
 
-            return view('income.income', ['incomes'=>$incomes, 'acesso'=>true, 'account'=>$account]);
+            return view('income.income', ['incomes'=>$incomes, 
+                                        'acesso'=>true, 
+                                        'account'=>$account,
+                                        'dataInicial'=>$dataInicial,
+                                        'dataFinal'=>$dataFinal]);
         }else{
             return redirect('dashboard');
         }
@@ -49,6 +66,14 @@ class IncomeController extends Controller
     }
 
     public function create(Request $request){
+
+        $request->validate([
+            'date_income'=>'required|date_format:Y-m-d',
+            'description'=>'required',
+            'value_custeio'=>'required',
+            'value_capital'=>'required',
+            'amount'=>'required'
+        ]);
 
         $amount = Str::of($request->amount)->replace('.', '');
         $amount = Str::of($amount)->replace(',', '.');

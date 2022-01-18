@@ -189,7 +189,7 @@
           @if ($action == 'update')
             value="{{$ordinance->value_custeio}}"
           @else
-            value = "{{old('value_custeio')}}"
+            value = "0,00"
           @endif
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('value_custeio') border-2 border-pink-600 @enderror"
           placeholder="Valor Total da Portaria"
@@ -213,7 +213,7 @@
           @if ($action == 'update')
             value="{{$ordinance->value_capital}}"
           @else
-            value = "{{old('value_capital')}}"
+            value = "0,00"
           @endif
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('value_capital') border-2 border-pink-600 @enderror"
           placeholder="Valor Total da Portaria"
@@ -233,7 +233,7 @@
           @if ($action == 'update')
             value="{{$ordinance->amount}}"
           @else
-            value="{{ old('amount')}}"
+            value="0,00"
           @endif
           class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
           placeholder="Valor Total da Portaria"

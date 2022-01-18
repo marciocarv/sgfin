@@ -6,7 +6,7 @@
 <div class="block w-full mt-24">
   <a href="{{route('income', ['id'=>$account->id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
   <div class="">
-    <h1 class="mt-5 text-2xl font-bold"><i class="fas fa-file-contract"></i> Cadastre sua Receita - {{$account->description}}</h1>
+    <h1 class="mt-5 text-2xl font-bold"><i class="fas fa-file-contract"></i> @if($action == 'update') Edite sua Receita - {{$account->description}} @else Cadastre sua Receita - {{$account->description}} @endif</h1>
   </div>
   @if ($options->count() === 1)
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">
@@ -46,16 +46,22 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Data</label
+        >Data
+          @error('date_income')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+        </label
       ><input
         type="date"
         name="date_income"
         required
         id="date_income"
         @if ($action == 'update')
-        value="{{$income->date_income->format('Y-m-d')}}"
+          value="{{$income->date_income->format('Y-m-d')}}"
+        @else
+          value="{{old('date_income')}}"
         @endif
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('date_income') border-2 border-pink-600 @enderror"
         placeholder="Data de recebimento do recurso"
         style="transition: all 0.15s ease 0s;"
       />
@@ -64,7 +70,11 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Descrição</label
+        >Descrição
+          @error('description')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+        </label
       ><input
         type="text"
         name="description"
@@ -73,7 +83,7 @@
         @if ($action == 'update')
           value="{{$income->description}}"
         @endif
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('description') border-2 border-pink-600 @enderror"
         placeholder="Descreva a que se destina o recurso"
         style="transition: all 0.15s ease 0s;"
       />
@@ -82,7 +92,11 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Valor Capital</label
+        >Valor Capital
+          @error('value_capital')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+        </label
       ><input
         type="text"
         name="value_capital"
@@ -90,8 +104,10 @@
         id="value_capital"
         @if ($action == 'update')
           value="{{$income->value_capital}}"
+        @else
+          value = "0,00"
         @endif
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('description') border-2 border-pink-600 @enderror"
         placeholder="Valor recebido destinado a aquisição de béns de Capital"
         style="transition: all 0.15s ease 0s;"
       />
@@ -100,7 +116,11 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Valor Custeio</label
+        >Valor Custeio
+        @error('value_custeio')
+          <p class="text-red-600">{{$message}}</p>
+        @enderror
+        </label
       ><input
         type="text"
         name="value_custeio"
@@ -108,8 +128,10 @@
         id="value_custeio"
         @if ($action == 'update')
           value="{{$income->value_custeio}}"
+        @else
+          value = "0,00"
         @endif
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('description') border-2 border-pink-600 @enderror""
         placeholder="Valor recebido destinado a despesas correntes"
         style="transition: all 0.15s ease 0s;"
       />
@@ -127,6 +149,8 @@
         id="amount"
         @if ($action == 'update')
           value="{{$income->amount}}"
+        @else
+          value="0,00"
         @endif
         class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
         placeholder="Valor total recebido"
@@ -153,13 +177,13 @@
 <script src="{{asset('js/vanilla-masker.min.js')}}" charset="utf-8"></script>
 <script charset="utf-8" type="text/javascript">
 
-var value_custeio = document.querySelector('#value_custeio');
+      var value_custeio = document.querySelector('#value_custeio');
       var value_capital = document.querySelector('#value_capital');
       var total = 0.00;
-      var custeio;
-      var capital;
-      var historico_custeio = 0;
-      var historico_capital = 0;
+      var custeio = 0.00;
+      var capital = 0.00;
+      var historico_custeio = 0.00;
+      var historico_capital = 0.00;
       var controle_custeio = false;
       var controle_capital = false;
 
@@ -167,18 +191,14 @@ var value_custeio = document.querySelector('#value_custeio');
         custeio = value_custeio.value.replace('.', '');
         custeio = custeio.replace(',', '');
         if(controle_custeio){
+          //se não for a primeira vez que esteja inserindo o numero
           total = total - historico_custeio + parseInt(custeio);
           historico_custeio = parseInt(custeio);
-          console.log(historico_custeio);
-          console.log(total);
-          console.log('segunda ou terceira vez');
         }else{
+          //se for a primeira vez que esteja inserindo o numero
           total += parseInt(custeio);
           historico_custeio = parseInt(custeio);
           controle_custeio = true;
-          console.log(historico_custeio);
-          console.log(total);
-          console.log('primeira vez');
         }
         document.querySelector('#amount').value = total;
         VMasker(document.querySelector("#amount")).maskMoney();
@@ -189,18 +209,14 @@ var value_custeio = document.querySelector('#value_custeio');
         capital = value_capital.value.replace('.', '');
         capital = capital.replace(',', '');
         if(controle_capital){
+          //se não for a primeira vez que esteja inserindo o numero
           total = total - historico_capital + parseInt(capital);
           historico_capital = parseInt(capital);
-          console.log(historico_capital);
-          console.log(total);
-          console.log('segunda ou terceira vez');
         }else{
+          //se for a primeira vez que esteja inserindo o numero
           total += parseInt(capital);
           historico_capital = parseInt(capital);
           controle_capital = true;
-          console.log(historico_capital);
-          console.log(total);
-          console.log('primeira vez');
         }
         document.querySelector('#amount').value = total;
         VMasker(document.querySelector("#amount")).maskMoney();

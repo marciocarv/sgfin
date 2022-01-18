@@ -29,9 +29,10 @@ class Income extends Model
         return $this->belongsTo(Account::class);
     }
 
-    public function incomeByAccount($id){
+    public function incomeByAccount($id, $date_inicial, $date_final){
         $incomes = Income::where('account_id', $id)
         ->join('ordinances', 'incomes.ordinance_id', '=', 'ordinances.id')
+        ->where('incomes.date_income', '>=', $date_inicial)->where('incomes.date_income', '<=', $date_final)
         ->select('incomes.*', 'ordinances.number', 'ordinances.description as orddescription')
         ->paginate(25);
         return $incomes;
