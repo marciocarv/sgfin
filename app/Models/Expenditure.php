@@ -21,9 +21,10 @@ class Expenditure extends Model
         'expiration',
     ];
 
-    public function expenditureByAccount($id){
+    public function expenditureByAccount($id, $dataInicial, $dataFinal){
         $expenditures = Expenditure::where('account_id', $id)
         ->leftJoin('pays', 'pays.expenditure_id', '=', 'expenditures.id')
+        ->where('date_expenditure', '>=', $dataInicial)->where('date_expenditure', '<=', $dataFinal)
         ->select('expenditures.*', 'pays.id as pay_id', 'pays.date_pay')
         ->orderBy('expenditures.expiration', 'desc')
         ->paginate(25);

@@ -105,6 +105,13 @@ class FixedExpenditureController extends Controller
 
     public function gerar(Request $request){
 
+        $request->validate([
+            'date_expenditure'=>'required|date_format:Y-m-d',
+            'description'=>'required',
+            'value'=>'required',
+            'expiration'=>'required|date_format:Y-m-d'
+        ]);
+
         $fe = FixedExpenditure::find($request->fe);
         $expenditure = new Expenditure;
 

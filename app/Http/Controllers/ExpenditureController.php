@@ -17,17 +17,35 @@ class ExpenditureController extends Controller
         $this->middleware('auth');
     }    
 
-    public function show($id){
+    public function show($id, Request $request){
         $school = session('school');
 
         $account = Account::find($id);
 
+        //se a data inicial e a data final vierem vazias, as datas padrão os três ultimos meses
+        if(!$request->dataInicial || !$request->dataFinal){
+            $data_inicio = mktime(0, 0, 0, date('m') , 1 , date('Y'));
+            $data_fim = mktime(23, 59, 59, date('m'), date("t"), date('Y'));
+
+            $data_base_inicial = date('Y-m-d', $data_inicio);
+            $dataInicial = date("Y-m-d",strtotime(date("Y-m-d",strtotime($data_base_inicial))."-3 month"));
+            $dataFinal = date('Y-m-d',$data_fim);
+        }else{
+            $dataInicial = $request->dataInicial;
+            $dataFinal = $request->dataFinal;
+        }
+
         if($account->school_id === $school->id){
             $expenditure =  new Expenditure;
 
-            $expenditures = $expenditure->expenditureByAccount($account->id);
+            $expenditures = $expenditure->expenditureByAccount($account->id, $dataInicial, $dataFinal);
 
-            return view('expenditure.expenditure', ['expenditures'=>$expenditures, 'acesso'=>true, 'account'=>$account]);
+            return view('expenditure.expenditure', ['expenditures'=>$expenditures,
+                                                    'acesso'=>true,
+                                                    'account'=>$account,
+                                                    'dataInicial'=>$dataInicial,
+                                                    'dataFinal'=>$dataFinal
+            ]);
         }else{
             return redirect()->route('dashboard');
         }
@@ -38,7 +56,7 @@ class ExpenditureController extends Controller
 
         $school = School::find(session('school')->id);
 
-        //busca todas as ordinances para montar o select
+        //busca todas as Fornecedores para montar o select
         $options = $school->providers;
 
         //verifica se o usuário tem acesso a conta.
@@ -52,6 +70,14 @@ class ExpenditureController extends Controller
     }
 
     public function create(Request $request){
+
+        $request->validate([
+            'description'=>'required',
+            'date_expenditure'=>'required|date_format:Y-m-d',
+            'value'=>'required',
+            'nature'=>'required',
+            'expiration'=>'required|date_format:Y-m-d'
+        ]);
 
         $value = Str::of($request->value)->replace('.', '');
         $value = Str::of($value)->replace(',', '.');
