@@ -23,14 +23,18 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Data de Emissão</label
+        >Data de Emissão
+          @error('date_expenditure')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+        </label
       ><input
         type="date"
         name="date_expenditure"
         required
         id="date_expenditure"
         value="{{$fe->emission_date->format('Y-m-d')}}"
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('date_expenditure') border-2 border-pink-600 @enderror"
         placeholder="Data de recebimento do recurso"
         style="transition: all 0.15s ease 0s;"
       />
@@ -39,14 +43,18 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Descrição</label
+        >Descrição
+          @error('description')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+        </label
       ><input
         type="text"
         name="description"
         required
         id="description"
         value="{{$fe->description}}"
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('description') border-2 border-pink-600 @enderror"
         placeholder="Descreva em que o recurso foi utilizado"
         style="transition: all 0.15s ease 0s;"
       />
@@ -55,14 +63,18 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Valor</label
+        >Valor
+          @error('value')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+        </label
       ><input
         type="text"
         name="value"
         required
         id="value"
         value="{{$fe->value}}"
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('value') border-2 border-pink-600 @enderror"
         placeholder="Valor da despesa"
         style="transition: all 0.15s ease 0s;"
       />
@@ -83,14 +95,18 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Data de Vencimento</label
+        >Data de Vencimento
+          @error('expiration')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+        </label
       ><input
         type="date"
         name="expiration"
         required
         id="expiration"
         value="{{$fe->expiration_date->format('Y-m-d')}}"
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('expiration') border-2 border-pink-600 @enderror"
         placeholder="Data de recebimento do recurso"
         style="transition: all 0.15s ease 0s;"
       />

@@ -179,7 +179,7 @@ class Account extends Model
         ->Join('ordinances', 'ordinances.id', '=', 'incomes.ordinance_id')
         ->where('incomes.date_income','>=', $dataInicial)->where('incomes.date_income', '<=', $dataFinal)
         ->where('ordinances.number', '1')
-        ->sum($value_nature);
+        ->sum('incomes.'.$value_nature);
 
         return $income;
     }

@@ -48,25 +48,30 @@ class AccountController extends Controller
         return view('account.choose', ['accounts'=>$accounts, 'acesso'=>true, 'titulo'=>$titulo, 'route'=>$route]);
     }
 
+    public function setCreate(){
+        return view('account.formAccount', ['route'=>'addAccount', 'action'=>'create']);
+    }
+
     public function create(Request $request){
-
-        if($request->input('number') == null || $request->input('agency') == null){
-            return view('account.formAccount', ['route'=>'addAccount', 'action'=>'create']);
-        }else{
+        //validação
+        $request->validate([
+            'number'=>'required',
+            'agency'=>'required',
+            'description'=>'required',
+        ]);
             
-            //montagem do objeto account para inserir
-            $school = session('school');
-            $account = new Account;
-            $account->school_id = $school->id;
-            $account->number = $request->number;
-            $account->agency = $request->agency;
-            $account->description = $request->description;
+        //montagem do objeto account para inserir
+        $school = session('school');
+        $account = new Account;
+        $account->school_id = $school->id;
+        $account->number = $request->number;
+        $account->agency = $request->agency;
+        $account->description = $request->description;
 
-            if($account->save()){
-                return redirect('conta')->with('msg', 'Conta Salva com sucesso!');                
-            }else{
-                return redirect('conta/add')->with('msg', 'Não foi possível Salvar a conta!');
-            }
+        if($account->save()){
+            return redirect('conta')->with('msg', 'Conta Salva com sucesso!');                
+        }else{
+            return redirect('conta/add')->with('msg', 'Não foi possível Salvar a conta!');
         }
     }
 
@@ -138,6 +143,13 @@ class AccountController extends Controller
     }
 
     public function update(Request $request){
+
+        $request->validate([
+            'number'=>'required',
+            'agency'=>'required',
+            'description'=>'required',
+        ]);
+
         $account = Account::find($request->id);
 
             $account->number = $request->number;

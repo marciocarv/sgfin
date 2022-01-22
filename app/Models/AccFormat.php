@@ -20,6 +20,7 @@ class AccFormat extends Model
     ];
 
     public function accountability(){
-        return $this::belongsTo(accountability::class);
+
+        return $this->belongsTo(Accountability::class);
     }
 }

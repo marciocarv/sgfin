@@ -26,8 +26,7 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Conta</label
-      >
+        >Conta</label>
       <select name="account_id" class="px-3 py-3 shadow focus:outline-none focus:shadow-outline w-full text-gray-700 text-sm">
         <option value="" class="text-gray-700 text-sm" style="transition: all 0.15s ease 0s;">Selecione a Conta</option>
         @foreach($accounts as $account)
@@ -45,7 +44,9 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Número do processo</label
+        >Número do processo
+        
+        </label
       ><input
         type="text"
         name="num_process"

@@ -34,6 +34,15 @@ class AccountabilityController extends Controller
     }
 
     public function create(Request $request){
+        //validação
+        $request->validate([
+            'account_id'=>'required|numeric',
+            'num_process'=>'required',
+            'description'=>'required',
+            'year'=>'required|numeric',
+            'format'=>'required'
+        ]);
+
         $accountability = new Accountability;
 
         $accountability->account_id = $request->account_id;

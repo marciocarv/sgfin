@@ -77,7 +77,7 @@
                             <span class="text-gray-900 font-semibold">Total de receitas do período:</span>
                         </td>
                         <td class="bg-gray-200 w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
-                            <span class="text-green-900 font-bold">$ {{number_format($fullIncomes, 2, ',', '.')}}</span>
+                            <span class="text-green-900 font-bold">R$ {{number_format($fullIncomes, 2, ',', '.')}}</span>
                         </td>
                     </tr>
                 </tbody>
@@ -123,7 +123,7 @@
                             <span class="text-gray-900 font-semibold">Total de despesas do período:</span>
                         </td>
                         <td class="bg-gray-200 w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
-                            <span class="text-red-900 font-bold">$ {{number_format($fullExpenditures, 2, ',', '.')}}</span>
+                            <span class="text-red-900 font-bold">R$ {{number_format($fullExpenditures, 2, ',', '.')}}</span>
                         </td>
                     </tr>
                 </tbody>
@@ -164,7 +164,7 @@
                         <span class="text-gray-900 font-semibold">Total de rendimentos do período:</span>
                     </td>
                     <td class="bg-gray-200 w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static">
-                        <span class="text-green-900 font-bold">$ {{number_format($fullBankIncomes, 2, ',', '.')}}</span>
+                        <span class="text-green-900 font-bold">R$ {{number_format($fullBankIncomes, 2, ',', '.')}}</span>
                     </td>
                 </tr>
                 </tbody>

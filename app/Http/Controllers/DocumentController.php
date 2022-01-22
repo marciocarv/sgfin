@@ -7,10 +7,15 @@ use App\Models\AccFormat;
 use App\Models\Account;
 use App\Models\Expenditure;
 use Illuminate\Support\Carbon;
-use PDF;
+use Barryvdh\DomPDF\Facade as PDF;;
 
 class DocumentController extends Controller
 {
+    public function teste(){
+        $accFormat = AccFormat::find(8);
+        $pdf = PDF::loadView('documents.teste', compact('accFormat'));
+        return $pdf->setPaper('a4')->stream('capa.pdf');
+    }
     public function setPdfCapa($id){
 
         $accFormat = AccFormat::find($id);
@@ -19,8 +24,9 @@ class DocumentController extends Controller
             $accFormat->mes_inicial = $accFormat->initial_date->formatLocalized('%B');
             $accFormat->mes_final = $accFormat->final_date->formatLocalized('%B');
 
-            $pdf = PDF::loadView('documents.capa', compact('accFormat'));
+            //dd($accFormat->description);
 
+            $pdf = PDF::loadView('documents.capa', compact('accFormat'));
             return $pdf->setPaper('a4')->stream('capa.pdf');
         }else{
             return redirect()->route('dashboard');

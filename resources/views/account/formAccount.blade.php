@@ -7,7 +7,7 @@
   <div class="">
       <h1 class="mb-20 text-2xl font-bold"><i class="fas fa-file-contract"></i> @if ($action == 'update') Edite sua conta @else Cadastre sua Conta @endif</h1>
   </div>
-  <a href="{{route('account')}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
+  <a @if ($action == 'update') href="{{route('manageAcount', ['id'=>$account->id])}}" @else href="{{route('account')}}" @endif  class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
   @if (session('msg'))
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">{{ session('msg') }}</p>
   @endif
@@ -21,7 +21,11 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Nº Conta Corrente</label
+        >Nº Conta Corrente
+          @error('number')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+        </label
       ><input
         type="text"
         name="number"
@@ -30,7 +34,7 @@
         @if ($action == 'update')
           value="{{$account->number}}"
         @endif
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('date_expenditure') border-2 border-pink-600 @enderror"
         placeholder="Número da Conta"
         style="transition: all 0.15s ease 0s;"
       />
@@ -39,7 +43,11 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Agencia</label
+        >Agencia
+          @error('agency')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+        </label
       ><input
         type="text"
         name="agency"
@@ -48,7 +56,7 @@
         @if ($action == 'update')
         value="{{$account->agency}}"
         @endif
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('agency') border-2 border-pink-600 @enderror"
         placeholder="Número da Agência"
         style="transition: all 0.15s ease 0s;"
       />
@@ -57,7 +65,11 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Descrição</label
+        >Descrição
+          @error('description')
+            <p class="text-red-600">{{$message}}</p>
+          @enderror
+        </label
       ><input
         type="text"
         name="description"
@@ -66,7 +78,7 @@
         @if ($action == 'update')
           value="{{$account->description}}"
         @endif
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('agency') border-2 border-pink-600 @enderror"
         placeholder="Descrição da Conta"
         style="transition: all 0.15s ease 0s;"
       />

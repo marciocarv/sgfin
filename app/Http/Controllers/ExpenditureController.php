@@ -28,7 +28,7 @@ class ExpenditureController extends Controller
             $data_fim = mktime(23, 59, 59, date('m'), date("t"), date('Y'));
 
             $data_base_inicial = date('Y-m-d', $data_inicio);
-            $dataInicial = date("Y-m-d",strtotime(date("Y-m-d",strtotime($data_base_inicial))."-3 month"));
+            $dataInicial = date("Y-m-d",strtotime(date("Y-m-d",strtotime($data_base_inicial))."-2 month"));
             $dataFinal = date('Y-m-d',$data_fim);
         }else{
             $dataInicial = $request->dataInicial;
@@ -134,6 +134,15 @@ class ExpenditureController extends Controller
     }
 
     public function update(Request $request){
+
+        $request->validate([
+            'description'=>'required',
+            'date_expenditure'=>'required|date_format:Y-m-d',
+            'value'=>'required',
+            'nature'=>'required',
+            'expiration'=>'required|date_format:Y-m-d'
+        ]);
+
         $expenditure = Expenditure::find($request->id);
 
         $account = Account::find($request->account_id);

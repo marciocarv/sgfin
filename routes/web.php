@@ -20,7 +20,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\User;
 
 
-//Route::get('/teste', [testeController::class, 'teste']);
+Route::get('/teste', [DocumentController::class, 'teste']);
 
 //Rotas de página inicial e dashboad
 
@@ -68,7 +68,7 @@ Route::prefix('portaria')->group(function(){
 Route::prefix('conta')->group(function(){
     Route::get('/', [AccountController::class, 'show'])->name('account')->middleware('checkSchool');
     Route::get('/gerenciar/{id}', [AccountController::class, 'manage'])->name('manageAcount')->middleware('checkSchool');
-    Route::get('/add', [AccountController::class, 'create'])->name('addAccount')->middleware('checkSchool');
+    Route::get('/add', [AccountController::class, 'setCreate'])->name('addAccount')->middleware('checkSchool');
     Route::post('/add', [AccountController::class, 'create'])->name('addAccountPost');
     Route::get('/delete/{id}', [AccountController::class, 'delete'])->name('delAccount')->middleware('checkSchool');
     Route::get('/alterar/{id}', [AccountController::class, 'setUpdate'])->name('upAccount')->middleware('checkSchool');

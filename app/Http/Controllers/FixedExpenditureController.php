@@ -81,6 +81,14 @@ class FixedExpenditureController extends Controller
     }
 
     public function update(Request $request){
+
+        $request->validate([
+            'date_expenditure'=>'required|date_format:Y-m-d',
+            'description'=>'required',
+            'value'=>'required',
+            'expiration'=>'required|date_format:Y-m-d'
+        ]);
+
         $fixedExpenditure = FixedExpenditure::find($request->fe);
 
         $value = Str::of($request->value)->replace('.', '');

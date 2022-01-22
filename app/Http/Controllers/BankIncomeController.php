@@ -22,6 +22,12 @@ class BankIncomeController extends Controller
     }
 
     public function create(Request $request){
+        //validação
+        $request->validate([
+            'date_bank_income'=>'required|date_format:Y-m-d',
+            'value'=>'required'
+        ]);
+
         $value = Str::of($request->value)->replace('.', '');
         $value = Str::of($value)->replace(',', '.');
 
@@ -65,6 +71,12 @@ class BankIncomeController extends Controller
     }
 
     public function update(Request $request){
+        //validação
+        $request->validate([
+            'date_bank_income'=>'required|date_format:Y-m-d',
+            'value'=>'required'
+        ]);
+
         $bankIncome = BankIncome::find($request->id);
 
         $value = Str::of($request->value)->replace('.', '');

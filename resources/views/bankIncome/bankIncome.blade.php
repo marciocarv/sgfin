@@ -21,7 +21,11 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Data</label
+        >Data
+        @error('date_bank_income')
+          <p class="text-red-600">{{$message}}</p>
+        @enderror
+        </label
       ><input
         type="date"
         name="date_bank_income"
@@ -30,7 +34,7 @@
         @if ($action == 'update')
         value="{{$bankIncome->date_bank_income->format('Y-m-d')}}"
         @endif
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('date_bank_income') border-2 border-pink-600 @enderror"
         placeholder="Data de recebimento do recurso"
         style="transition: all 0.15s ease 0s;"
       />
@@ -39,7 +43,11 @@
       <label
         class="block uppercase text-gray-700 text-xs font-bold mb-2"
         for="grid-password"
-        >Valor</label
+        >Valor
+        @error('value')
+          <p class="text-red-600">{{$message}}</p>
+        @enderror
+        </label
       ><input
         type="text"
         name="value"
@@ -48,7 +56,7 @@
         @if ($action == 'update')
         value="{{$bankIncome->value}}"
         @endif
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('date_bank_income') border-2 border-pink-600 @enderror"
         placeholder="Valor do rendimento"
         style="transition: all 0.15s ease 0s;"
       />
