@@ -17,6 +17,7 @@ use App\Http\Controllers\TenancyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AceController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\ContractController;
 use App\Http\Controllers\User;
 
 
@@ -136,4 +137,11 @@ Route::prefix('prestacao')->group(function(){
     Route::get('/capa/{id}', [DocumentController::class, 'setPdfCapa'])->name('capa')->middleware('checkSchool');
     Route::get('/rerd/{id}', [DocumentController::class, 'setPdfRerd'])->name('rerd')->middleware('checkSchool');
     Route::get('/relPagamento/{id}', [DocumentController::class, 'setPdfRelPagamento'])->name('relPagamento')->middleware('checkSchool');
+});
+
+Route::prefix('contrato')->group(function(){
+    Route::get('/', [ContractController::class, 'show'])->name('contract')->middleware('checkSchool');
+    Route::get('/add', [ContractController::class, 'setCreate'])->name('addContract')->middleware('checkSchool');
+    Route::post('/add', [ContractController::class, 'create'])->name('addContractPost');
+    Route::get('/gerenciar/{id}', [ContractController::class, 'manage'])->name('manageContract')->middleware('checkSchool');
 });

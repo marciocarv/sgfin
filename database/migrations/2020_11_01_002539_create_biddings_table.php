@@ -15,7 +15,7 @@ class CreateBiddingsTable extends Migration
     {
         Schema::create('biddings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ordinance_id')->constrained();
+            $table->foreignId('ordinance_id')->constrained()->onDelete('cascade');
             $table->string('num_process');
             $table->string('object');
             $table->string('type');

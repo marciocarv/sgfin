@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBankIncomesTable extends Migration
+class CreateItemOrderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateBankIncomesTable extends Migration
      */
     public function up()
     {
-        Schema::create('bank_incomes', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('account_id')->constrained()->onDelete('cascade');
-            $table->decimal('value', 10, 2);
-            $table->dateTime('date_bank_income');
+        Schema::create('item_order', function (Blueprint $table) {
+            $table->foreignId('item_id')->constrained()->onDelete('cascade');
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateBankIncomesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bank_incomes');
+        Schema::dropIfExists('item_order');
     }
 }

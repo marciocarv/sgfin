@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccountabilitiesTable extends Migration
+class CreateItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class CreateAccountabilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('accountabilities', function (Blueprint $table) {
+        Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('account_id')->constrained()->onDelete('cascade');
-            $table->string('num_process');
+            $table->foreignId('contract_id')->constrained()->onDelete('cascade');
             $table->string('description');
-            $table->string('year');
-            $table->string('format');
+            $table->decimal('unitary_value', 10, 2);
+            $table->integer('quantity');
+            $table->string('unity')->nullable();
+            $table->decimal('total_value', 10, 2);
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateAccountabilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accountabilities');
+        Schema::dropIfExists('items');
     }
 }

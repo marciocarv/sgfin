@@ -15,7 +15,7 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('school_id')->constrained();
+            $table->foreignId('school_id')->constrained()->onDelete('cascade');
             $table->string('number');
             $table->string('agency');
             $table->string('description');

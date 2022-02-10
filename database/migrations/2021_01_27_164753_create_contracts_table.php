@@ -15,7 +15,8 @@ class CreateContractsTable extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('provider_id')->constrained();
+            $table->foreignId('provider_id')->constrained()->onDelete('cascade');
+            $table->foreignId('school_id')->constrained()->onDelete('cascade');
             $table->string('num_contract');
             $table->string('description');
             $table->string('object');

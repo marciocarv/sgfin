@@ -28,7 +28,7 @@ class ProviderController extends Controller
     }
 
     public function create(Request $request){
-            //montagem do objeto ordinance para inserir
+            //montagem do objeto provider para inserir
 
             if($request->person_type === 'Física'){
                 $cnpj = '';

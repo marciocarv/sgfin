@@ -8,7 +8,7 @@
   <div class="">
     <h1 class="mt-5 text-2xl font-bold"><i class="fas fa-file-contract"></i> @if($action == 'update') Edite sua Receita - {{$account->description}} @else Cadastre sua Receita - {{$account->description}} @endif</h1>
   </div>
-  @if ($options->count() === 1)
+  @if ($options->count() === 2)
     <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">
       Você não possui Portarias Cadastradas, se o Recurso veio através de uma portaria, <a href="{{route('addOrdinance')}}" class="text-red-600 hover:text-red-400">cadastre aqui</a>
     </p>

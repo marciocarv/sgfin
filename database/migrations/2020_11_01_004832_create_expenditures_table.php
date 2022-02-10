@@ -15,8 +15,8 @@ class CreateExpendituresTable extends Migration
     {
         Schema::create('expenditures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('account_id')->constrained();
-            $table->foreignId('provider_id')->constrained();
+            $table->foreignId('account_id')->constrained()->onDelete('cascade');
+            $table->foreignId('provider_id')->constrained()->onDelete('cascade');
             $table->string('description');
             $table->datetime('date_expenditure')->nullable();
             $table->decimal('value', 10, 2);

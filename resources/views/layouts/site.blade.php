@@ -209,7 +209,7 @@
               <li class="items-center">
                 <a
                   class="text-gray-800 text-xs uppercase py-3 font-bold block"
-                  href="#pablo"
+                  href="{{route('contract')}}"
                   ><i class="fas fa-file-contract  text-gray-500 mr-2 text-sm"></i>
                   contratos</a
                 >

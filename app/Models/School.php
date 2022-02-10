@@ -48,4 +48,8 @@ class School extends Model
     public function ace(){
         return $this->hasOne(Ace::class);
     }
+
+    public function contracts($dataInicial, $dataFinal){
+        return $this->hasMany(Contract::class)->where('start_period', '>=', $dataInicial)->where('start_period', '<=', $dataFinal)->get();
+    }
 }

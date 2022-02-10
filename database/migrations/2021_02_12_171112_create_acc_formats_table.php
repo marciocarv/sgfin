@@ -15,7 +15,7 @@ class CreateAccFormatsTable extends Migration
     {
         Schema::create('acc_formats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('accountability_id')->constrained();
+            $table->foreignId('accountability_id')->constrained()->onDelete('cascade');
             $table->dateTime('initial_date');
             $table->dateTime('final_date');
             $table->string('description');

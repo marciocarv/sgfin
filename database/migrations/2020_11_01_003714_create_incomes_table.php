@@ -15,9 +15,9 @@ class CreateIncomesTable extends Migration
     {
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('account_id')->constrained();
+            $table->foreignId('account_id')->constrained()->onDelete('cascade');
             $table->dateTime('date_income');
-            $table->foreignId('ordinance_id')->constrained();
+            $table->foreignId('ordinance_id')->constrained()->onDelete('cascade');
             $table->string('description');
             $table->decimal('value_custeio', 10, 2)->default(0.00);
             $table->decimal('value_capital', 10, 2)->default(0.00);

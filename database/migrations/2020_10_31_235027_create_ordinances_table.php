@@ -15,7 +15,7 @@ class CreateOrdinancesTable extends Migration
     {
         Schema::create('ordinances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('school_id')->constrained();
+            $table->foreignId('school_id')->constrained()->onDelete('cascade');
             $table->string('number')->nullable();
             $table->string('description')->nullable();
             $table->string('number_process')->nullable();
