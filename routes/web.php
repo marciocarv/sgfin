@@ -6,9 +6,11 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrdinanceController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ExpenditureController;
 use App\Http\Controllers\FixedExpenditureController;
 use App\Http\Controllers\testeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProviderController;
 use App\Http\Controllers\PayController;
 use App\Http\Controllers\BankIncomeController;
@@ -143,5 +145,20 @@ Route::prefix('contrato')->group(function(){
     Route::get('/', [ContractController::class, 'show'])->name('contract')->middleware('checkSchool');
     Route::get('/add', [ContractController::class, 'setCreate'])->name('addContract')->middleware('checkSchool');
     Route::post('/add', [ContractController::class, 'create'])->name('addContractPost');
+    Route::get('/alterar/{id}', [ContractController::class, 'setUpdate'])->name('upContract')->middleware('checkSchool');
+    Route::post('/alterar', [ContractController::class, 'update'])->name('upContractPost');
+    Route::get('/delete/{id}', [ContractController::class, 'delete'])->name('delContract')->middleware('checkSchool');
     Route::get('/gerenciar/{id}', [ContractController::class, 'manage'])->name('manageContract')->middleware('checkSchool');
+
+});
+
+Route::prefix('item')->group(function(){
+    Route::post('/add', [ItemController::class, 'create'])->name('addItem');
+    Route::get('/delete/{id}', [ItemController::class, 'delete'])->name('delItem')->middleware('checkSchool');
+});
+
+Route::prefix('order')->group(function(){
+    Route::get('/add/{id}', [OrderController::class, 'setCreate'])->name('addOrder')->middleware('checkSchool');
+    Route::post('/add', [OrderController::class, 'create'])->name('addOrderPost');
+    Route::get('/detail/{id}', [OrderController::class, 'detail'])->name('detailOrder')->middleware('checkSchool');
 });

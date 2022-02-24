@@ -68,6 +68,50 @@ class ContractController extends Controller
         }
     }
 
+    public function setUpdate($id){
+        $contract = Contract::find($id);
+
+        $providers = $contract->school->providers;
+
+        if($contract->school_id === session('school')->id){
+            return view('contract.formContract', ['contract'=>$contract, 'providers'=>$providers, 'route'=>'upContractPost', 'action'=>'update']);
+        }else{
+            return redirect()->route('contract')->with('msg', 'Você não tem acesso a essa Conta!');
+        }
+    }
+
+    public function update(Request $request){
+        $value = Str::of($request->value)->replace('.', '');
+        $value = Str::of($value)->replace(',', '.');
+
+        $contract = Contract::find($request->id);
+        $contract->provider_id = $request->provider_id;
+        $contract->start_period = $request->start_period;
+        $contract->end_period = $request->end_period;
+        $contract->num_contract = $request->num_contract;
+        $contract->category = $request->category;
+        $contract->description = $request->description;
+        $contract->object = $request->object;
+        $contract->value = $value;
+        $contract->nature = $request->nature;
+
+        if($contract->save()){
+            return redirect()->route('contract')->with('msg', 'Contrato alterado com sucesso!');                
+        }else{
+            return redirect()->route('contract')->with('msg', 'Não foi possível alterar o contrato!');
+        }
+    }
+
+    public function delete($id){
+        $contract = Contract::find($id);
+
+        if($contract->delete()){
+            return redirect()->route('contract')->with('msg', 'Contrato apagado com sucesso!');                
+        }else{
+            return redirect()->route('contract')->with('msg', 'Não foi possível apagar o contrato!');
+        }
+    }
+
     public function manage($id){
         $contract = Contract::find($id);
 

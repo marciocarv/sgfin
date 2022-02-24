@@ -20,7 +20,7 @@
   <form id="register-form" class="w-full mt-5 max-w-2xl block rounded border shadow p-3" action="{{route($route)}}" method="post" enctype="multipart/form-data">
     @csrf
     @if ($action == 'update')
-      <input type="hidden" value="{{$accountability->id}}" name="id"/>
+      <input type="hidden" value="{{$contract->id}}" name="id"/>
     @endif
     <div class="relative w-full mb-3">
       <label
@@ -32,7 +32,7 @@
         @foreach($providers as $provider)
         <option value="{{$provider->id}}" class="text-gray-700 text-sm"
           @if ($action == 'update')
-            @if($provider->id === $contract->account_id)
+            @if($provider->id === $contract->provider_id)
               selected
             @endif
           @endif
