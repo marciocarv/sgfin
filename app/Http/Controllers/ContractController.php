@@ -117,6 +117,8 @@ class ContractController extends Controller
 
         $items = $contract->items;
 
+        $sumItems = $items->sum('total_value');
+
         $orders = $contract->orders;
 
         if($contract->category == "M"){

@@ -157,8 +157,10 @@ Route::prefix('item')->group(function(){
     Route::get('/delete/{id}', [ItemController::class, 'delete'])->name('delItem')->middleware('checkSchool');
 });
 
-Route::prefix('order')->group(function(){
+Route::prefix('pedido')->group(function(){
     Route::get('/add/{id}', [OrderController::class, 'setCreate'])->name('addOrder')->middleware('checkSchool');
     Route::post('/add', [OrderController::class, 'create'])->name('addOrderPost');
     Route::get('/detail/{id}', [OrderController::class, 'detail'])->name('detailOrder')->middleware('checkSchool');
+    Route::get('/delete/{id}', [OrderController::class, 'delete'])->name('delOrder')->middleware('checkSchool');
+    Route::get('/alterar/{id}', [OrderController::class, 'setUpdate'])->name('upOrder')->middleware('checkSchool');
 });

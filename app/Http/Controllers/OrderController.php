@@ -60,6 +60,32 @@ class OrderController extends Controller
     }
 
     public function detail($id){
+        $order = Order::find($id);
+        $items = $order->items;
+
+        if($order->contract->school_id == session('school')->id){
+            return view('order.detailOrder', ['order'=>$order, 'items'=>$items]);
+        }else{
+            return redirect()->route('manageContract', ['id'=>$order->contract_id])->with('msg', 'Você não tem acesso a esse pedido / ordem de serviço');
+        }
+
         
+    }
+
+    public function delete($id){
+        $order = Order::find($id);
+
+        if($order->contract->school_id == session('school')->id){
+            $order->delete();
+            return redirect()->route('manageContract', ['id'=>$order->contract_id])->with('msg', 'excluído com sucesso');
+        }else{
+            return redirect()->route('manageContract', ['id'=>$order->contract_id])->with('msg', 'Você não tem acesso a esse pedido / ordem de serviço');
+        }
+    }
+
+    public function setUpdate($id){
+        $order = Order::find($id);
+
+        dd($order);
     }
 }

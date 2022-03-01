@@ -18,8 +18,8 @@
       <p class="bg-green-300 p-4 font-bold leading-normal mb-3 mt-3 rounded-lg text-green-800">{{ session('msg') }}</p>
     @endif
     <div class="flex justify-center flex-wrap">
-        <button class="p-3 mb-5 mr-3  bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold" onclick="mostrar()"><i class="fas fa-plus"></i> Adicionar {{$title_items}}</button>
-        <a href="{{route('addOrder', ['id'=>$contract->id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-pen-square"></i> Realizar {{$title_orders}}</a>
+        <button class="p-3 mx-5 my-3 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold" onclick="mostrar()"><i class="fas fa-plus"></i> Adicionar {{$title_items}}</button>
+        <a href="{{route('addOrder', ['id'=>$contract->id])}}" class="p-3 mx-5 my-3  bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-pen-square"></i> Realizar {{$title_orders}}</a>
     </div>
     <div id="form_item" class="hidden">
         <form id="register-form" class="w-full mt-5 max-w-2xl block rounded border shadow p-3" action="{{route('addItem')}}" method="post" enctype="multipart/form-data">
@@ -138,7 +138,7 @@
                         <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Saldo</th>
                         <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Unidade</th>
                         <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Valor Total</th>
-                        <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell"></th>
+                        <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -175,11 +175,21 @@
                     </tr>
                     @endforeach
                     @if($items->isEmpty())
-                    <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="5">
+                    <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="7">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Sem Registro</span>
                         Nâo há {{$title_items}} nesse contrato!
                     </td>
                     @endif
+                    <tr>
+                      <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static uppercase" colspan="5">
+                        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Total Contrato</span>
+                        <span class="font-bold">Total Contrato</span>
+                    </td>
+                    <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static" colspan="2">
+                      <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Valor Total</span>
+                      <span class="font-bold">R$ {{number_format($items->sum('total_value'), 2, ',', '.')}}</span>
+                  </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -222,17 +232,17 @@
                         </td>
                         <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                           <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Detalhar</span>
-                          <a href="#"><i class="fas fa-eye"></i></a>
+                          <a class="hover:text-blue-400" href="{{route('detailOrder', ['id'=>$order->id])}}"><i class="fas fa-eye"></i></a>
                       </td>
                       <td class="w-full lg:w-auto p-3 text-gray-800 text-center border border-b block lg:table-cell relative lg:static">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">ações</span>
-                        <a href="#" class="text-red-600 hover:text-red-400 underline mr-3" alt="Excluir"><i class="fas fa-trash-alt"></i></a>
-                        <a href="#" class="text-gray-600 hover:text-gray-400 underline ml-3" alt="Editar"><i class="fas fa-edit"></i></a>
+                        <a href="{{route('delOrder', ['id'=>$order->id])}}" class="text-red-600 hover:text-red-400 underline mr-3" alt="Excluir"><i class="fas fa-trash-alt"></i></a>
+                        <a href="{{route('upOrder', ['id'=>$order->id])}}" class="text-gray-600 hover:text-gray-400 underline ml-3" alt="Editar"><i class="fas fa-edit"></i></a>
                     </td>
                     </tr>
                     @endforeach
                     @if($orders->isEmpty())
-                    <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="5">
+                    <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="7">
                         <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Sem Registro</span>
                         Nâo há {{$title_orders}} para esse contrato!
                     </td>
