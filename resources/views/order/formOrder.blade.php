@@ -1,18 +1,18 @@
 @extends('layouts.site')
 
 @section('content')
-<div class="px-4 md:px-10 mx-auto w-full">
+<div class="w-full px-4 mx-auto md:px-10">
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
-  <a href="{{route('manageContract', ['id'=>$contract->id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
+  <a href="{{route('manageContract', ['id'=>$contract->id])}}" class="p-3 mb-5 text-white bg-gray-800 rounded hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
   <div class="">
     <h1 class="mt-5 text-2xl font-bold"><i class="fas fa-file-contract"></i> @if($action == 'update') Edite seu  {{$title_orders}} @else Cadastre o {{$title_orders}} @endif</h1>
   </div>
   @if (session('msg'))
-    <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">{{ session('msg') }}</p>
+    <p class="p-4 mb-3 font-bold leading-normal text-green-800 bg-green-300 rounded-lg">{{ session('msg') }}</p>
   @endif
   
-  <form id="register-form" class="w-full mt-5 max-w-2xl block rounded border shadow p-3" action="{{route($route)}}" method="post" enctype="multipart/form-data">
+  <form id="register-form" class="block w-full max-w-2xl p-3 mt-5 border rounded shadow" action="{{route($route)}}" method="post" enctype="multipart/form-data">
     @csrf
     @if ($action == 'update')
       <input type="hidden" value="{{$order->id}}" name="id"/>
@@ -20,7 +20,7 @@
       <input type="hidden" value="{{$contract->id}}" name="contract_id"/>
     <div class="relative w-full mb-3">
       <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        class="block mb-2 text-xs font-bold text-gray-700 uppercase"
         for="grid-password"
         >Data do Pedido
           @error('date_order')
@@ -44,7 +44,7 @@
     </div>
     <div class="relative w-full mb-3">
       <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        class="block mb-2 text-xs font-bold text-gray-700 uppercase"
         for="grid-password"
         >Descrição
           @error('description')
@@ -66,7 +66,7 @@
     </div>
     <div class="relative w-full mb-3">
       <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        class="block mb-2 text-xs font-bold text-gray-700 uppercase"
         for="grid-password"
         >Servidor Responsável
           @error('responsible')
@@ -88,7 +88,7 @@
     </div>
     <div class="relative w-full mb-3">
       <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        class="block mb-2 text-xs font-bold text-gray-700 uppercase"
         for="grid-password"
         >Produtos / Serviços
         </label>
@@ -115,22 +115,22 @@
                 readonly
                 name="nocounted"
                 @endif
-                class="px-1 py-1 placeholder-gray-400 text-gray-700 rounded text-sm shadow focus:outline-none focus:shadow-outline " />
-              <span id="disponivel{{$item->id}}" class="text-green-500 text-xs hidden">Disponível: {{$item->quantity}} |
+                class="px-1 py-1 text-sm text-gray-700 placeholder-gray-400 rounded shadow focus:outline-none focus:shadow-outline " />
+              <span id="disponivel{{$item->id}}" class="hidden text-xs text-green-500">Disponível: {{$item->quantity}} |
                  Valor Unitário: {{number_format($item->unitary_value, 2, ',', '.')}}</span>
           </div>
         @endforeach
     </div>
-    <div class="text-center mt-6">
+    <div class="mt-6 text-center">
       <button
-        class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full max-w-xs"
+        class="w-full max-w-xs px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase bg-gray-900 rounded shadow outline-none active:bg-gray-700 hover:shadow-lg focus:outline-none"
         type="submit"
         id="btn-submit"
         style="transition: all 0.15s ease 0s;"
       >
         Salvar
       </button>
-      <p id="error-validation" class="hidden text-red-600 absolute text-xs"></p>
+      <p id="error-validation" class="absolute hidden text-xs text-red-600"></p>
     </div>
   </form>
 </div>
