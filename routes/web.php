@@ -163,4 +163,6 @@ Route::prefix('pedido')->group(function(){
     Route::get('/detail/{id}', [OrderController::class, 'detail'])->name('detailOrder')->middleware('checkSchool');
     Route::get('/delete/{id}', [OrderController::class, 'delete'])->name('delOrder')->middleware('checkSchool');
     Route::get('/alterar/{id}', [OrderController::class, 'setUpdate'])->name('upOrder')->middleware('checkSchool');
+    Route::post('/alterar', [OrderController::class, 'update'])->name('upOrderPost')->middleware('checkSchool');
+    Route::get('/gerar_despesa', [OrderController::class, 'gerExpenditure'])->name('gerExpenditure')->middleware('checkSchool');
 });

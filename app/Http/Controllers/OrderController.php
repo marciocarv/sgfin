@@ -86,6 +86,57 @@ class OrderController extends Controller
     public function setUpdate($id){
         $order = Order::find($id);
 
-        dd($order);
+        if($order->contract->category == "M"){
+            $title_orders = "Pedido";
+        }elseif($order->contract->category == "A"){
+            $title_orders = "Pedido";
+        }elseif($order->contract->category == "P"){
+            $title_orders = "Ordem de Serviço";
+        }else{
+            $title_orders = "Ordem de Serviço";
+        }
+
+        $items_contract = $order->contract->items;
+
+        $items_order = $order->items;
+
+        
+        return view('order.formOrder', ['route'=>'upOrderPost', 'action'=>'update', 'order'=>$order, 'items'=>$items_contract, 'items_order'=>$items_order, 'contract'=>$order->contract, 'title_orders'=>$title_orders]);
+    }
+
+    public function update(Request $request){
+        $order = Order::find($request->id);
+
+        $items_quantity = count($request->items);
+        $quantities = $request->quantities;
+        $items = $request->items;
+        $order_items = array();
+
+        $amount = 0;
+        for($i = 0 ; $i<$items_quantity ; $i++){
+            $item = Item::find($items[$i]);
+            $amount = $amount + ($item->unitary_value * $quantities[$i]);
+            $order_items[$items[$i]] = ['quantity'=>$quantities[$i]];
+        }
+        
+        $order->date_order = $request->date_order;
+        $order->description = $request->description;
+        $order->responsible = $request->responsible;
+        $order->contract_id = $request->contract_id;
+        $order->amount = $amount;
+
+        if($order->save()){
+            $order->items()->sync($order_items);
+            return redirect()->route('manageContract', ['id'=>$order->contract_id])->with('msg', 'Pedido ou Ordem de serviço alterado com sucesso!');                
+        }else{
+            return redirect()->route('contract')->with('msg', 'Não foi possível alterar o pedido / Ordem de serviço!');
+        }       
+        
+    }
+
+    public function gerExpenditure(){
+        $order = new Order;
+
+        dd($order->all());
     }
 }

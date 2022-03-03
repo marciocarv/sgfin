@@ -16,8 +16,6 @@
     @csrf
     @if ($action == 'update')
       <input type="hidden" value="{{$order->id}}" name="id"/>
-      <input type="hidden" value="{{$order->amount}}" name="amount"/>
-      <input type="hidden" value="{{$order->status}}" name="status"/>
     @endif
       <input type="hidden" value="{{$contract->id}}" name="contract_id"/>
     <div class="relative w-full mb-3">
@@ -59,7 +57,7 @@
         required
         id="description"
         @if ($action == 'update')
-          value="{{$income->description}}"
+          value="{{$order->description}}"
         @endif
         class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('description') border-2 border-pink-600 @enderror"
         placeholder="A que se destina o pedido"
@@ -103,12 +101,20 @@
               type="checkbox"
               value="{{$item->id}}"
               name="items[]"
-              id="item{{$item->id}}" /> 
+              @if($action == 'update' && $items_order->where('id', $item->id)->isNotEmpty())
+              checked
+              @endif
+              id="item{{$item->id}}" />
               {{$item->description}}&nbsp;
               <input type="number"
-                name="nocounted"
                 id="quantity{{$item->id}}"
+                @if($action == 'update' && $items_order->where('id', $item->id)->isNotEmpty())
+                value="{{$items_order->where('id', $item->id)->first()->pivot->quantity}}"
+                name="quantities[]"
+                @else
                 readonly
+                name="nocounted"
+                @endif
                 class="px-1 py-1 placeholder-gray-400 text-gray-700 rounded text-sm shadow focus:outline-none focus:shadow-outline " />
               <span id="disponivel{{$item->id}}" class="text-green-500 text-xs hidden">Disponível: {{$item->quantity}} |
                  Valor Unitário: {{number_format($item->unitary_value, 2, ',', '.')}}</span>

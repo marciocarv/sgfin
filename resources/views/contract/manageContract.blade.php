@@ -195,7 +195,7 @@
         </div>
         <div class="w-full rounded border shadow mt-3 p-3">
             <h1 class="mb-5 mt-3 text-2xl text-center font-bold">{{$title_orders}}</h1>
-            <table class="border-collapse w-full mt-5">
+            <table class="border-collapse w-full mt-5 mb-5">
                 <thead>
                     <tr>
                         <th class="p-3 font-bold uppercase bg-gray-200 text-gray-600 border border-gray-300 hidden lg:table-cell">Data</th>
@@ -242,13 +242,19 @@
                     </tr>
                     @endforeach
                     @if($orders->isEmpty())
-                    <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="7">
-                        <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Sem Registro</span>
-                        Nâo há {{$title_orders}} para esse contrato!
-                    </td>
+                    <tr>
+                      <td class="w-full lg:w-auto p-3 text-gray-800 border border-b text-center block lg:table-cell relative lg:static" colspan="7">
+                          <span class="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">Sem Registro</span>
+                          Nâo há {{$title_orders}} para esse contrato!
+                      </td>
+                    </tr>
                     @endif
                 </tbody>
             </table>
+            <div class="text-center">
+              <a href="{{route('gerExpenditure')}}" class="p-3 m-5 bg-gray-800 text-white rounded hover:bg-gray-600 hover:font-semibold"><i class="fas fa-pen-square"></i> Gerar Despesa</a>
+              <p class="text-xs text-blue-800 mt-2">* Ao clicar nesse botão, será gerada uma despesa com o valor de todos os pedidos em aberto.</p>
+            </div>
         </div>
     </div>
 @else
