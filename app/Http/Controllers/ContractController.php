@@ -127,7 +127,7 @@ class ContractController extends Controller
         }elseif($contract->category == "A"){
             $title_items = "Alimentos";
             $title_orders = "Pedidos";
-        }elseif($contract->category == "P"){
+        }elseif($contract->category == "S"){
             $title_items = "Serviços";
             $title_orders = "Ordem de Serviços";
         }else{

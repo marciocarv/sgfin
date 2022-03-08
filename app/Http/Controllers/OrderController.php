@@ -17,7 +17,7 @@ class OrderController extends Controller
             $title_orders = "Pedido";
         }elseif($contract->category == "A"){
             $title_orders = "Pedido";
-        }elseif($contract->category == "P"){
+        }elseif($contract->category == "S"){
             $title_orders = "Ordem de Serviço";
         }else{
             $title_orders = "Ordem de Serviço";
@@ -90,7 +90,7 @@ class OrderController extends Controller
             $title_orders = "Pedido";
         }elseif($order->contract->category == "A"){
             $title_orders = "Pedido";
-        }elseif($order->contract->category == "P"){
+        }elseif($order->contract->category == "S"){
             $title_orders = "Ordem de Serviço";
         }else{
             $title_orders = "Ordem de Serviço";
@@ -134,9 +134,20 @@ class OrderController extends Controller
         
     }
 
-    public function gerExpenditure(){
+    public function setGerExpenditure($id){
+
         $order = new Order;
 
-        dd($order->all());
+        $orders = $order->orderByContract($id);
+
+        $amount = 0;
+
+        foreach($orders as $orderByContract){
+            $amount = $amount + $orderByContract->amount;
+        }
+
+        $contract = Contract::find($id);
+
+        return view('order.orderToExpenditure', ['amount'=>$amount, 'contract'=>$contract]);
     }
 }

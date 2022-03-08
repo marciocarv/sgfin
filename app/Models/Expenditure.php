@@ -10,7 +10,7 @@ class Expenditure extends Model
     use HasFactory;
 
     protected $fillable = [
-        'descripton',
+        'description',
         'value',
         'nature',
         'fixed'

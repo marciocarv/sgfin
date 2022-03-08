@@ -27,4 +27,8 @@ class Order extends Model
     public function items(){
         return $this->belongsToMany(Item::class)->withPivot(['quantity']);
     }
+
+    public function orderByContract($id){
+        return $this::Where('contract_id', $id)->where('status', 'aberto')->get();
+    }
 }
