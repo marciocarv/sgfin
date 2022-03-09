@@ -262,7 +262,7 @@
                 </tbody>
             </table>
             <div class="text-center">
-              <a href="{{route('gerExpenditure', ['id'=>$contract->id])}}" class="p-3 m-5 text-white bg-gray-800 rounded hover:bg-gray-600 hover:font-semibold"><i class="fas fa-pen-square"></i> Gerar Despesa</a>
+              <a href="{{route('gerExpenditureByOrder', ['id'=>$contract->id])}}" class="p-3 m-5 text-white bg-gray-800 rounded hover:bg-gray-600 hover:font-semibold"><i class="fas fa-pen-square"></i> Gerar Despesa</a>
               <p class="mt-2 text-xs text-blue-800">* Ao clicar nesse botão, será gerada uma despesa com o valor de todos os pedidos em aberto.</p>
             </div>
         </div>

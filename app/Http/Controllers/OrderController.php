@@ -142,12 +142,14 @@ class OrderController extends Controller
 
         $amount = 0;
 
+        $accounts = session('school')->accounts;
+
         foreach($orders as $orderByContract){
             $amount = $amount + $orderByContract->amount;
         }
 
         $contract = Contract::find($id);
 
-        return view('order.orderToExpenditure', ['amount'=>$amount, 'contract'=>$contract]);
+        return view('order.orderToExpenditure', ['amount'=>$amount, 'contract'=>$contract, 'accounts'=>$accounts]);
     }
 }

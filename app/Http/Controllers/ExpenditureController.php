@@ -218,6 +218,10 @@ class ExpenditureController extends Controller
             return view('expenditure.detailExpenditure', ['acesso'=>false]);
         }
     }
+
+    public function GerExpenditureByOrder(Request $request){
+        dd($request->all);
+    }
 }
 
 

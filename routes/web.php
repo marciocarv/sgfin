@@ -20,7 +20,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AceController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ContractController;
-use App\Http\Controllers\User;
 
 
 Route::get('/teste', [DocumentController::class, 'teste']);
@@ -104,6 +103,7 @@ Route::prefix('despesa')->group(function(){
     Route::get('/alterar/{id}', [ExpenditureController::class, 'setUpdate'])->name('upExpenditure')->middleware('checkSchool');
     Route::post('/alterar', [ExpenditureController::class, 'update'])->name('upExpenditurePost');
     Route::get('/detalhe/{id}', [ExpenditureController::class, 'detail'])->name('detailExpenditure')->middleware('checkSchool');
+    Route::post('/gerar', [ExpenditureController::class, 'GerExpenditureByOrder'])->name('gerExpenditureByOrder');
 });
 
 Route::prefix('despesa_fixa')->group(function(){
