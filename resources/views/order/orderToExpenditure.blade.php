@@ -61,23 +61,23 @@
             />
         </div>
         <div class="relative w-full mb-3">
-        <label
-            class="block mb-2 text-xs font-bold text-gray-700 uppercase"
-            for="grid-password"
-            >Descrição
-            @error('description')
-                <p class="text-red-600">{{$message}}</p>
-            @enderror
-            </label
-        ><input
-            type="text"
-            name="description"
-            required
-            id="description"
-            class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('description') border-2 border-pink-600 @enderror"
-            placeholder="Descreva em que o recurso foi utilizado"
-            style="transition: all 0.15s ease 0s;"
-        />
+          <label
+              class="block mb-2 text-xs font-bold text-gray-700 uppercase"
+              for="grid-password"
+              >Descrição
+              @error('description')
+                  <p class="text-red-600">{{$message}}</p>
+              @enderror
+              </label
+          ><input
+              type="text"
+              name="description"
+              required
+              id="description"
+              class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('description') border-2 border-pink-600 @enderror"
+              placeholder="Descreva em que o recurso foi utilizado"
+              style="transition: all 0.15s ease 0s;"
+          />
         </div>
         <div class="relative w-full mb-3">
         <label
@@ -100,16 +100,15 @@
         />
         </div>
         <div class="relative w-full mb-3">
-        <label
+          <label
             class="block mb-2 text-xs font-bold text-gray-700 uppercase"
             for="grid-password"
-            >Natureza</label
-        >
-        <label
-        class="block mb-2 text-sm font-bold text-teal-900 uppercase"
-        for="grid-password"
-        >{{$contract->nature}}</label
-        >
+            >Natureza
+          </label>
+          <label
+            class="block mb-2 text-sm font-bold text-teal-900 uppercase"
+            for="grid-password"
+            >{{$contract->nature}}</label>
         </div>
         <div class="relative w-full mb-3">
         <label
