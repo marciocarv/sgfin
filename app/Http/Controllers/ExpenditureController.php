@@ -235,7 +235,7 @@ class ExpenditureController extends Controller
         $expenditure->fixed = false;
 
         if(!$expenditure->save()){
-            return redirect()->route('expenditure', ['id'=>$expenditure->account_id])->with('msg', 'Não foi possível gerar essa despesa!');
+            return redirect()->route('expenditure', ['id'=>$expenditure->account_id])->with('msg', 'Não foi possível gerar sua despesa!');
         }else{
             foreach($request->id_orders as $id_order){
                 $orderController = new OrderController;
