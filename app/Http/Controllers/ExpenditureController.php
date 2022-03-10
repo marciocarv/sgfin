@@ -234,15 +234,14 @@ class ExpenditureController extends Controller
         $expenditure->expiration = $request->expiration;
         $expenditure->fixed = false;
 
-        foreach($request->id_orders as $id_order){
-            $orderController = new OrderController;
-
-            $orderController->updateStatus($id_order);
-        }
-
         if(!$expenditure->save()){
             return redirect()->route('expenditure', ['id'=>$expenditure->account_id])->with('msg', 'Não foi possível gerar essa despesa!');
         }else{
+            foreach($request->id_orders as $id_order){
+                $orderController = new OrderController;
+    
+                $orderController->updateStatus($id_order, $expenditure->id);
+            }
             return redirect()->route('expenditure', ['id'=>$expenditure->account_id])->with('msg', 'Despesa Gerada com sucesso!');
         }
     }

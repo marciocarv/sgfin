@@ -160,10 +160,11 @@ class OrderController extends Controller
         return view('order.orderToExpenditure', ['amount'=>$amount, 'contract'=>$contract, 'accounts'=>$accounts, 'id_orders'=>$id_orders]);
     }
 
-    public function updateStatus($id){
-        $order = Order::find($id);
+    public function updateStatus($order_id, $expenditure_id){
+        $order = Order::find($order_id);
 
         $order->status = "faturado";
+        $order->expenditure_id = $expenditure_id;
 
         $order->save();
     }
