@@ -103,7 +103,7 @@ Route::prefix('despesa')->group(function(){
     Route::get('/alterar/{id}', [ExpenditureController::class, 'setUpdate'])->name('upExpenditure')->middleware('checkSchool');
     Route::post('/alterar', [ExpenditureController::class, 'update'])->name('upExpenditurePost');
     Route::get('/detalhe/{id}', [ExpenditureController::class, 'detail'])->name('detailExpenditure')->middleware('checkSchool');
-    Route::post('/gerar', [ExpenditureController::class, 'GerExpenditureByOrder'])->name('gerExpenditureByOrder');
+    Route::post('/gerar', [ExpenditureController::class, 'GerExpenditureByOrder'])->name('gerExpenditureByOrderPost');
 });
 
 Route::prefix('despesa_fixa')->group(function(){

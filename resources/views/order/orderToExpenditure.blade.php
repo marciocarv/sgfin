@@ -12,7 +12,10 @@
         @csrf
         <input type="hidden" value="{{$contract->id}}" name="contract_id"/>
         <input type="hidden" value="{{$contract->provider_id}}" name="provider_id"/>
-
+        <input type="hidden" value="{{$contract->nature}}" name="nature" />
+        @foreach($id_orders as $id_order)
+        <input type="hidden" value="{{$id_order}}" name="id_orders[]" />
+        @endforeach
         <div class="relative w-full mb-3">
             <label
                 class="block mb-2 text-xs font-bold text-gray-700 uppercase"
@@ -90,7 +93,7 @@
             name="value"
             required
             id="value"
-            value="{{$amount}}"
+            value="{{number_format($amount, '2', ',', '.')}}"
             class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full @error('value') border-2 border-pink-600 @enderror"
             placeholder="Valor da despesa"
             style="transition: all 0.15s ease 0s;"

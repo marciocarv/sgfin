@@ -140,16 +140,31 @@ class OrderController extends Controller
 
         $orders = $order->orderByContract($id);
 
+        if($orders->isEmpty()){
+            return redirect()->route('manageContract', ['id'=>$id])->with('msg', 'Você não possui pedidos / Ordem de serviços em aberto');
+        }
+
         $amount = 0;
+
+        $id_orders = array();
 
         $accounts = session('school')->accounts;
 
         foreach($orders as $orderByContract){
             $amount = $amount + $orderByContract->amount;
+            $id_orders[] = $orderByContract->id;
         }
 
         $contract = Contract::find($id);
 
-        return view('order.orderToExpenditure', ['amount'=>$amount, 'contract'=>$contract, 'accounts'=>$accounts]);
+        return view('order.orderToExpenditure', ['amount'=>$amount, 'contract'=>$contract, 'accounts'=>$accounts, 'id_orders'=>$id_orders]);
+    }
+
+    public function updateStatus($id){
+        $order = Order::find($id);
+
+        $order->status = "faturado";
+
+        $order->save();
     }
 }

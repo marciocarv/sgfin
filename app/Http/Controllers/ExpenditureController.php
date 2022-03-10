@@ -220,7 +220,31 @@ class ExpenditureController extends Controller
     }
 
     public function GerExpenditureByOrder(Request $request){
-        dd($request->all);
+        $expenditure = new Expenditure;
+
+        $value = Str::of($request->value)->replace('.', '');
+        $value = Str::of($value)->replace(',', '.');
+
+        $expenditure->account_id = $request->account_id;
+        $expenditure->provider_id = $request->provider_id;
+        $expenditure->description = $request->description;
+        $expenditure->date_expenditure = $request->date_expenditure;
+        $expenditure->value = $value;
+        $expenditure->nature = $request->nature;
+        $expenditure->expiration = $request->expiration;
+        $expenditure->fixed = false;
+
+        foreach($request->id_orders as $id_order){
+            $orderController = new OrderController;
+
+            $orderController->updateStatus($id_order);
+        }
+
+        if(!$expenditure->save()){
+            return redirect()->route('expenditure', ['id'=>$expenditure->account_id])->with('msg', 'Não foi possível gerar essa despesa!');
+        }else{
+            return redirect()->route('expenditure', ['id'=>$expenditure->account_id])->with('msg', 'Despesa Gerada com sucesso!');
+        }
     }
 }
 
