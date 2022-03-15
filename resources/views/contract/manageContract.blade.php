@@ -158,7 +158,7 @@
                         </td>
                         <td class="relative block w-full p-3 text-center text-gray-800 border border-b lg:w-auto lg:table-cell lg:static">
                           <span class="absolute top-0 left-0 px-2 py-1 text-xs font-bold uppercase bg-blue-200 lg:hidden">Saldo</span>
-                          {{$item->quantity}}
+                          {{$item->quantity - $item->orders->sum('pivot.quantity')}}
                       </td>
                         <td class="relative block w-full p-3 text-center text-gray-800 border border-b lg:w-auto lg:table-cell lg:static">
                             <span class="absolute top-0 left-0 px-2 py-1 text-xs font-bold uppercase bg-blue-200 lg:hidden">Unidade</span>
@@ -187,7 +187,7 @@
                     </td>
                     <td class="relative block w-full p-3 text-center text-gray-800 border border-b lg:w-auto lg:table-cell lg:static" colspan="2">
                       <span class="absolute top-0 left-0 px-2 py-1 text-xs font-bold uppercase bg-blue-200 lg:hidden">Valor Total</span>
-                      <span class="font-bold">R$ {{number_format($items->sum('total_value'), 2, ',', '.')}}</span>
+                      <span class="font-bold">R$ {{number_format($sumItems, 2, ',', '.')}}</span>
                   </td>
                     </tr>
                 </tbody>

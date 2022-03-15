@@ -136,7 +136,13 @@ class ContractController extends Controller
         }
 
         if($contract->school->id === session('school')->id){
-            return view('contract.manageContract', ['acesso'=>true, 'contract'=>$contract, 'items'=>$items, 'orders'=>$orders, 'title_items'=>$title_items, 'title_orders'=>$title_orders]);
+            return view('contract.manageContract', ['acesso'=>true,
+                                                    'contract'=>$contract, 
+                                                    'items'=>$items, 
+                                                    'orders'=>$orders, 
+                                                    'title_items'=>$title_items, 
+                                                    'title_orders'=>$title_orders,
+                                                    'sumItems'=>$sumItems]);
         }else{
             return redirect()->route('contract')->with('msg', 'Você não tem acesso a esse contrato!');
         }

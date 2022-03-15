@@ -117,7 +117,7 @@
                 placeholder="Quantidade"
                 @endif
                 class="px-1 py-1 text-sm text-gray-700 placeholder-gray-400 rounded shadow focus:outline-none focus:shadow-outline " />
-              <span id="disponivel{{$item->id}}" class="hidden text-xs text-green-500">Disponível: {{$item->quantity}} |
+              <span id="disponivel{{$item->id}}" class="hidden text-xs text-green-500">Disponível: {{$item->quantity - $item->orders->sum('pivot.quantity')}} |
                  Valor Unitário: {{number_format($item->unitary_value, 2, ',', '.')}}</span>
           </div>
         @endforeach
