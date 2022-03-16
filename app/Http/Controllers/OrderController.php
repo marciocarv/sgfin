@@ -68,8 +68,6 @@ class OrderController extends Controller
         }else{
             return redirect()->route('manageContract', ['id'=>$order->contract_id])->with('msg', 'Você não tem acesso a esse pedido / ordem de serviço');
         }
-
-        
     }
 
     public function delete($id){
