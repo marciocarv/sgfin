@@ -1,23 +1,23 @@
 @extends('layouts.site')
 
 @section('content')
-<div class="px-4 md:px-10 mx-auto w-full">
+<div class="w-full px-4 mx-auto md:px-10">
 <div class="flex flex-wrap">
 <div class="block w-full mt-24">
-  <a href="{{route('income', ['id'=>$account->id])}}" class="p-3 mb-5 bg-gray-800 text-white rounded  hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
+  <a href="{{route('income', ['id'=>$account->id])}}" class="p-3 mb-5 text-white bg-gray-800 rounded hover:bg-gray-600 hover:font-semibold"><i class="fas fa-undo-alt"></i> Voltar</a>
   <div class="">
     <h1 class="mt-5 text-2xl font-bold"><i class="fas fa-file-contract"></i> @if($action == 'update') Edite sua Receita - {{$account->description}} @else Cadastre sua Receita - {{$account->description}} @endif</h1>
   </div>
   @if ($options->count() === 2)
-    <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">
+    <p class="p-4 mb-3 font-bold leading-normal text-green-800 bg-green-300 rounded-lg">
       Você não possui Portarias Cadastradas, se o Recurso veio através de uma portaria, <a href="{{route('addOrdinance')}}" class="text-red-600 hover:text-red-400">cadastre aqui</a>
     </p>
   @endif
   @if (session('msg'))
-    <p class="bg-green-300 p-4 font-bold leading-normal mb-3 rounded-lg text-green-800">{{ session('msg') }}</p>
+    <p class="p-4 mb-3 font-bold leading-normal text-green-800 bg-green-300 rounded-lg">{{ session('msg') }}</p>
   @endif
   
-  <form id="register-form" class="w-full mt-5 max-w-2xl block rounded border shadow p-3" action="{{route($route)}}" method="post" enctype="multipart/form-data">
+  <form id="register-form" class="block w-full max-w-2xl p-3 mt-5 border rounded shadow" action="{{route($route)}}" method="post" enctype="multipart/form-data">
     @csrf
     @if ($action == 'update')
       <input type="hidden" value="{{$income->id}}" name="id"/>
@@ -25,14 +25,14 @@
       <input type="hidden" value="{{$account->id}}" name="account_id"/>
     <div class="relative w-full mb-3">
       <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        class="block mb-2 text-xs font-bold text-gray-700 uppercase"
         for="grid-password"
         >Portaria</label
       >
-      <select name="ordinance_id" class="px-3 py-3 shadow focus:outline-none focus:shadow-outline w-full text-gray-700 text-sm">
-        <option value=" " class="text-gray-700 text-sm" style="transition: all 0.15s ease 0s;">Selecione a portaria</option>
+      <select name="ordinance_id" class="w-full px-3 py-3 text-sm text-gray-700 shadow focus:outline-none focus:shadow-outline">
+        <option value=" " class="text-sm text-gray-700" style="transition: all 0.15s ease 0s;">Selecione a portaria</option>
         @foreach($options as $option)
-        <option value="{{$option->id}}" class="text-gray-700 text-sm"
+        <option value="{{$option->id}}" class="text-sm text-gray-700"
           @if ($action == 'update')
             @if($option->id === $income->ordinance_id)
               selected
@@ -44,7 +44,7 @@
     </div>
     <div class="relative w-full mb-3">
       <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        class="block mb-2 text-xs font-bold text-gray-700 uppercase"
         for="grid-password"
         >Data
           @error('date_income')
@@ -68,7 +68,7 @@
     </div>
     <div class="relative w-full mb-3">
       <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        class="block mb-2 text-xs font-bold text-gray-700 uppercase"
         for="grid-password"
         >Descrição
           @error('description')
@@ -90,7 +90,7 @@
     </div>
     <div class="relative w-full mb-3">
       <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        class="block mb-2 text-xs font-bold text-gray-700 uppercase"
         for="grid-password"
         >Valor Capital
           @error('value_capital')
@@ -114,7 +114,7 @@
     </div>
     <div class="relative w-full mb-3">
       <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        class="block mb-2 text-xs font-bold text-gray-700 uppercase"
         for="grid-password"
         >Valor Custeio
         @error('value_custeio')
@@ -138,7 +138,7 @@
     </div>
     <div class="relative w-full mb-3">
       <label
-        class="block uppercase text-gray-700 text-xs font-bold mb-2"
+        class="block mb-2 text-xs font-bold text-gray-700 uppercase"
         for="grid-password"
         >Valor Total</label
       ><input
@@ -152,21 +152,21 @@
         @else
           value="0,00"
         @endif
-        class="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+        class="w-full px-3 py-3 text-sm text-gray-700 placeholder-gray-400 bg-white rounded shadow focus:outline-none focus:shadow-outline"
         placeholder="Valor total recebido"
         style="transition: all 0.15s ease 0s;"
       />
     </div>
-    <div class="text-center mt-6">
+    <div class="mt-6 text-center">
       <button
-        class="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full max-w-xs"
+        class="w-full max-w-xs px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase bg-gray-900 rounded shadow outline-none active:bg-gray-700 hover:shadow-lg focus:outline-none"
         type="submit"
         id="btn-submit"
         style="transition: all 0.15s ease 0s;"
       >
         Salvar
       </button>
-      <p id="error-validation" class="hidden text-red-600 absolute text-xs"></p>
+      <p id="error-validation" class="absolute hidden text-xs text-red-600"></p>
     </div>
   </form>
 </div>
@@ -179,50 +179,31 @@
 
       var value_custeio = document.querySelector('#value_custeio');
       var value_capital = document.querySelector('#value_capital');
-      var total = 0.00;
-      var custeio = 0.00;
-      var capital = 0.00;
-      var historico_custeio = 0.00;
-      var historico_capital = 0.00;
-      var controle_custeio = false;
-      var controle_capital = false;
+      var total = 0;
+      var custeio;
+      var capital;
 
-      value_custeio.addEventListener('blur', ()=>{
+      function somar(){
+
         custeio = value_custeio.value.replace('.', '');
         custeio = custeio.replace(',', '');
-        if(controle_custeio){
-          //se não for a primeira vez que esteja inserindo o numero
-          total = total - historico_custeio + parseInt(custeio);
-          historico_custeio = parseInt(custeio);
-        }else{
-          //se for a primeira vez que esteja inserindo o numero
-          total += parseInt(custeio);
-          historico_custeio = parseInt(custeio);
-          controle_custeio = true;
-        }
+
+        capital = value_capital.value.replace('.', '');
+        capital = capital.replace(',', '');
+
+        total = parseInt(custeio) + parseInt(capital);
+
         document.querySelector('#amount').value = total;
         VMasker(document.querySelector("#amount")).maskMoney();
-        
+      }
+
+      value_custeio.addEventListener('blur', ()=>{
+        somar();
       });
 
       value_capital.addEventListener('blur', ()=>{
-        capital = value_capital.value.replace('.', '');
-        capital = capital.replace(',', '');
-        if(controle_capital){
-          //se não for a primeira vez que esteja inserindo o numero
-          total = total - historico_capital + parseInt(capital);
-          historico_capital = parseInt(capital);
-        }else{
-          //se for a primeira vez que esteja inserindo o numero
-          total += parseInt(capital);
-          historico_capital = parseInt(capital);
-          controle_capital = true;
-        }
-        document.querySelector('#amount').value = total;
-        VMasker(document.querySelector("#amount")).maskMoney();
-        
+        somar()
       });
-
 
   VMasker(document.querySelector("#amount")).maskMoney();
   VMasker(document.querySelector("#value_capital")).maskMoney();
