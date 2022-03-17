@@ -108,7 +108,7 @@
                         </td>
                         <td class="relative block w-full p-3 text-xs text-center text-gray-800 border border-b lg:w-auto lg:table-cell lg:static">
                             <span class="absolute top-0 left-0 px-2 py-1 text-xs font-bold uppercase bg-blue-200 lg:hidden">Valor</span>
-                            <span class="font-bold text-red-600">R$ {{number_format($expenditure->value_paid + $expenditure->interest, 2, ',', '.')}}</span> 
+                            <span class="font-bold text-red-600">R$ {{number_format($expenditure->value_paid + $expenditure->interest + $expenditure->tax, 2, ',', '.')}}</span> 
                         </td>
                     </tr>
                     @endforeach
