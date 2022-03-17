@@ -132,22 +132,39 @@ class Account extends Model
     }
 
     public function sumExpenditure($id, $dataInicial, $dataFinal){
+
         $expenditure = Expenditure::where('account_id', $id)
         ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
         ->where('pays.date_pay','>=', $dataInicial)->where('pays.date_pay', '<=', $dataFinal)
-        ->sum('pays.value_paid');
+        ->select('expenditures.*', 'pays.date_pay', 'pays.interest', 'pays.value_paid', 'pays.tax')
+        ->get();
 
-        return $expenditure;
+        $expenditure_paid = $expenditure->sum('value_paid');
+
+        $interest = $expenditure->sum('interest');
+
+        $tax = $expenditure->sum('tax');
+
+        return $expenditure_paid + $interest + $tax;
     }
 
     public function sumExpenditureNature($id, $dataInicial, $dataFinal, $nature){
+
         $expenditure = Expenditure::where('account_id', $id)
         ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
         ->where('pays.date_pay','>=', $dataInicial)->where('pays.date_pay', '<=', $dataFinal)
         ->where('expenditures.nature', '=', $nature)
-        ->sum('pays.value_paid');
+        ->select('expenditures.*', 'pays.date_pay', 'pays.interest', 'pays.value_paid', 'pays.tax')
+        ->get();
 
-        return $expenditure;
+        $expenditure_paid = $expenditure->sum('value_paid');
+
+        $interest = $expenditure->sum('interest');
+
+        $tax = $expenditure->sum('tax');
+
+        return $expenditure_paid + $interest + $tax;
+
     }
 
     public function sumIncome($id, $dataInicial, $dataFinal){
