@@ -28,7 +28,7 @@ class ExpenditureController extends Controller
             $data_fim = mktime(23, 59, 59, date('m'), date("t"), date('Y'));
 
             $data_base_inicial = date('Y-m-d', $data_inicio);
-            $dataInicial = date("Y-m-d",strtotime(date("Y-m-d",strtotime($data_base_inicial))."-2 month"));
+            $dataInicial = date("Y-m-d",strtotime(date("Y-m-d",strtotime($data_base_inicial))."-12 month"));
             $dataFinal = date('Y-m-d',$data_fim);
         }else{
             $dataInicial = $request->dataInicial;
