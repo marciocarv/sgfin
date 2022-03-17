@@ -122,7 +122,7 @@ class Account extends Model
         ->Join('pays', 'pays.expenditure_id', '=', 'expenditures.id')
         ->where('pays.date_pay','>=', $dataInicial)->where('pays.date_pay', '<=', $dataFinal)
         ->select('expenditures.*', 'pays.date_pay', 'pays.interest', 'pays.value_paid')
-        ->orderBy('pays.date_pay', 'desc')
+        ->orderBy('pays.date_pay', 'asc')
         ->get();
     }
 
