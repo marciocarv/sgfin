@@ -71,7 +71,7 @@
 
               <div class="flex flex-wrap">
                 @foreach($accountsSaldo as $accountSaldo)
-                <div class="w-full px-3 mt-2 lg:w-6/12 xl:w-2/12">
+                <div class="w-full px-3 mt-2 lg:w-6/12 xl:w-4/12">
                   <div class="relative flex flex-col min-w-0 mb-6 break-words bg-white rounded shadow-lg xl:mb-0">
                     <div class="flex-auto p-4">
                       <div class="flex flex-wrap">
