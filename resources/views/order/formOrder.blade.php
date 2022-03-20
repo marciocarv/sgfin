@@ -92,11 +92,15 @@
         for="grid-password"
         >Produtos / Serviços
         </label>
+        <table>
         @if($items->isEmpty())
-          Não há Produtos / Serviços
+        <tr>
+          <td colspan="2">Não há Produtos / Serviços</td>
+        </tr>
         @endif
         @foreach ($items as $item)
-          <div class="p-4">
+        <tr>
+          <td class="p-2">
             <input 
               type="checkbox"
               value="{{$item->id}}"
@@ -106,21 +110,24 @@
               @endif
               id="item{{$item->id}}" />
               {{$item->description}}&nbsp;
+          </td>
+          <td class="p-2">
               <input type="number"
                 id="quantity{{$item->id}}"
                 @if($action == 'update' && $items_order->where('id', $item->id)->isNotEmpty())
                 value="{{$items_order->where('id', $item->id)->first()->pivot->quantity}}"
                 name="quantities[]"
                 @else
-                readonly
                 name="nocounted"
                 placeholder="Quantidade"
                 @endif
-                class="px-1 py-1 text-sm text-gray-700 placeholder-gray-400 rounded shadow focus:outline-none focus:shadow-outline " />
+                class="hidden px-1 py-1 text-sm text-gray-700 placeholder-gray-400 rounded shadow focus:outline-none focus:shadow-outline" />
               <span id="disponivel{{$item->id}}" class="hidden text-xs text-green-500">Disponível: {{$item->quantity - $item->orders->sum('pivot.quantity')}} |
                  Valor Unitário: {{number_format($item->unitary_value, 2, ',', '.')}}</span>
-          </div>
+          </td>
+        </tr>
         @endforeach
+      </table>
     </div>
     <div class="mt-6 text-center">
       <button
@@ -145,18 +152,18 @@
   
   document.querySelector('#item{{$item->id}}').addEventListener('click', ()=>{
     if(document.querySelector('#item{{$item->id}}').checked){
-      document.querySelector('#quantity{{$item->id}}').removeAttribute('readonly');
       document.querySelector('#disponivel{{$item->id}}').classList.remove('hidden');
       document.querySelector('#quantity{{$item->id}}').classList.add('border-2');
       document.querySelector('#quantity{{$item->id}}').setAttribute('required', 'required');
       document.querySelector('#quantity{{$item->id}}').setAttribute('name', 'quantities[]');
+      document.querySelector('#quantity{{$item->id}}').classList.remove('hidden');
     }else{
-      document.querySelector('#quantity{{$item->id}}').setAttribute('readonly', 'readonly');
       document.querySelector('#disponivel{{$item->id}}').classList.add('hidden');
       document.querySelector('#quantity{{$item->id}}').classList.remove('border-2');
       document.querySelector('#quantity{{$item->id}}').removeAttribute('required');
       document.querySelector('#quantity{{$item->id}}').value = "";
       document.querySelector('#quantity{{$item->id}}').setAttribute('name', 'nocounted');
+      document.querySelector('#quantity{{$item->id}}').classList.add('hidden');
     }
   });
 
